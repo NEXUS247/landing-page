@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280">
+  <defs>
+    <linearGradient id="g1" x1="172" y1="348" x2="640" y2="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1EA4F5"/><stop offset="1" stop-color="#1689EF"/></linearGradient>
+    <linearGradient id="g2" x1="640" y1="60" x2="1108" y2="348" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#25B9FF"/><stop offset="1" stop-color="#1CA2F3"/></linearGradient>
+    <linearGradient id="g3" x1="1108" y1="348" x2="1108" y2="932" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#12E2E6"/><stop offset="1" stop-color="#18A7F2"/></linearGradient>
+    <linearGradient id="g4" x1="1108" y1="932" x2="640" y2="1218" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1CC4E9"/><stop offset="1" stop-color="#1B8EF5"/></linearGradient>
+    <linearGradient id="g5" x1="172" y1="932" x2="640" y2="1218" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5943FF"/><stop offset="0.55" stop-color="#3F55FF"/><stop offset="1" stop-color="#1A8EF5"/></linearGradient>
+    <linearGradient id="g6" x1="172" y1="348" x2="172" y2="932" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#17B6E8"/><stop offset="1" stop-color="#1B98F3"/></linearGradient>
+    <linearGradient id="cTop" x1="405" y1="489" x2="875" y2="489" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#16DDE4"/><stop offset="1" stop-color="#12E8E7"/></linearGradient>
+    <linearGradient id="cLeft" x1="405" y1="520" x2="620" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2D6DFF"/><stop offset="1" stop-color="#4855FF"/></linearGradient>
+    <linearGradient id="cRight" x1="650" y1="520" x2="875" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#279BFF"/><stop offset="1" stop-color="#1B7EF4"/></linearGradient>
+  </defs>
+
+  <!-- Hexagon frame -->
+  <polygon fill="url(#g1)" points="640,60 640,172 266,402 172,348"/>
+  <polygon fill="url(#g2)" points="640,60 1108,348 1006,402 640,172"/>
+  <polygon fill="url(#g3)" points="1108,348 1108,932 1006,876 1006,402"/>
+  <polygon fill="url(#g4)" points="1108,932 640,1218 640,1108 1006,876"/>
+  <polygon fill="url(#g5)" points="640,1218 172,932 266,876 640,1108"/>
+  <polygon fill="url(#g6)" points="172,932 172,348 266,402 266,876"/>
+
+  <!-- Cube separator -->
+  <polygon fill="#000000" points="405,489 640,632 875,489 875,532 640,676 405,532"/>
+
+  <!-- Cube faces -->
+  <polygon fill="url(#cLeft)" points="405,525 640,657 640,921 405,788"/>
+  <polygon fill="url(#cRight)" points="640,657 875,525 875,788 640,921"/>
+  <polygon fill="#000000" points="640,657 658,657 658,921 640,921"/>
+  <polygon fill="url(#cTop)" points="640,350 875,489 640,628 405,489"/>
+
+  <!-- LETTER D - Top face, centered -->
+  <g transform="translate(640, 496)">
+    <text x="0" y="0"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      font-family="Arial Black, sans-serif"
+      font-size="180"
+      font-weight="900"
+      fill="#000000"
+      transform="scale(1.0, 0.75)">D</text>
+  </g>
+
+  <!-- LETTER S - Left face, rotated to match perspective -->
+  <g transform="translate(505, 718)">
+    <text x="0" y="0"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      font-family="Arial Black, sans-serif"
+      font-size="200"
+      font-weight="900"
+      fill="#000000"
+      transform="rotate(30) scale(0.75, 1.15)">S</text>
+  </g>
+
+  <!-- LETTER H - Right face -->
+  <g transform="translate(775, 720)">
+    <text x="0" y="0"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      font-family="Arial Black, sans-serif"
+      font-size="200"
+      font-weight="900"
+      fill="#000000"
+      transform="scale(0.75, 1.15)">H</text>
+  </g>
+</svg>

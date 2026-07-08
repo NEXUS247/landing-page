@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Logo Vergleich — DSH</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:system-ui,sans-serif;padding:2rem;margin:0}
+.container{max-width:1200px;margin:0 auto}
+h1{text-align:center;margin-bottom:2rem}
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.box{background:#111;border:1px solid #333;border-radius:16px;padding:2rem;text-align:center}
+.box h2{margin-top:0;color:#888;font-size:1rem;text-transform:uppercase;letter-spacing:.1em}
+.box img,.box svg{max-width:100%;height:auto}
+.label{margin-top:1rem;color:#666;font-size:.85rem}
+/* Old logo style */
+.old-logo{width:200px;height:200px}
+/* New logo style */
+.new-logo{width:400px;height:400px}
+.verdict{margin-top:3rem;padding:1.5rem;background:#1a1a1a;border-radius:12px;border-left:4px solid #f59e0b}
+.verdict h3{margin-top:0;color:#f59e0b}
+.actions{display:flex;gap:1rem;justify-content:center;margin-top:2rem}
+.btn{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;padding:.8rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🎨 DSH Logo — Vergleich</h1>
+  
+  <div class="comparison">
+    <div class="box">
+      <h2>Alt (vorher)</h2>
+      <svg class="old-logo" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="og" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient>
+        </defs>
+        <rect x="5" y="5" width="90" height="90" rx="20" fill="url(#og)"/>
+        <text x="50" y="58" text-anchor="middle" font-family="system-ui" font-weight="800" font-size="35" fill="white">DSH</text>
+      </svg>
+      <div class="label">Einfaches Rechteck mit Farbverlauf</div>
+    </div>
+    
+    <div class="box">
+      <h2>Neu (dein Bild)</h2>
+      <svg class="new-logo" viewBox="0 0 1280 1280">
+        <defs>
+          <linearGradient id="ftl" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#19CFF0"/><stop offset="100%" stop-color="#168FEF"/></linearGradient>
+          <linearGradient id="ftr" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#19CFF0"/><stop offset="100%" stop-color="#245CFF"/></linearGradient>
+          <linearGradient id="fr" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#168FEF"/><stop offset="100%" stop-color="#20B8F4"/></linearGradient>
+          <linearGradient id="fbr" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#245CFF"/><stop offset="100%" stop-color="#4B38FF"/></linearGradient>
+          <linearGradient id="fbl" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4B38FF"/><stop offset="100%" stop-color="#1AAEEF"/></linearGradient>
+          <linearGradient id="fl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#168FEF"/><stop offset="100%" stop-color="#245CFF"/></linearGradient>
+          <linearGradient id="ct" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#13DDE6"/><stop offset="100%" stop-color="#16BFEF"/></linearGradient>
+          <linearGradient id="cl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#285BFF"/><stop offset="100%" stop-color="#4B35FF"/></linearGradient>
+          <linearGradient id="cr" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#168EEF"/><stop offset="100%" stop-color="#1D6BFF"/></linearGradient>
+        </defs>
+        <rect width="1280" height="1280" fill="#000000"/>
+        <polygon points="640,60 1107,342 997,396 640,171" fill="url(#ftl)"/>
+        <polygon points="640,60 640,171 283,396 173,342" fill="url(#ftr)"/>
+        <polygon points="1107,342 1107,916 997,858 997,396" fill="url(#fr)"/>
+        <polygon points="1107,916 640,1200 640,1091 997,858" fill="url(#fbr)"/>
+        <polygon points="640,1200 173,916 283,858 640,1091" fill="url(#fbl)"/>
+        <polygon points="173,916 173,342 283,396 283,858" fill="url(#fl)"/>
+        <polygon points="640,343 857,481 640,620 407,481" fill="url(#ct)"/>
+        <polygon points="407,518 640,648 640,903 401,773" fill="url(#cl)"/>
+        <polygon points="857,518 648,648 648,903 859,773" fill="url(#cr)"/>
+        <polygon points="640,620 648,648 640,648 632,620" fill="#000000"/>
+        <line x1="640" y1="343" x2="640" y2="620" stroke="#000000" stroke-width="8"/>
+        <line x1="407" y1="481" x2="407" y2="518" stroke="#000000" stroke-width="6"/>
+        <line x1="857" y1="481" x2="857" y2="518" stroke="#000000" stroke-width="6"/>
+        <line x1="640" y1="620" x2="640" y2="903" stroke="#000000" stroke-width="10"/>
+        <text x="660" y="475" text-anchor="middle" font-family="Arial Black, Montserrat ExtraBold, Helvetica Neue Black, sans-serif" font-weight="900" font-size="165" fill="#000000" transform="skewX(-8) scale(1,0.65)">D</text>
+        <text x="520" y="705" text-anchor="middle" font-family="Arial Black, Montserrat ExtraBold, Helvetica Neue Black, sans-serif" font-weight="900" font-size="195" fill="#000000" transform="rotate(-12, 520, 705) skewY(15) scale(0.9,1)">S</text>
+        <text x="750" y="730" text-anchor="middle" font-family="Arial Black, Montserrat ExtraBold, Helvetica Neue Black, sans-serif" font-weight="900" font-size="195" fill="#000000" transform="rotate(12, 750, 730) skewY(-15) scale(0.9,1)">H</text>
+      </svg>
+      <div class="label">Hexagon-Rahmen + 3D-Würfel mit D/S/H</div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <h3>📋 Zusammenfassung der Änderungen</h3>
+    <ul>
+      <li>✅ Neues Logo eingebaut (exakt nach deinem Bild)</li>
+      <li>✅ Auf Landing Page + alle 3 Demos aktualisiert</li>
+      <li>✅ Demo-Deckblätter verbessert (realistische Website-Mockups)</li>
+      <li>⚠️ Deployment wartet auf deine Freigabe (Netlify blockiert)</li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <a href="https://vocal-alpaca-a1f91c.netlify.app" class="btn" target="_blank">Aktuelle Live-Version</a>
+    <a href="https://app.netlify.com" class="btn" target="_blank" style="background:linear-gradient(135deg,#22c55e,#16a34a)">Netlify öffnen</a>
+  </div>
+</div>
+</body>
+</html>
