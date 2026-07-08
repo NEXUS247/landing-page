@@ -35,7 +35,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .header{background:rgba(3,3,8,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);padding:1.2rem 2rem;position:fixed;width:100%;top:0;z-index:1000;transition:all .3s}
 .header-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
 .logo{display:flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--text)}
-.logo svg{width:55px;height:55px;filter:drop-shadow(0 0 10px rgba(99,102,241,.3))}
+.logo svg,.logo img{width:55px;height:55px;object-fit:contain;display:block;filter:drop-shadow(0 0 10px rgba(99,102,241,.3))}
 .logo span{font-weight:800;font-size:1.1rem;letter-spacing:-.02em}
 .nav{display:flex;gap:2.5rem;align-items:center}
 .nav a{color:var(--text-dim);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s;position:relative}
@@ -166,7 +166,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .footer-column a:hover{color:var(--text)}
 .footer-bottom{max-width:1400px;margin:0 auto;padding:2rem 2rem 0;margin-top:3rem;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;color:var(--text-dim);font-size:.8rem}
 
-@media (max-width:768px){.logo svg{width:40px;height:40px}
+@media (max-width:768px){.logo svg,.logo img{width:40px;height:40px}
 .hero-inner{grid-template-columns:1fr}
 .hero-visual{display:none}
 .demos-grid,.features-grid,.testimonials-grid,.pricing-grid{grid-template-columns:1fr}
@@ -180,7 +180,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 <header class="header">
   <div class="header-inner">
     <a href="#" class="logo">
-      <img src="assets/logo-dsh.png" alt="Digital Service Hub Logo" width="55" height="55">
+      <img src="assets/logo-dsh-final.png?v=2" alt="Digital Service Hub Logo" width="55" height="55">
       <span>Digital Service Hub</span>
     </a>
     <nav class="nav">
@@ -488,9 +488,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
   <div class="footer-inner">
     <div class="footer-brand">
       <a href="#" class="logo">
-        <svg width="32" height="32" viewBox="0 0 1280 1280">
-          <use href="assets/logo-dsh.svg#dsh-logo"/>
-        </svg>
+        <img src="assets/logo-dsh-final.png?v=2" alt="Digital Service Hub Logo" width="32" height="32">
         <span>Digital Service Hub</span>
       </a>
       <p>Wir erstellen hochkonvertierende Websites für Coaches, Handwerker und KMU. Festpreis. In 7-10 Tagen online.</p>
