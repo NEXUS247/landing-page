@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="hf-grad" x1="0" y1="0" x2="200" y2="200"><stop offset="0" stop-color="#8b6914"/><stop offset="1" stop-color="#5a4510"/></linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="95" fill="url(#hf-grad)" stroke="#a67c00" stroke-width="3"/>
+  <text x="100" y="108" text-anchor="middle" dominant-baseline="middle"
+    font-family="Georgia, serif" font-size="80" font-weight="700" fill="#fff">HF</text>
+</svg>

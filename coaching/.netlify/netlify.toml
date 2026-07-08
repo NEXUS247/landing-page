@@ -1,0 +1,26 @@
+plugins = []
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/data/.openclaw/workspace/projects/web-agency/portfolio/coaching"
+publishOrigin = "default"
+base = "/data/.openclaw/workspace/projects/web-agency/portfolio/coaching"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]

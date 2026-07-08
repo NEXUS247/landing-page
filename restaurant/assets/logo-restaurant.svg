@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="ar-grad" x1="0" y1="0" x2="200" y2="200"><stop offset="0" stop-color="#d4af37"/><stop offset="1" stop-color="#aa8a28"/></linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="95" fill="url(#ar-grad)" stroke="#f0d878" stroke-width="3"/>
+  <text x="100" y="108" text-anchor="middle" dominant-baseline="middle"
+    font-family="Georgia, serif" font-size="80" font-weight="700" fill="#1a1a2e">AR</text>
+</svg>

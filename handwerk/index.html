@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holz & Form — Tischlerei & Möbelbau</title>
+<meta name="description" content="Maßgeschneiderte Möbel und Innenausbau aus Holz. Handwerk in Perfektion. Tischlerei Meisterbetrieb.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --walnut: #5d4037;
+  --walnut-light: #8b7355;
+  --walnut-dark: #3e2723;
+  --amber: #d4a574;
+  --amber-light: #e8c9a8;
+  --cream: #f0ebe3;
+  --cream-dark: #e0d8cc;
+  --dark: #1a1a1a;
+  --text: #3a3a3a;
+  --text-light: #6a6a6a;
+  --text-dim: #8a8a8a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.7}
+
+/* Typography */
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.15;letter-spacing:0.02em}
+h1{font-size:clamp(3rem,6vw,5.5rem)}
+h2{font-size:clamp(2.2rem,4vw,3.5rem)}
+h3{font-size:clamp(1.3rem,2.5vw,2rem)}
+
+/* DSH Logo */
+.dsh-logo{display:inline-flex;align-items:center;gap:0.6rem;text-decoration:none}
+.dsh-logo svg{width:36px;height:36px;filter:drop-shadow(0 2px 6px rgba(99,102,241,0.2))}
+.dsh-logo span{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.95rem;color:var(--dark)}
+
+/* Grain texture */
+body::after {
+  content:'';position:fixed;inset:0;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;
+}
+
+/* Header */
+.header{background:rgba(240,235,227,0.95);backdrop-filter:blur(30px);border-bottom:1px solid rgba(0,0,0,0.08);padding:1.2rem 2rem;position:fixed;width:100%;top:0;z-index:1000;transition:all .4s}
+.header.scrolled{padding:0.8rem 2rem;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+
+.nav{display:flex;gap:2.5rem;align-items:center}
+.nav a{color:var(--text-light);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color .3s;position:relative}
+.nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--walnut);transition:width .3s}
+.nav a:hover{color:var(--dark)}
+.nav a:hover::after{width:100%}
+
+.cta-btn{background:var(--walnut);color:#fff;padding:0.7rem 1.8rem;border-radius:50px;font-weight:600;font-size:0.8rem;text-decoration:none;transition:all .3s}
+.cta-btn:hover{background:var(--walnut-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(93,64,55,0.3)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:80px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--walnut) 0%,var(--walnut-dark) 100%)}
+.hero-pattern{position:absolute;inset:0;opacity:0.05;background-image:repeating-linear-gradient(45deg,transparent,transparent 35px,rgba(255,255,255,0.1) 35px,rgba(255,255,255,0.1) 70px);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-content{text-align:left}
+.hero-label{display:inline-block;background:rgba(212,165,116,0.15);color:var(--amber);padding:0.5rem 1.2rem;border-radius:50px;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;border:1px solid rgba(212,165,116,0.2)}
+.hero h1{margin-bottom:1.5rem;color:#fff;font-style:italic}
+.hero-subtitle{font-size:1.1rem;color:rgba(255,255,255,0.75);max-width:480px;margin-bottom:2.5rem;line-height:1.8}
+.hero-ctas{display:flex;gap:1rem}
+.btn-primary{background:var(--amber);color:var(--walnut-dark);padding:1rem 2.2rem;border-radius:50px;font-weight:700;text-decoration:none;transition:all .3s;display:inline-block;font-size:0.95rem}
+.btn-primary:hover{background:var(--amber-light);transform:translateY(-2px);box-shadow:0 12px 35px rgba(212,165,116,0.35)}
+.btn-secondary{background:transparent;color:#fff;padding:1rem 2.2rem;border-radius:50px;font-weight:600;text-decoration:none;transition:all .3s;display:inline-block;border:2px solid rgba(255,255,255,0.2);font-size:0.95rem}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
+
+.hero-visual{position:relative}
+.hero-image{border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.4);transform:rotate(-2deg);transition:transform .5s}
+.hero-image:hover{transform:rotate(0deg) scale(1.02)}
+.hero-image img{width:100%;height:500px;object-fit:cover;display:block}
+
+/* Trust badges */
+.trust-section{padding:2rem 0;background:var(--cream);border-top:1px solid rgba(0,0,0,0.06);border-bottom:1px solid rgba(0,0,0,0.06)}
+.trust-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:0.6rem;color:var(--text-light);font-size:0.85rem;font-weight:500}
+.trust-icon{font-size:1.2rem}
+
+/* Services */
+.services{padding:6rem 0;background:#fff}
+.services-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-label{display:inline-block;color:var(--walnut-light);font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.8rem}
+.section-header h2{margin-bottom:1rem;color:var(--dark)}
+.section-header p{color:var(--text-light);font-size:1.05rem;max-width:550px;margin:0 auto}
+
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.service-card{background:var(--cream);border:1px solid rgba(0,0,0,0.06);border-radius:20px;padding:2.5rem;transition:all .4s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--walnut),var(--amber));transform:scaleX(0);transition:transform .4s}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(0,0,0,0.12)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{font-size:2.5rem;margin-bottom:1.2rem}
+.service-card h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:0.8rem;color:var(--dark)}
+.service-card p{color:var(--text-light);font-size:0.9rem;line-height:1.7}
+
+/* Gallery */
+.gallery{padding:6rem 0;background:var(--cream)}
+.gallery-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.gallery-item{border-radius:16px;overflow:hidden;position:relative;aspect-ratio:1;cursor:pointer;transition:transform .4s}
+.gallery-item:hover{transform:scale(1.03)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.1)}
+.gallery-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.gallery-item:first-child img{height:100%}
+.gallery-item:nth-child(4){grid-column:span 2}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1.5rem}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay span{color:#fff;font-size:0.9rem;font-weight:500;font-family:'Cormorant Garamond',serif;letter-spacing:0.05em}
+
+/* Process */
+.process{padding:6rem 0;background:#fff}
+.process-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.process-step{text-align:center;position:relative}
+.process-step::after{content:'';position:absolute;top:30px;right:-1rem;width:2rem;height:1px;background:linear-gradient(90deg,var(--walnut),transparent);opacity:0.3}
+.process-step:last-child::after{display:none}
+.step-number{width:60px;height:60px;background:linear-gradient(135deg,var(--walnut),var(--walnut-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;color:#fff;margin:0 auto 1.5rem;box-shadow:0 8px 25px rgba(93,64,55,0.3);font-family:'Cormorant Garamond',serif}
+.process-step h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;color:var(--dark)}
+.process-step p{color:var(--text-light);font-size:0.85rem;line-height:1.6}
+
+/* Testimonials */
+.testimonials{padding:6rem 0;background:linear-gradient(180deg,var(--cream-dark),var(--cream))}
+.testimonials-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.testi-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:20px;padding:2rem;box-shadow:0 10px 40px rgba(0,0,0,0.05);transition:all .3s}
+.testi-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1)}
+.testi-stars{color:#f5a623;margin-bottom:1rem;font-size:1.1rem}
+.testi-text{font-size:0.95rem;line-height:1.8;color:var(--text-light);margin-bottom:1.5rem;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.05rem}
+.testi-author{display:flex;align-items:center;gap:1rem}
+.testi-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--walnut),var(--walnut-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.9rem}
+.testi-name{font-weight:700;font-size:0.9rem;color:var(--dark)}
+.testi-role{font-size:0.8rem;color:var(--text-dim)}
+
+/* Contact CTA */
+.contact{padding:6rem 0;background:var(--walnut-dark);position:relative;overflow:hidden}
+.contact::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,165,116,0.1),transparent);pointer-events:none}
+.contact-inner{max-width:800px;margin:0 auto;padding:0 2rem;text-align:center;position:relative;z-index:1}
+.contact h2{color:#fff;margin-bottom:1.5rem;font-style:italic}
+.contact > div > p{color:rgba(255,255,255,0.7);font-size:1.1rem;margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto}
+.contact-options{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem}
+.contact-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:2rem;transition:all .3s}
+.contact-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-4px)}
+.contact-card .icon{font-size:2rem;margin-bottom:1rem}
+.contact-card h4{color:#fff;font-size:1rem;margin-bottom:0.5rem}
+.contact-card p{color:rgba(255,255,255,0.6);font-size:0.85rem}
+.contact .btn-primary{background:var(--amber);color:var(--walnut-dark);font-size:1.1rem;padding:1.2rem 3rem;font-weight:700}
+.contact .btn-primary:hover{background:var(--amber-light)}
+
+/* Footer */
+.footer{padding:3rem 0;background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{display:flex;align-items:center;gap:0.6rem}
+.footer-logo span{color:rgba(255,255,255,0.8);font-weight:700;font-size:0.9rem}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{color:rgba(255,255,255,0.3);font-size:0.8rem}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-content{text-align:center}
+  .hero-ctas{justify-content:center}
+  .hero-visual{display:none}
+  .services-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item:first-child{grid-column:span 2;grid-row:span 1}
+  .gallery-item:nth-child(4){grid-column:span 1}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .process-step::after{display:none}
+  .testi-grid{grid-template-columns:1fr}
+  .contact-options{grid-template-columns:1fr}
+  .nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- DSH Logo SVG Definition -->
+<svg style="display:none">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <symbol id="dsh-logo" viewBox="0 0 1280 1280">
+
+  <defs>
+    <!-- Frame gradients - balanced, less neon -->
+    <linearGradient id="g1" x1="640" y1="60" x2="172" y2="348" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="640" y1="60" x2="1108" y2="348" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="1108" y1="348" x2="1108" y2="932" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="1108" y1="932" x2="640" y2="1222" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="172" y1="932" x2="640" y2="1222" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="g6" x1="172" y1="348" x2="172" y2="932" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    
+    <!-- Cube faces - balanced colors -->
+    <linearGradient id="cTop" x1="405" y1="489" x2="875" y2="489" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="cLeft" x1="405" y1="525" x2="640" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="cRight" x1="640" y1="525" x2="875" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- NO background - transparent! -->
+
+  <!-- Outer hexagon frame - balanced thickness -->
+  <polygon points="640,60 640,172 266,402 172,348" fill="url(#g1)"/>
+  <polygon points="640,60 1108,348 1006,402 640,172" fill="url(#g2)"/>
+  <polygon points="1108,348 1108,932 1006,876 1006,402" fill="url(#g3)"/>
+  <polygon points="1108,932 640,1222 640,1108 1006,876" fill="url(#g4)"/>
+  <polygon points="640,1222 172,932 266,876 640,1108" fill="url(#g5)"/>
+  <polygon points="172,932 172,348 266,402 266,876" fill="url(#g6)"/>
+
+  <!-- 3D Cube - centered, balanced perspective -->
+  <!-- Thin black separators -->
+  <polygon points="405,489 640,632 875,489 875,500 640,643 405,500" fill="#000000" opacity="0.8"/>
+
+  <!-- Left face -->
+  <polygon points="405,525 640,657 640,921 405,788" fill="url(#cLeft)"/>
+
+  <!-- Right face -->
+  <polygon points="640,657 875,525 875,788 640,921" fill="url(#cRight)"/>
+
+  <!-- Thin vertical separator -->
+  <polygon points="640,657 645,657 645,921 640,921" fill="#000000" opacity="0.8"/>
+
+  <!-- Top face -->
+  <polygon points="640,350 875,489 640,628 405,489" fill="url(#cTop)"/>
+
+  <!-- Letters D/S/H - properly sized and positioned -->
+  <g transform="translate(640, 500)">
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
+      font-family="Arial Black, sans-serif" font-weight="900" font-size="120" fill="#000000"
+      transform="scale(1, 0.6)">D</text>
+  </g>
+
+  <g transform="translate(520, 720) rotate(30)">
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
+      font-family="Arial Black, sans-serif" font-weight="900" font-size="130" fill="#000000"
+      transform="scale(0.75, 1)">S</text>
+  </g>
+
+  <g transform="translate(760, 720)">
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
+      font-family="Arial Black, sans-serif" font-weight="900" font-size="130" fill="#000000"
+      transform="scale(0.75, 1)">H</text>
+  </g>
+
+</symbol>
+</svg>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="dsh-logo">
+      <svg width="36" height="36" viewBox="0 0 1280 1280"><use href="#dsh-logo"/></svg>
+      <span>Digital Service Hub</span>
+    </a>
+    <nav class="nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#prozess">Prozess</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="#kontakt" class="cta-btn">Projekt anfragen</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">🪵 Handwerkskunst in Perfektion</div>
+      <h1>Holz &amp; Form</h1>
+      <p class="hero-subtitle">Maßgeschneiderte Möbel und Innenausbau aus Holz. Jedes Stück ein Unikat, gefertigt mit jahrzehntelanger Erfahrung und Liebe zum Detail.</p>
+      <div class="hero-ctas">
+        <a href="#kontakt" class="btn-primary">Beratungstermin vereinbaren</a>
+        <a href="#galerie" class="btn-secondary">Werke ansehen</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image">
+        <img src="images/hero.jpg" alt="Holz & Form — Handwerkliche Holzarbeit">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust-section">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">🏆</span> Meisterbetrieb</div>
+    <div class="trust-item"><span class="trust-icon">🌳</span> Nachhaltiges Holz</div>
+    <div class="trust-item"><span class="trust-icon">✨</span> Maßanfertigung</div>
+    <div class="trust-item"><span class="trust-icon">🛠️</span> 25 Jahre Erfahrung</div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="leistungen">
+  <div class="services-inner">
+    <div class="section-header">
+      <div class="section-label">Leistungen</div>
+      <h2>Was wir für dich schaffen</h2>
+      <p>Vom einzelnen Möbelstück bis zum kompletten Innenausbau — alles aus einer Hand</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🪑</div>
+        <h3>Maßmöbel</h3>
+        <p>Individuell gefertigte Möbel nach deinen Vorstellungen. Von der Idee bis zur Fertigstellung — einzigartig und passgenau.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Innenausbau</h3>
+        <p>Komplette Raumlösungen aus Holz. Einbauschränke, Regalsysteme, Wandverkleidungen — alles harmonisch aufeinander abgestimmt.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🍽️</div>
+        <h3>Küchen & Küchenmöbel</h3>
+        <p>Funktionale und ästhetische Küchenlösungen. Arbeitsplatten, Schränke, Inseln — maßgeschneidert für deinen Kochraum.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚪</div>
+        <h3>Türen & Fenster</h3>
+        <p>Handgefertigte Holztüren und Fenster im traditionellen oder modernen Stil. Energieeffizient und langlebig.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Restaurierung</h3>
+        <p>Wir bringen alte Schätze wieder zum Leben. Professionelle Restaurierung von Antiquitäten und wertvollen Möbelstücken.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>Planung & Beratung</h3>
+        <p>Vor-Ort-Besichtigung, 3D-Visualisierung und detaillierte Planung. Wir begleiten dich von der ersten Idee bis zur Realisierung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="galerie">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <div class="section-label">Galerie</div>
+      <h2>Unsere Werke</h2>
+      <p>Jedes Stück erzählt eine Geschichte — entdecke unsere Handwerkskunst</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/hero.jpg" alt="Werkstatt Holzarbeit">
+        <div class="gallery-overlay"><span>Unsere Werkstatt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/detail.jpg" alt="Detail Holzarbeit">
+        <div class="gallery-overlay"><span>Liebe zum Detail</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/table.jpg" alt="Maßgefertigter Tisch">
+        <div class="gallery-overlay"><span>Eichen-Esstisch</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/finished.jpg" alt="Fertiges Walnuss Bücherregal">
+        <div class="gallery-overlay"><span>Walnuss-Bücherregal im Einsatz</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" alt="Holzmöbel">
+        <div class="gallery-overlay"><span>Maßanfertigung</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process" id="prozess">
+  <div class="process-inner">
+    <div class="section-header">
+      <div class="section-label">So arbeiten wir</div>
+      <h2>Von der Idee zum Unikat</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-number">1</div>
+        <h3>Beratung</h3>
+        <p>Wir besprechen deine Wünsche, nehmen Maß und zeigen dir Materialien und Optionen.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">2</div>
+        <h3>Entwurf</h3>
+        <p>Detaillierte 3D-Visualisierung und Planung deines Projekts zur Freigabe.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">3</div>
+        <h3>Fertigung</h3>
+        <p>Handwerkliche Fertigung in unserer Werkstatt mit besten Materialien.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <h3>Montage</h3>
+        <p>Fachgerechte Montage vor Ort und finale Qualitätskontrolle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <div class="section-label">Kundenstimmen</div>
+      <h2>Was Kunden sagen</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Der Esstisch ist ein Traum! Die Verarbeitung und die Auswahl des Holzes sind erstklassig. Ein echtes Unikat das unsere Gäste begeistert."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AF</div>
+          <div>
+            <div class="testi-name">Andreas F.</div>
+            <div class="testi-role">Privatkunde</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Von der Planung bis zur Montage alles perfekt. Die Einbauschränke passen wie angegossen und die Qualität übertrifft unsere Erwartungen."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">KM</div>
+          <div>
+            <div class="testi-name">Katrin M.</div>
+            <div class="testi-role">Innenarchitektin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
+    <h2>Lass uns dein Projekt besprechen</h2>
+    <p>Vereinbare einen kostenlosen Beratungstermin. Wir schauen uns deine Räumlichkeiten an und entwickeln ein Konzept das zu dir passt.</p>
+    <div class="contact-options">
+      <div class="contact-card">
+        <div class="icon">📧</div>
+        <h4>E-Mail</h4>
+        <p>info@holzundform.de</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📱</div>
+        <h4>Telefon</h4>
+        <p>+49 40 123 45678</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <h4>Standort</h4>
+        <p>Hamburg & Umgebung</p>
+      </div>
+    </div>
+    <a href="#" class="btn-primary">Beratungstermin vereinbaren</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 1280 1280"><use href="#dsh-logo"/></svg>
+      <span>Digital Service Hub</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+    </div>
+    <div class="footer-copy">© 2025 Digital Service Hub. Alle Rechte vorbehalten.</div>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) header.classList.add('scrolled');
+  else header.classList.remove('scrolled');
+});
+</script>
+
+</body>
+</html>

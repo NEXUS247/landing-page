@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura — Kulinarik neu definiert</title>
+<meta name="description" content="Fine Dining in Hamburg. Kulinarische Erlebnisse auf höchstem Niveau. Sterneküche trifft innovativen Genuss.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e0c99e;
+  --gold-dark: #a08650;
+  --dark: #0a0a0f;
+  --darker: #060608;
+  --card: #111118;
+  --card-hover: #1a1a24;
+  --text: #e8e4df;
+  --text-dim: #8a8478;
+  --text-muted: #5a5448;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--darker);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* Typography */
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:-0.02em}
+h1{font-size:clamp(3.5rem,7vw,6rem);line-height:1.0}
+h2{font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1}
+h3{font-size:clamp(1.5rem,3vw,2rem);font-weight:400}
+p{font-weight:300;font-size:1.05rem;letter-spacing:0.01em}
+
+::selection{background:rgba(201,169,110,0.3);color:#fff}
+
+/* Grain */
+body::after {
+  content:'';position:fixed;inset:0;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.4;
+}
+
+/* ========== HEADER ========== */
+.header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1.5rem 3rem;transition:all .5s ease}
+.header.scrolled{background:rgba(6,6,8,0.95);backdrop-filter:blur(30px);padding:1rem 3rem;border-bottom:1px solid rgba(201,169,110,0.1)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto}
+
+/* DSH Logo */
+.dsh-logo{display:inline-flex;align-items:center;gap:0.7rem;text-decoration:none}
+.dsh-logo svg{width:36px;height:36px;filter:drop-shadow(0 2px 6px rgba(99,102,241,0.3))}
+.dsh-logo span{font-family:'Inter',sans-serif;font-weight:500;font-size:0.9rem;color:var(--text-dim);letter-spacing:0.05em}
+
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;text-decoration:none}
+
+.nav{display:flex;gap:3rem;align-items:center}
+.nav a{color:var(--text-dim);text-decoration:none;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;transition:color .3s;position:relative;font-weight:400}
+.nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s cubic-bezier(0.25,0.46,0.45,0.94)}
+.nav a:hover{color:var(--gold)}
+.nav a:hover::after{width:100%}
+.nav .cta-btn{border:1px solid var(--gold);color:var(--gold);padding:0.7rem 1.8rem;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;transition:all .4s;background:transparent;cursor:pointer;border-radius:0}
+.nav .cta-btn:hover{background:var(--gold);color:var(--dark)}
+
+/* ========== HERO ========== */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:100px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,var(--darker) 0%,var(--dark) 50%,var(--darker) 100%)}
+.hero-image-wrap{position:absolute;inset:0;overflow:hidden}
+.hero-image-wrap img{width:100%;height:100%;object-fit:cover;opacity:0.4;filter:blur(2px)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--darker) 100%)}
+.hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:0 3rem;text-align:center}
+.hero-label{display:inline-block;color:var(--gold);font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:2rem;font-weight:400}
+.hero h1{margin-bottom:1.5rem;font-style:italic}
+.hero-subtitle{font-size:1.2rem;color:var(--text-dim);max-width:600px;margin:0 auto 3rem;line-height:1.8;font-weight:300}
+.hero-ctas{display:flex;gap:1.5rem;justify-content:center}
+.btn-gold{background:var(--gold);color:var(--dark);padding:1.1rem 2.5rem;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;transition:all .4s;border:none;cursor:pointer;text-decoration:none;display:inline-block;font-weight:500}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 40px rgba(201,169,110,0.3)}
+.btn-outline{border:1px solid var(--gold);color:var(--gold);padding:1.1rem 2.5rem;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;transition:all .4s;background:transparent;cursor:pointer;text-decoration:none;display:inline-block;font-weight:500}
+.btn-outline:hover{background:rgba(201,169,110,0.1)}
+
+/* ========== TRUST BAR ========== */
+.trust-bar{padding:2rem 0;border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1)}
+.trust-inner{max-width:1400px;margin:0 auto;padding:0 3rem;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap}
+.trust-item{color:var(--text-dim);font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:300}
+
+/* ========== FEATURES ========== */
+.features{padding:8rem 0}
+.features-inner{max-width:1400px;margin:0 auto;padding:0 3rem}
+.section-header{text-align:center;margin-bottom:5rem}
+.section-label{color:var(--gold);font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:1.5rem;display:block}
+.section-header h2{margin-bottom:1.5rem}
+.section-header p{color:var(--text-dim);max-width:500px;margin:0 auto;font-size:1.1rem}
+
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.feature-card{background:var(--card);border:1px solid rgba(201,169,110,0.1);padding:3rem;transition:all .5s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .5s}
+.feature-card:hover{background:var(--card-hover);border-color:rgba(201,169,110,0.2);transform:translateY(-6px)}
+.feature-card:hover::before{opacity:1}
+.feature-icon{font-size:2rem;margin-bottom:1.5rem;opacity:0.8}
+.feature-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:1rem;color:var(--gold)}
+.feature-card p{color:var(--text-dim);font-size:0.95rem;line-height:1.7}
+
+/* ========== GALLERY ========== */
+.gallery{padding:8rem 0;background:var(--dark)}
+.gallery-inner{max-width:1400px;margin:0 auto;padding:0 3rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gallery-item{position:relative;overflow:hidden;aspect-ratio:1;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(0.25,0.46,0.45,0.94);display:block;filter:brightness(0.9)}
+.gallery-item:hover img{transform:scale(1.08);filter:brightness(1)}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 60%);opacity:0;transition:opacity .5s;display:flex;align-items:flex-end;padding:2rem}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-text{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic}
+.gallery-text span{display:block;font-size:0.75rem;font-family:'Inter',sans-serif;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;font-style:normal}
+
+.gallery-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.gallery-item:first-child img{height:100%}
+
+/* ========== MENU PREVIEW ========== */
+.menu-section{padding:8rem 0}
+.menu-inner{max-width:1400px;margin:0 auto;padding:0 3rem}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.menu-image{border-radius:4px;overflow:hidden}
+.menu-image img{width:100%;height:500px;object-fit:cover;display:block;filter:brightness(0.85);transition:filter .5s}
+.menu-image:hover img{filter:brightness(1)}
+.menu-content h2{margin-bottom:2rem}
+.menu-item{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(201,169,110,0.1)}
+.menu-item:last-child{border-bottom:none}
+.menu-item-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem}
+.menu-item h3{font-size:1.3rem;color:var(--gold);font-weight:400}
+.menu-item .price{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.2rem}
+.menu-item p{color:var(--text-dim);font-size:0.9rem}
+
+/* ========== TESTIMONIALS ========== */
+.testimonials{padding:8rem 0;background:var(--dark)}
+.testimonials-inner{max-width:1400px;margin:0 auto;padding:0 3rem}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.testi-card{background:var(--card);border:1px solid rgba(201,169,110,0.1);padding:2.5rem;transition:all .4s}
+.testi-card:hover{border-color:rgba(201,169,110,0.2);transform:translateY(-4px)}
+.testi-stars{color:var(--gold);margin-bottom:1.5rem;font-size:0.9rem;letter-spacing:2px}
+.testi-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.6;margin-bottom:2rem;color:var(--text-dim)}
+.testi-author{color:var(--text-muted);font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase}
+
+/* ========== CTA ========== */
+.cta-section{padding:10rem 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,0.05),transparent);pointer-events:none}
+.cta-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;padding:0 3rem}
+.cta-section h2{margin-bottom:1.5rem;font-style:italic}
+.cta-section > div > p{color:var(--text-dim);margin-bottom:3rem;font-size:1.1rem}
+
+/* ========== FOOTER ========== */
+.footer{padding:4rem 0;border-top:1px solid rgba(201,169,110,0.1)}
+.footer-inner{max-width:1400px;margin:0 auto;padding:0 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+.footer-logo{display:flex;align-items:center;gap:0.7rem}
+.footer-logo span{font-family:'Inter',sans-serif;color:var(--text-muted);font-size:0.85rem;font-weight:500}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{color:var(--text-muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{color:var(--text-muted);font-size:0.75rem}
+
+/* Responsive */
+@media(max-width:768px){
+  .header{padding:1rem 1.5rem}
+  .header-inner{flex-wrap:wrap}
+  .nav{display:none}
+  .hero h1{font-size:clamp(2.5rem,8vw,4rem)}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .features-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item:first-child{grid-column:span 2;grid-row:span 1;aspect-ratio:1}
+  .menu-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .trust-inner{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- DSH Logo SVG Definition -->
+<svg style="display:none">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <symbol id="dsh-logo" viewBox="0 0 1280 1280">
+
+  <defs>
+    <!-- Frame gradients - balanced, less neon -->
+    <linearGradient id="g1" x1="640" y1="60" x2="172" y2="348" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="640" y1="60" x2="1108" y2="348" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="1108" y1="348" x2="1108" y2="932" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="1108" y1="932" x2="640" y2="1222" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="172" y1="932" x2="640" y2="1222" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="g6" x1="172" y1="348" x2="172" y2="932" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    
+    <!-- Cube faces - balanced colors -->
+    <linearGradient id="cTop" x1="405" y1="489" x2="875" y2="489" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="cLeft" x1="405" y1="525" x2="640" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="cRight" x1="640" y1="525" x2="875" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- NO background - transparent! -->
+
+  <!-- Outer hexagon frame - balanced thickness -->
+  <polygon points="640,60 640,172 266,402 172,348" fill="url(#g1)"/>
+  <polygon points="640,60 1108,348 1006,402 640,172" fill="url(#g2)"/>
+  <polygon points="1108,348 1108,932 1006,876 1006,402" fill="url(#g3)"/>
+  <polygon points="1108,932 640,1222 640,1108 1006,876" fill="url(#g4)"/>
+  <polygon points="640,1222 172,932 266,876 640,1108" fill="url(#g5)"/>
+  <polygon points="172,932 172,348 266,402 266,876" fill="url(#g6)"/>
+
+  <!-- 3D Cube - centered, balanced perspective -->
+  <!-- Thin black separators -->
+  <polygon points="405,489 640,632 875,489 875,500 640,643 405,500" fill="#000000" opacity="0.8"/>
+
+  <!-- Left face -->
+  <polygon points="405,525 640,657 640,921 405,788" fill="url(#cLeft)"/>
+
+  <!-- Right face -->
+  <polygon points="640,657 875,525 875,788 640,921" fill="url(#cRight)"/>
+
+  <!-- Thin vertical separator -->
+  <polygon points="640,657 645,657 645,921 640,921" fill="#000000" opacity="0.8"/>
+
+  <!-- Top face -->
+  <polygon points="640,350 875,489 640,628 405,489" fill="url(#cTop)"/>
+
+  <!-- Letters D/S/H - properly sized and positioned -->
+  <g transform="translate(640, 500)">
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
+      font-family="Arial Black, sans-serif" font-weight="900" font-size="120" fill="#000000"
+      transform="scale(1, 0.6)">D</text>
+  </g>
+
+  <g transform="translate(520, 720) rotate(30)">
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
+      font-family="Arial Black, sans-serif" font-weight="900" font-size="130" fill="#000000"
+      transform="scale(0.75, 1)">S</text>
+  </g>
+
+  <g transform="translate(760, 720)">
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
+      font-family="Arial Black, sans-serif" font-weight="900" font-size="130" fill="#000000"
+      transform="scale(0.75, 1)">H</text>
+  </g>
+
+</symbol>
+</svg>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="dsh-logo">
+      <svg width="36" height="36" viewBox="0 0 1280 1280"><use href="#dsh-logo"/></svg>
+      <span>Digital Service Hub</span>
+    </a>
+    <nav class="nav">
+      <a href="#about">Über uns</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#menu">Menü</a>
+      <a href="#reservierung">Reservierung</a>
+      <a href="#kontakt" class="cta-btn">Tisch reservieren</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-image-wrap"><img src="images/hero.jpg" alt="Aura Restaurant Hamburg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-label">Fine Dining — Hamburg</div>
+    <h1>Aura</h1>
+    <p class="hero-subtitle">Kulinarik neu definiert. Wo Geschmack, Ästhetik und Emotion zu einem unvergesslichen Erlebnis verschmelzen.</p>
+    <div class="hero-ctas">
+      <a href="#reservierung" class="btn-gold">Tisch reservieren</a>
+      <a href="#menu" class="btn-outline">Menü entdecken</a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">⭐ Michelin-Auszeichnung</div>
+    <div class="trust-item">🍷 500+ Weine</div>
+    <div class="trust-item">🌿 Regional & Saisonal</div>
+    <div class="trust-item">✨ Seit 2018</div>
+  </div>
+</div>
+
+<!-- About / Philosophy -->
+<section class="features" id="about">
+  <div class="features-inner">
+    <div class="section-header">
+      <span class="section-label">Unsere Philosophie</span>
+      <h2>Kulinarik als Kunstform</h2>
+      <p>Jedes Gericht erzählt eine Geschichte — von der sorgfältigen Auswahl regionaler Zutaten bis zur perfekten Präsentation auf deinem Teller.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌿</div>
+        <h3>Regional & Saisonal</h3>
+        <p>Wir arbeiten ausschließlich mit regionalen Erzeugern und saisonalen Zutaten. Frische und Qualität stehen an erster Stelle.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍🍳</div>
+        <h3>Kreativität & Innovation</h3>
+        <p>Unser Küchenchef kombiniert klassische Techniken mit modernen Interpretationen. Jedes Gericht ist einzigartig und überraschend.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🍷</div>
+        <h3>Weinbegleitung</h3>
+        <p>Unser Sommelier wählt zu jedem Gang den perfekten Wein. Eine Reise durch die besten Weingüter der Welt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="galerie">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <span class="section-label">Impressionen</span>
+      <h2>Einblicke in die Aura</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/hero.jpg" alt="Aura Restaurant">
+        <div class="gallery-overlay"><div class="gallery-text">Das Restaurant<span>Hamburg</span></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery1.jpg" alt="Signature Dish">
+        <div class="gallery-overlay"><div class="gallery-text">Signature Dish<span>Kreation des Küchenchefs</span></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/ambiente.jpg" alt="Restaurant Ambiente">
+        <div class="gallery-overlay"><div class="gallery-text">Ambiente<span>Elegantes Dining</span></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/dessert.jpg" alt="Dessert">
+        <div class="gallery-overlay"><div class="gallery-text">Dessert<span>Süße Kunst</span></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Fine Dining">
+        <div class="gallery-overlay"><div class="gallery-text">Service<span>Perfektion im Detail</span></div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Cocktails">
+        <div class="gallery-overlay"><div class="gallery-text">Cocktails<span>Kreative Mixologie</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Preview -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="menu-image">
+      <img src="images/gallery1.jpg" alt="Signature Dish">
+    </div>
+    <div class="menu-content">
+      <span class="section-label">Menü</span>
+      <h2>Geschmacksreise</h2>
+      
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Amuse-Bouche</h3>
+          <span class="price">€ 18</span>
+        </div>
+        <p>Kürbis & Maronen — Espuma von geröstetem Butternusskürbis mit Maronencrunch und karamellisierter Birne</p>
+      </div>
+      
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Starter</h3>
+          <span class="price">€ 28</span>
+        </div>
+        <p>Tartar vom heimischen Rind — Sylter Lamm, Rote-Bete-Gel, Shiso & geräucherter Öl</p>
+      </div>
+      
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Hauptgang</h3>
+          <span class="price">€ 48</span>
+        </div>
+        <p>Wildfang & Trüffel — Steinbutt, schwarzer Wintertrüffel, Petersilienwurzel & Beurre Blanc</p>
+      </div>
+      
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Dessert</h3>
+          <span class="price">€ 22</span>
+        </div>
+        <p>Schokolade & Gold — Valrhona-Ganache, karamellisierte Macadamia, essbares Goldblatt</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <span class="section-label">Gästestimmen</span>
+      <h2>Was unsere Gäste sagen</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ein kulinarisches Erlebnis der Extraklasse. Jedes Gericht war ein kleines Kunstwerk. Der Service ist unaufdringlich und perfekt."</p>
+        <div class="testi-author">— Julia M., Hamburg</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Das beste Restaurant in Hamburg. Die Kombination aus kreativer Küche, exzellenten Weinen und stilvollem Ambiente ist einzigartig."</p>
+        <div class="testi-author">— Michael K., Berlin</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Wir feierten unseren Hochzeitstag bei Aura. Es war magisch. Das Team hat an jedes Detail gedacht. Unvergesslich!"</p>
+        <div class="testi-author">— Sarah & Thomas L., München</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="reservierung">
+  <div class="cta-inner">
+    <h2>Reserviere deinen Tisch</h2>
+    <p>Erlebe kulinarische Magie in Hamburg. Wir freuen uns darauf, dich in der Aura willkommen zu heißen.</p>
+    <a href="#" class="btn-gold">Jetzt reservieren</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="kontakt">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 1280 1280"><use href="#dsh-logo"/></svg>
+      <span>Digital Service Hub</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Kontakt</a>
+    </div>
+    <div class="footer-copy">© 2025 Digital Service Hub. Alle Rechte vorbehalten.</div>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) header.classList.add('scrolled');
+  else header.classList.remove('scrolled');
+});
+</script>
+
+</body>
+</html>
