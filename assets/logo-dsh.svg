@@ -11,6 +11,7 @@
     <linearGradient id="cr" x1="650" y1="520" x2="875" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#279BFF"/><stop offset="1" stop-color="#1B7EF4"/></linearGradient>
   </defs>
 
+  <!-- Hexagon background -->
   <polygon fill="url(#tl)" points="640,60 640,172 266,402 172,348"/>
   <polygon fill="url(#tr)" points="640,60 1108,348 1006,402 640,172"/>
   <polygon fill="url(#r)" points="1108,348 1108,932 1006,876 1006,402"/>
@@ -18,30 +19,31 @@
   <polygon fill="url(#bl)" points="640,1218 172,932 266,876 640,1108"/>
   <polygon fill="url(#l)" points="172,932 172,348 266,402 266,876"/>
 
+  <!-- Center pyramid -->
   <polygon fill="#000" points="405,489 640,632 875,489 875,532 640,676 405,532"/>
   <polygon fill="url(#cl)" points="405,525 640,657 640,921 405,788"/>
   <polygon fill="url(#cr)" points="640,657 875,525 875,788 640,921"/>
   <polygon fill="#000" points="640,657 658,657 658,921 640,921"/>
   <polygon fill="url(#ct)" points="640,350 875,489 640,628 405,489"/>
 
-  <!-- D - Top face, large and centered -->
-  <g transform="translate(640, 490)">
+  <!-- D - Top face -->
+  <g transform="translate(640, 520)">
     <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
-      font-family="Arial Black, sans-serif" font-size="220" font-weight="900" fill="#000"
-      transform="scale(1.0, 0.7)">D</text>
+      font-family="Arial Black, sans-serif" font-size="120" font-weight="900" fill="#fff"
+      transform="scale(1.0, 0.8)">D</text>
   </g>
 
-  <!-- S - Left face, rotated to match perspective -->
-  <g transform="translate(500, 715)">
+  <!-- S - Left face -->
+  <g transform="translate(520, 720)">
     <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
-      font-family="Arial Black, sans-serif" font-size="240" font-weight="900" fill="#000"
-      transform="rotate(30) scale(0.72, 1.12)">S</text>
+      font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#fff"
+      transform="rotate(30) scale(0.8, 1.0)">S</text>
   </g>
 
   <!-- H - Right face -->
-  <g transform="translate(780, 718)">
+  <g transform="translate(760, 720)">
     <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
-      font-family="Arial Black, sans-serif" font-size="240" font-weight="900" fill="#000"
-      transform="scale(0.72, 1.12)">H</text>
+      font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#fff"
+      transform="scale(0.8, 1.0)">H</text>
   </g>
 </svg>
