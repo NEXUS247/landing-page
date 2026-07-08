@@ -1,49 +1,94 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280">
+  <!-- Black background -->
+  <rect width="1280" height="1280" fill="#000000"/>
+  
   <defs>
-    <linearGradient id="tl" x1="172" y1="348" x2="640" y2="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1EA4F5"/><stop offset="1" stop-color="#1689EF"/></linearGradient>
-    <linearGradient id="tr" x1="640" y1="60" x2="1108" y2="348" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#25B9FF"/><stop offset="1" stop-color="#1CA2F3"/></linearGradient>
-    <linearGradient id="r" x1="1108" y1="348" x2="1108" y2="932" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#12E2E6"/><stop offset="1" stop-color="#18A7F2"/></linearGradient>
-    <linearGradient id="br" x1="1108" y1="932" x2="640" y2="1218" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1CC4E9"/><stop offset="1" stop-color="#1B8EF5"/></linearGradient>
-    <linearGradient id="bl" x1="172" y1="932" x2="640" y2="1218" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5943FF"/><stop offset="0.55" stop-color="#3F55FF"/><stop offset="1" stop-color="#1A8EF5"/></linearGradient>
-    <linearGradient id="l" x1="172" y1="348" x2="172" y2="932" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#17B6E8"/><stop offset="1" stop-color="#1B98F3"/></linearGradient>
-    <linearGradient id="ct" x1="405" y1="489" x2="875" y2="489" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#16DDE4"/><stop offset="1" stop-color="#12E8E7"/></linearGradient>
-    <linearGradient id="cl" x1="405" y1="520" x2="620" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2D6DFF"/><stop offset="1" stop-color="#4855FF"/></linearGradient>
-    <linearGradient id="cr" x1="650" y1="520" x2="875" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#279BFF"/><stop offset="1" stop-color="#1B7EF4"/></linearGradient>
+    <!-- Blue glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Gradients for cube faces -->
+    <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#0099FF"/>
+    </linearGradient>
+    
+    <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B4FF"/>
+      <stop offset="100%" stop-color="#0077FF"/>
+    </linearGradient>
+    
+    <linearGradient id="rightFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0099FF"/>
+      <stop offset="100%" stop-color="#0066FF"/>
+    </linearGradient>
   </defs>
 
-  <!-- Hexagon background -->
-  <polygon fill="url(#tl)" points="640,60 640,172 266,402 172,348"/>
-  <polygon fill="url(#tr)" points="640,60 1108,348 1006,402 640,172"/>
-  <polygon fill="url(#r)" points="1108,348 1108,932 1006,876 1006,402"/>
-  <polygon fill="url(#br)" points="1108,932 640,1218 640,1108 1006,876"/>
-  <polygon fill="url(#bl)" points="640,1218 172,932 266,876 640,1108"/>
-  <polygon fill="url(#l)" points="172,932 172,348 266,402 266,876"/>
-
-  <!-- Center pyramid -->
-  <polygon fill="#000" points="405,489 640,632 875,489 875,532 640,676 405,532"/>
-  <polygon fill="url(#cl)" points="405,525 640,657 640,921 405,788"/>
-  <polygon fill="url(#cr)" points="640,657 875,525 875,788 640,921"/>
-  <polygon fill="#000" points="640,657 658,657 658,921 640,921"/>
-  <polygon fill="url(#ct)" points="640,350 875,489 640,628 405,489"/>
-
-  <!-- D - Top face, centered and smaller -->
-  <g transform="translate(640, 500)">
-    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
-      font-family="Arial Black, sans-serif" font-size="70" font-weight="900" fill="#fff"
-      transform="scale(1.0, 0.75)">D</text>
+  <!-- Hexagon frame with glow -->
+  <g filter="url(#glow)">
+    <polygon points="640,100 900,250 900,550 640,700 380,550 380,250" 
+      fill="none" 
+      stroke="#00D4FF" 
+      stroke-width="8"/>
+    <!-- Inner hexagon -->
+    <polygon points="640,150 850,270 850,530 640,650 430,530 430,270" 
+      fill="none" 
+      stroke="#0099FF" 
+      stroke-width="3" 
+      opacity="0.6"/>
   </g>
 
-  <!-- S - Left face, properly rotated and positioned -->
-  <g transform="translate(520, 720)">
-    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
-      font-family="Arial Black, sans-serif" font-size="65" font-weight="900" fill="#fff"
-      transform="rotate(30) scale(0.75, 1.0)">S</text>
+  <!-- 3D Cube -->
+  <g transform="translate(640, 400)">
+    <!-- Top face -->
+    <polygon points="0,-80 140,-20 0,40 -140,-20" fill="url(#topFace)"/>
+    
+    <!-- Left face -->
+    <polygon points="-140,-20 0,40 0,180 -140,120" fill="url(#leftFace)"/>
+    
+    <!-- Right face -->
+    <polygon points="0,40 140,-20 140,120 0,180" fill="url(#rightFace)"/>
+    
+    <!-- D on top face -->
+    <text x="0" y="-5" 
+      text-anchor="middle" 
+      dominant-baseline="central"
+      font-family="Arial Black, Impact, sans-serif" 
+      font-size="60" 
+      font-weight="900" 
+      fill="#000000">D</text>
+    
+    <!-- S on left face -->
+    <g transform="rotate(30)">
+      <text x="-70" y="80" 
+        text-anchor="middle" 
+        dominant-baseline="central"
+        font-family="Arial Black, Impact, sans-serif" 
+        font-size="50" 
+        font-weight="900" 
+        fill="#000000">S</text>
+    </g>
+    
+    <!-- H on right face -->
+    <text x="70" y="80" 
+      text-anchor="middle" 
+      dominant-baseline="central"
+      font-family="Arial Black, Impact, sans-serif" 
+      font-size="50" 
+      font-weight="900" 
+      fill="#000000">H</text>
   </g>
-
-  <!-- H - Right face, properly positioned -->
-  <g transform="translate(760, 720)">
-    <text x="0" y="0" text-anchor="middle" dominant-baseline="middle"
-      font-family="Arial Black, sans-serif" font-size="65" font-weight="900" fill="#fff"
-      transform="scale(0.75, 1.0)">H</text>
-  </g>
+  
+  <!-- Corner accents -->
+  <circle cx="640" cy="100" r="8" fill="#00D4FF" filter="url(#glow)"/>
+  <circle cx="900" cy="250" r="8" fill="#00D4FF" filter="url(#glow)"/>
+  <circle cx="900" cy="550" r="8" fill="#00D4FF" filter="url(#glow)"/>
+  <circle cx="640" cy="700" r="8" fill="#00D4FF" filter="url(#glow)"/>
+  <circle cx="380" cy="550" r="8" fill="#00D4FF" filter="url(#glow)"/>
+  <circle cx="380" cy="250" r="8" fill="#00D4FF" filter="url(#glow)"/>
 </svg>
