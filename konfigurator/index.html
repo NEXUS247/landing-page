@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website-Konfigurator — Digital Service Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --accent: #06b6d4;
+  --gold: #c9a96e;
+  --bg: #030308;
+  --bg-card: #0a0a14;
+  --bg-elevated: #13131f;
+  --text: #e8ecf1;
+  --text-dim: #8a95a5;
+  --text-muted: #5a6270;
+  --success: #22c55e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+
+/* Background Effects */
+body::before {
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 100% 100% at 20% 0%, rgba(99,102,241,0.06), transparent),
+    radial-gradient(ellipse 100% 100% at 80% 100%, rgba(6,182,212,0.04), transparent);
+  pointer-events:none;z-index:-1;
+}
+
+/* Header */
+.header{background:rgba(3,3,8,0.8);backdrop-filter:blur(30px);border-bottom:1px solid rgba(255,255,255,0.06);padding:1rem 2rem;position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo span{font-weight:300;font-size:0.9rem;color:var(--text-dim);-webkit-text-fill-color:var(--text-dim);display:block;margin-top:-2px}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:2rem}
+.app-layout{display:grid;grid-template-columns:380px 1fr;gap:2rem;min-height:calc(100vh - 80px)}
+
+/* Sidebar */
+.sidebar{background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:1.5rem;height:fit-content;position:sticky;top:90px}
+.sidebar h2{font-size:1.1rem;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
+.sidebar h2 .step-num{width:28px;height:28px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700}
+
+/* Form Elements */
+.form-group{margin-bottom:1.5rem}
+.form-label{display:block;font-size:0.85rem;font-weight:500;margin-bottom:0.6rem;color:var(--text-dim)}
+.form-input, .form-select{
+  width:100%;background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.1);border-radius:12px;
+  padding:0.9rem 1rem;color:var(--text);font-family:inherit;font-size:0.9rem;outline:none;transition:all .3s
+}
+.form-input:focus, .form-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+.form-input::placeholder{color:var(--text-muted)}
+.form-textarea{min-height:100px;resize:vertical}
+
+/* Options Grid */
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem}
+.option-btn{
+  background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.08);border-radius:10px;
+  padding:0.7rem;font-size:0.8rem;color:var(--text-dim);cursor:pointer;transition:all .3s;text-align:center
+}
+.option-btn:hover{border-color:rgba(99,102,241,0.3);color:var(--text)}
+.option-btn.active{
+  background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(6,182,212,0.1));
+  border-color:var(--primary);color:#fff
+}
+
+/* Color Picker */
+.color-options{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem}
+.color-option{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .3s;position:relative}
+.color-option:hover{transform:scale(1.1)}
+.color-option.active{border-color:#fff;box-shadow:0 0 0 2px var(--primary)}
+.color-option::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(255,255,255,0.1)}
+
+/* Range Slider */
+.range-wrap{display:flex;align-items:center;gap:1rem}
+.range-slider{flex:1;-webkit-appearance:none;height:4px;background:var(--bg-elevated);border-radius:2px;outline:none}
+.range-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;cursor:pointer;box-shadow:0 2px 10px rgba(99,102,241,0.3)}
+.range-value{font-size:0.85rem;font-weight:600;color:var(--primary);min-width:40px}
+
+/* Generate Button */
+.generate-btn{
+  width:100%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;
+  border-radius:12px;padding:1rem;font-family:inherit;font-size:0.9rem;font-weight:600;cursor:pointer;
+  transition:all .3s;display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:1rem
+}
+.generate-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(99,102,241,0.3)}
+.generate-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+/* Preview Area */
+.preview-area{background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;overflow:hidden}
+.preview-header{
+  padding:1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;
+  background:var(--bg-elevated)
+}
+.preview-header h3{font-size:0.9rem;font-weight:600;color:var(--text-dim);display:flex;align-items:center;gap:0.5rem}
+.preview-header .badge{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:var(--primary-light);padding:0.3rem 0.8rem;border-radius:50px;font-size:0.75rem}
+
+.preview-frame{width:100%;height:600px;border:none;background:#fff}
+
+/* Preview Content (simulated) */
+.preview-content{padding:2rem;display:none}
+.preview-content.active{display:block}
+.preview-hero{
+  background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:3rem 2rem;text-align:center;margin-bottom:2rem
+}
+.preview-hero h1{color:#fff;font-size:2rem;margin-bottom:0.5rem}
+.preview-hero p{color:rgba(255,255,255,0.7);font-size:0.9rem}
+.preview-card{
+  background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem;margin-bottom:1rem
+}
+.preview-card h4{color:var(--primary);font-size:0.9rem;margin-bottom:0.5rem}
+.preview-card p{color:var(--text-dim);font-size:0.85rem}
+
+/* Loading State */
+.loading-overlay{
+  position:absolute;inset:0;background:rgba(3,3,8,0.95);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1rem;z-index:10;border-radius:20px
+}
+.loading-spinner{
+  width:48px;height:48px;border:3px solid rgba(99,102,241,0.2);border-top-color:var(--primary);border-radius:50%;
+  animation:spin 1s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Success State */
+.success-check{
+  width:60px;height:60px;background:linear-gradient(135deg,var(--success),#16a34a);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1rem
+}
+
+/* Tabs */
+.tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0.5rem}
+.tab-btn{background:none;border:none;color:var(--text-dim);padding:0.5rem 1rem;font-size:0.85rem;cursor:pointer;transition:all .3s;border-radius:8px;position:relative}
+.tab-btn::after{content:'';position:absolute;bottom:-0.5rem;left:0;right:0;height:2px;background:var(--primary);border-radius:2px;opacity:0;transition:opacity .3s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--primary);background:rgba(99,102,241,0.08)}
+.tab-btn.active::after{opacity:1}
+
+/* Responsive */
+@media(max-width:1024px){
+  .app-layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+}
+@media(max-width:768px){
+  .container{padding:1rem}
+  .options-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      Digital Service Hub
+      <span>Website-Konfigurator</span>
+    </div>
+    <a href="../" style="color:var(--text-dim);font-size:0.85rem;text-decoration:none">← Zurück zur Landing Page</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="app-layout">
+    
+    <!-- Sidebar: Form -->
+    <div class="sidebar">
+      <h2><span class="step-num">1</span> Dein Projekt</h2>
+      
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'basic')">Basis</button>
+        <button class="tab-btn" onclick="switchTab(this,'design')">Design</button>
+        <button class="tab-btn" onclick="switchTab(this,'features')">Features</button>
+      </div>
+      
+      <!-- Tab: Basic -->
+      <div id="tab-basic" class="tab-content">
+        <div class="form-group">
+          <label class="form-label">Wie heißt dein Unternehmen?</label>
+          <input type="text" class="form-input" id="companyName" placeholder="z.B. Müller GmbH" oninput="updatePreview()">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Branche</label>
+          <div class="options-grid">
+            <button class="option-btn active" onclick="selectOption(this,'branche','handwerk')">Handwerk</button>
+            <button class="option-btn" onclick="selectOption(this,'branche','coaching')">Coaching</button>
+            <button class="option-btn" onclick="selectOption(this,'branche','restaurant')">Restaurant</button>
+            <button class="option-btn" onclick="selectOption(this,'branche','sonstige')">Sonstige</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Was ist dein Hauptziel?</label>
+          <select class="form-select" id="goal" onchange="updatePreview()">
+            <option value="kunden">Mehr Kunden gewinnen</option>
+            <option value="image">Professionelleres Image</option>
+            <option value="verkauf">Direkte Verkäufe</option>
+            <option value="termin">Online-Terminbuchung</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Kurze Beschreibung</label>
+          <textarea class="form-input form-textarea" id="description" placeholder="Was macht dein Unternehmen besonders?" oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Zielgruppe</label>
+          <input type="text" class="form-input" id="targetAudience" placeholder="z.B. Hausbesitzer, Selbstständige, lokale Kunden" oninput="updatePreview()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Wunsch-Call-to-Action</label>
+          <select class="form-select" id="ctaGoal" onchange="updatePreview()">
+            <option value="Kostenlos beraten lassen">Kostenlos beraten lassen</option>
+            <option value="Termin buchen">Termin buchen</option>
+            <option value="Angebot anfordern">Angebot anfordern</option>
+            <option value="Reservieren">Reservieren</option>
+            <option value="Jetzt anfragen">Jetzt anfragen</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Tab: Design -->
+      <div id="tab-design" class="tab-content" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Farbstimmung</label>
+          <div class="color-options">
+            <div class="color-option active" style="background:linear-gradient(135deg,#6366f1,#06b6d4)" onclick="selectColor(this,'modern')" title="Modern"></div>
+            <div class="color-option" style="background:linear-gradient(135deg,#c9a96e,#8b7355)" onclick="selectColor(this,'elegant')" title="Elegant"></div>
+            <div class="color-option" style="background:linear-gradient(135deg,#10b981,#06b6d4)" onclick="selectColor(this,'fresh')" title="Frisch"></div>
+            <div class="color-option" style="background:linear-gradient(135deg,#f59e0b,#ef4444)" onclick="selectColor(this,'warm')" title="Warm"></div>
+            <div class="color-option" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)" onclick="selectColor(this,'creative')" title="Kreativ"></div>
+            <div class="color-option" style="background:linear-gradient(135deg,#1f2937,#374151)" onclick="selectColor(this,'dark')" title="Dunkel"></div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Stilrichtung</label>
+          <div class="options-grid">
+            <button class="option-btn active" onclick="selectOption(this,'stil','minimal')">Minimalistisch</button>
+            <button class="option-btn" onclick="selectOption(this,'stil','corporate')">Corporate</button>
+            <button class="option-btn" onclick="selectOption(this,'stil','kreativ')">Kreativ</button>
+            <button class="option-btn" onclick="selectOption(this,'stil','luxus')">Luxuriös</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Schriftart</label>
+          <div class="options-grid">
+            <button class="option-btn active" onclick="selectOption(this,'font','modern')">Modern (Inter)</button>
+            <button class="option-btn" onclick="selectOption(this,'font','elegant')">Elegant (Serif)</button>
+            <button class="option-btn" onclick="selectOption(this,'font','sporty')">Dynamisch</button>
+            <button class="option-btn" onclick="selectOption(this,'font','classic')">Klassisch</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tab: Features -->
+      <div id="tab-features" class="tab-content" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Welche Features brauchst du?</label>
+          <div style="display:flex;flex-direction:column;gap:0.5rem">
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Kontaktformular <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Online-Termine <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Blog/News <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Bildergalerie <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Chatbot <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Newsletter-Anmeldung <span>☐</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Anzahl Seiten</label>
+          <div class="range-wrap">
+            <input type="range" class="range-slider" id="pages" min="1" max="10" value="3" oninput="updateRange(this); updatePreview()">
+            <span class="range-value" id="pagesValue">3</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Was ist dir besonders wichtig?</label>
+          <div style="display:flex;flex-direction:column;gap:0.5rem">
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Starke Vertrauenswirkung <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Schnelle Ladezeit / SEO <span>☐</span>
+            </button>
+            <button class="option-btn" style="text-align:left;display:flex;justify-content:space-between" onclick="toggleFeature(this)">
+              Premium-Design <span>☐</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Budget-Rahmen</label>
+          <div class="options-grid">
+            <button class="option-btn active" onclick="selectOption(this,'budget','starter')">1.499 €</button>
+            <button class="option-btn" onclick="selectOption(this,'budget','business')">3.300 €</button>
+            <button class="option-btn" onclick="selectOption(this,'budget','premium')">7.900 €</button>
+            <button class="option-btn" onclick="selectOption(this,'budget','custom')">Individuell</button>
+          </div>
+        </div>
+      </div>
+      
+      <button class="generate-btn" onclick="generatePreview()">
+        🎨 Vorschau generieren
+      </button>
+    </div>
+    
+    <!-- Preview Area -->
+    <div class="preview-area">
+      <div class="preview-header">
+        <h3>👁️ Live-Vorschau</h3>
+        <span class="badge" id="previewBadge">Business Paket</span>
+      </div>
+      
+      <div id="previewLoading" class="loading-overlay" style="display:none">
+        <div class="loading-spinner"></div>
+        <div style="color:var(--text-dim);font-size:0.9rem">Deine Website wird generiert...</div>
+      </div>
+      
+      <div id="previewEmpty" style="padding:4rem;text-align:center;color:var(--text-muted)">
+        <div style="font-size:3rem;margin-bottom:1rem">✨</div>
+        <div style="font-size:1.1rem;margin-bottom:0.5rem">Deine Vorschau erscheint hier</div>
+        <div style="font-size:0.85rem">Fülle das Formular aus und klicke auf "Vorschau generieren"</div>
+      </div>
+      
+      <div id="previewContent" class="preview-content">
+        <!-- Dynamic preview will be inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// State
+let state = {
+  branche: 'handwerk',
+  stil: 'minimal',
+  farbe: 'modern',
+  font: 'modern',
+  budget: 'business',
+  pages: 3,
+  features: []
+};
+
+// Tab switching
+function switchTab(btn, tabName) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  btn.classList.add('active');
+  document.getElementById('tab-' + tabName).style.display = 'block';
+}
+
+// Option selection
+function selectOption(btn, key, value) {
+  btn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  state[key] = value;
+  updatePreview();
+}
+
+// Color selection
+function selectColor(el, value) {
+  document.querySelectorAll('.color-option').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  state.farbe = value;
+  updatePreview();
+}
+
+// Feature toggle
+function toggleFeature(btn) {
+  const span = btn.querySelector('span');
+  const feature = btn.textContent.replace('☐','').replace('☑','').trim();
+  
+  if (span.textContent === '☐') {
+    span.textContent = '☑';
+    btn.classList.add('active');
+    state.features.push(feature);
+  } else {
+    span.textContent = '☐';
+    btn.classList.remove('active');
+    state.features = state.features.filter(f => f !== feature);
+  }
+  updatePreview();
+}
+
+// Range update
+function updateRange(input) {
+  document.getElementById('pagesValue').textContent = input.value;
+  state.pages = parseInt(input.value);
+}
+
+// Preview update
+function updatePreview() {
+  // Update badge
+  const badges = {starter: 'Starter Paket', business: 'Business Paket', premium: 'Premium Paket', custom: 'Individuell'};
+  document.getElementById('previewBadge').textContent = badges[state.budget];
+}
+
+// Generate preview
+function generatePreview() {
+  const loading = document.getElementById('previewLoading');
+  const empty = document.getElementById('previewEmpty');
+  const content = document.getElementById('previewContent');
+  
+  empty.style.display = 'none';
+  content.style.display = 'none';
+  loading.style.display = 'flex';
+  
+  setTimeout(() => {
+    loading.style.display = 'none';
+    content.style.display = 'block';
+    content.classList.add('active');
+    
+    const company = document.getElementById('companyName').value || 'Dein Unternehmen';
+    const desc = document.getElementById('description').value || 'Professionelle Dienstleistungen für anspruchsvolle Kunden.';
+    const target = document.getElementById('targetAudience')?.value || 'deine Zielgruppe';
+    const ctaText = document.getElementById('ctaGoal')?.value || 'Jetzt kontaktieren';
+    
+    // Color schemes
+    const colors = {
+      modern: {primary: '#6366f1', accent: '#06b6d4'},
+      elegant: {primary: '#c9a96e', accent: '#8b7355'},
+      fresh: {primary: '#10b981', accent: '#06b6d4'},
+      warm: {primary: '#f59e0b', accent: '#ef4444'},
+      creative: {primary: '#ec4899', accent: '#8b5cf6'},
+      dark: {primary: '#6b7280', accent: '#9ca3af'}
+    };
+    
+    const c = colors[state.farbe];
+    
+    content.innerHTML = `
+      <div style="padding:2rem">
+        <div style="background:linear-gradient(135deg,${c.primary}20,${c.accent}10);border-radius:16px;padding:3rem 2rem;text-align:center;margin-bottom:2rem;border:1px solid ${c.primary}30">
+          <h1 style="font-size:2.5rem;font-weight:700;color:#fff;margin-bottom:0.5rem">${company}</h1>
+          <p style="color:var(--text-dim);font-size:1rem">${desc}</p>
+          <div style="margin-top:1.5rem">
+            <span style="background:${c.primary};color:#fff;padding:0.6rem 1.5rem;border-radius:50px;font-size:0.85rem;font-weight:600">${ctaText} →</span>
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem">
+          <div style="background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem">
+            <div style="width:40px;height:40px;background:${c.primary}20;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">🎯</div>
+            <h4 style="color:${c.primary};font-size:0.9rem;margin-bottom:0.5rem">Unsere Leistungen</h4>
+            <p style="color:var(--text-dim);font-size:0.85rem">Maßgeschneiderte Lösungen für ${state.branche === 'handwerk' ? 'Ihr Handwerksbetrieb' : state.branche === 'coaching' ? 'Ihre Coaching-Praxis' : 'Ihr Restaurant'}.</p>
+          </div>
+          
+          <div style="background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem">
+            <div style="width:40px;height:40px;background:${c.primary}20;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">⭐</div>
+            <h4 style="color:${c.primary};font-size:0.9rem;margin-bottom:0.5rem">Warum wir?</h4>
+            <p style="color:var(--text-dim);font-size:0.85rem">${state.pages} Seiten • ${state.stil} Design • ${state.features.length} Extra-Features</p>
+          </div>
+          
+          <div style="background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem">
+            <div style="width:40px;height:40px;background:${c.primary}20;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">📞</div>
+            <h4 style="color:${c.primary};font-size:0.9rem;margin-bottom:0.5rem">Kontakt</h4>
+            <p style="color:var(--text-dim);font-size:0.85rem">Ideal für ${target}. Vereinbaren Sie ein kostenloses Erstgespräch.</p>
+          </div>
+        </div>
+        
+        ${state.features.length > 0 ? `
+        <div style="margin-top:2rem;background:var(--bg-elevated);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem">
+          <h4 style="color:${c.primary};font-size:0.9rem;margin-bottom:1rem">✨ Enthaltene Features</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+            ${state.features.map(f => `<span style="background:${c.primary}15;color:${c.primary};padding:0.4rem 0.8rem;border-radius:8px;font-size:0.8rem">${f}</span>
+            `).join('')}
+          </div>
+        </div>
+        ` : ''}
+        
+        <div style="margin-top:2rem;text-align:center;padding:2rem;background:linear-gradient(135deg,${c.primary}10,${c.accent}05);border-radius:16px;border:1px solid ${c.primary}20">
+          <div style="font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:0.5rem">Interesse geweckt?</div>
+          <p style="color:var(--text-dim);font-size:0.9rem;margin-bottom:1rem">Wir erstellen dir ein maßgeschneidertes Angebot.</p>
+          <a href="mailto:hello@digitalservicehub.de?subject=Website-Konfigurator Anfrage&body=Hallo Digital Service Hub,%0D%0A%0D%0Aich möchte ein Angebot für meine Website.%0D%0A%0D%0AUnternehmen: ${encodeURIComponent(company)}%0D%0ABranche: ${encodeURIComponent(state.branche)}%0D%0AZielgruppe: ${encodeURIComponent(target)}%0D%0AStil: ${encodeURIComponent(state.stil)}%0D%0AFarbe: ${encodeURIComponent(state.farbe)}%0D%0ASeiten: ${encodeURIComponent(state.pages)}%0D%0ABudget: ${encodeURIComponent(state.budget)}%0D%0AFeatures: ${encodeURIComponent(state.features.join(', ') || 'keine ausgewählt')}%0D%0A%0D%0ABeschreibung: ${encodeURIComponent(desc)}" style="display:inline-block;background:${c.primary};color:#fff;padding:0.8rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all .3s">Briefing per E-Mail senden</a>
+        </div>
+      </div>
+    `;
+  }, 2000);
+}
+
+// Init
+updateRange(document.getElementById('pages'));
+</script>
+
+</body>
+</html>
