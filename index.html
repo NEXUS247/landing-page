@@ -48,6 +48,53 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 /* Typing Effect */
 .typing-text{border-right:3px solid var(--primary);animation:typing-cursor .8s step-end infinite}
 @keyframes typing-cursor{0%,100%{border-color:transparent}50%{border-color:var(--primary)}}
+
+/* ===== INDIRekTE BELEUCHTUNG / GLOW SYSTEM ===== */
+
+/* Ambient Glow-Spots — große, verschwommene Lichtquellen */
+.ambient-glow{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(100px);opacity:.15}
+.ambient-glow-1{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,.6) 0%,transparent 70%);top:20%;left:10%;animation:ambient-float 20s ease-in-out infinite}
+.ambient-glow-2{width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,.5) 0%,transparent 70%);top:60%;right:15%;animation:ambient-float 25s ease-in-out infinite;animation-delay:-8s}
+.ambient-glow-3{width:350px;height:350px;background:radial-gradient(circle,rgba(34,197,94,.35) 0%,transparent 70%);bottom:20%;left:40%;animation:ambient-float 22s ease-in-out infinite;animation-delay:-15s}
+@keyframes ambient-float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(.95)}}
+
+/* Card Glow — indirektes Licht hinter Karten */
+.card-glow{position:relative}
+.card-glow::before{content:'';position:absolute;inset:-20px;background:radial-gradient(circle at 50% 50%,rgba(99,102,241,.08) 0%,transparent 70%);opacity:0;transition:opacity .5s;pointer-events:none;z-index:-1;border-radius:40px}
+.card-glow:hover::before{opacity:1}
+
+/* Section Bottom Glow — Licht von unten */
+.section-glow-bottom{position:relative}
+.section-glow-bottom::after{content:'';position:absolute;bottom:-50px;left:10%;right:10%;height:100px;background:linear-gradient(180deg,rgba(99,102,241,.06) 0%,transparent 100%);filter:blur(40px);pointer-events:none;z-index:0}
+
+/* Edge Light — leuchtende Kanten an wichtigen Elementen */
+.edge-light{position:relative;overflow:hidden}
+.edge-light::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--primary),var(--accent),transparent);animation:edge-sweep 4s ease-in-out infinite}
+@keyframes edge-sweep{0%{left:-100%}50%{left:100%}100%{left:100%}}
+
+/* Floating Light Orbs — kleine, helle Punkte */
+.light-orb{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:0;filter:blur(2px)}
+.light-orb-1{background:rgba(99,102,241,.6);top:30%;left:20%;animation:light-drift 18s ease-in-out infinite}
+.light-orb-2{background:rgba(6,182,212,.5);top:50%;left:80%;animation:light-drift 22s ease-in-out infinite;animation-delay:-7s}
+.light-orb-3{background:rgba(34,197,94,.4);top:75%;left:50%;animation:light-drift 20s ease-in-out infinite;animation-delay:-14s}
+.light-orb-4{background:rgba(99,102,241,.4);top:15%;left:60%;animation:light-drift 25s ease-in-out infinite;animation-delay:-5s}
+.light-orb-5{background:rgba(6,182,212,.35);top:85%;left:25%;animation:light-drift 19s ease-in-out infinite;animation-delay:-10s}
+@keyframes light-drift{0%,100%{transform:translate(0,0)}25%{transform:translate(15px,-20px)}50%{transform:translate(-10px,-10px)}75%{transform:translate(20px,15px)}}
+
+/* Warm Backlight — hinter dem Hero-Content */
+.hero-backlight{position:absolute;inset:-50%;background:radial-gradient(ellipse at 50% 50%,rgba(99,102,241,.04) 0%,transparent 50%,rgba(6,182,212,.03) 100%);filter:blur(60px);pointer-events:none;z-index:-1}
+
+/* Lens Flare Simulation — subtiler Blendeffekt */
+.lens-flare{position:fixed;width:200px;height:200px;border-radius:50%;pointer-events:none;z-index:0;filter:blur(40px);opacity:.03;background:radial-gradient(circle,rgba(255,255,255,.8) 0%,transparent 70%);transition:opacity .5s}
+
+/* Button Glow Pulse */
+@keyframes btn-glow-pulse{0%,100%{box-shadow:0 0 20px rgba(99,102,241,.3),0 0 40px rgba(99,102,241,.1)}50%{box-shadow:0 0 30px rgba(99,102,241,.5),0 0 60px rgba(99,102,241,.2),0 0 80px rgba(6,182,212,.1)}}
+.btn-glow{animation:btn-glow-pulse 3s ease-in-out infinite}
+
+/* Subtle rim light on images */
+.rim-light{position:relative}
+.rim-light::after{content:'';position:absolute;inset:-2px;border-radius:inherit;background:linear-gradient(135deg,rgba(99,102,241,.2),transparent 50%,rgba(6,182,212,.15));z-index:-1;opacity:0;transition:opacity .3s;filter:blur(8px)}
+.rim-light:hover::after{opacity:1}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
 @keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
@@ -250,12 +297,20 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 </style>
 </head>
 <body>
-<!-- Global Background Orbs -->
+<!-- Global Background Orbs + Ambient Glow -->
 <div class="global-bg">
   <div class="global-orb global-orb-1"></div>
   <div class="global-orb global-orb-2"></div>
   <div class="global-orb global-orb-3"></div>
   <div class="global-orb global-orb-4"></div>
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+  <div class="ambient-glow ambient-glow-3"></div>
+  <div class="light-orb light-orb-1"></div>
+  <div class="light-orb light-orb-2"></div>
+  <div class="light-orb light-orb-3"></div>
+  <div class="light-orb light-orb-4"></div>
+  <div class="light-orb light-orb-5"></div>
 </div>
 
 <!-- Popup Modal -->
@@ -306,6 +361,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
     <div class="hero-content">
       <div class="hero-label animate-fadeInUp">🚀 Websites die verkaufen</div>
       <h1 class="animate-fadeInUp delay-1 typing-text" id="heroTitle">Websites die verkaufen. Automatisiert.</h1>
+      <div class="hero-backlight"></div>
       <p class="hero-subtitle animate-fadeInUp delay-2">Wir erstellen hochkonvertierende Websites für Coaches, Handwerker und KMU. Kein Stress, keine versteckten Kosten — nur Ergebnisse.</p>
       <div class="hero-badges animate-fadeInUp delay-2">
         <span class="hero-badge">✅ In 7-10 Tagen online</span>
@@ -313,7 +369,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
         <span class="hero-badge">✅ Inkl. Domain + Hosting</span>
       </div>
       <div class="hero-ctas animate-fadeInUp delay-3">
-        <a href="#demos" class="btn-primary">Demos ansehen</a>
+        <a href="#demos" class="btn-primary btn-glow">Demos ansehen</a>
         <a href="#kontakt" class="btn-secondary">Kostenlos beraten lassen</a>
       </div>
     </div>
@@ -361,7 +417,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
       <p class="section-subtitle">Drei Beispiele aus unserem Portfolio — klicke und erlebe die Live-Version</p>
     </div>
     <div class="demos-grid">
-      <a href="coaching/index.html" target="_blank" class="demo-card">
+      <a href="coaching/index.html" target="_blank" class="demo-card card-glow">
         <div class="demo-preview">
           <img src="coaching/images/hero.jpg" alt="Clarity Coaching">
           <div class="demo-overlay"><span class="demo-cta">🚀 Live Demo</span></div>
@@ -376,7 +432,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
           </div>
         </div>
       </a>
-      <a href="handwerk/index.html" target="_blank" class="demo-card">
+      <a href="handwerk/index.html" target="_blank" class="demo-card card-glow">
         <div class="demo-preview">
           <img src="handwerk/images/hero.jpg" alt="Holz & Form">
           <div class="demo-overlay"><span class="demo-cta">🚀 Live Demo</span></div>
@@ -391,7 +447,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
           </div>
         </div>
       </a>
-      <a href="restaurant/index.html" target="_blank" class="demo-card">
+      <a href="restaurant/index.html" target="_blank" class="demo-card card-glow">
         <div class="demo-preview">
           <img src="restaurant/images/hero.jpg" alt="Aura Restaurant">
           <div class="demo-overlay"><span class="demo-cta">🚀 Live Demo</span></div>
@@ -419,32 +475,32 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
       <p class="section-subtitle">Keine Baustelle, keine technischen Probleme. Wir kümmern uns um alles.</p>
     </div>
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card card-glow">
         <div class="feature-icon">🎨</div>
         <h3>Premium Design</h3>
         <p>Individuelles Design nach deinen Wünschen. Keine Templates, keine 0815-Lösungen.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card card-glow">
         <div class="feature-icon">📱</div>
         <h3>100% Responsive</h3>
         <p>Perfekte Darstellung auf Desktop, Tablet und Smartphone. Google-optimiert.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card card-glow">
         <div class="feature-icon">🔍</div>
         <h3>SEO & Speed</h3>
         <p>Technische SEO, schnelle Ladezeiten, strukturierte Daten — für bessere Rankings.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card card-glow">
         <div class="feature-icon">🤖</div>
         <h3>Automatisierung</h3>
         <p>Chatbots, Kontaktformulare, Kalender-Integration — läuft von allein.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card card-glow">
         <div class="feature-icon">📝</div>
         <h3>Copywriting</h3>
         <p>Überzeugende Texte die verkaufen. Von erfahrenen Werbetextern geschrieben.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card card-glow">
         <div class="feature-icon">🛠️</div>
         <h3>Wartung & Support</h3>
         <p>30 Tage kostenloser Support nach Launch. Optional: Monatliche Wartung.</p>
@@ -461,7 +517,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
       <p class="section-subtitle">Überzeug dich selbst von der Qualität unserer Arbeit</p>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card card-glow">
         <div class="testimonial-text">Die Zusammenarbeit war erstklassig. Meine Website sieht nicht nur professionell aus, sondern bringt auch tatsächlich neue Kunden. Ein absolutes Game-Changer für mein Coaching-Business!</div>
         <div class="testimonial-author">
           <div class="testimonial-avatar">SM</div>
@@ -471,7 +527,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card card-glow">
         <div class="testimonial-text">Endlich eine Agentur, die liefert was sie verspricht. Meine Website war innerhalb einer Woche online und sieht einfach umwerfend aus. Die automatisierte Terminbuchung spart mir Stunden pro Woche.</div>
         <div class="testimonial-author">
           <div class="testimonial-avatar">MK</div>
@@ -481,7 +537,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card card-glow">
         <div class="testimonial-text">Vom ersten Gespräch bis zum Launch hat alles reibungslos funktioniert. Das Design ist exakt auf unsere Marke abgestimmt und die Reservierungsfunktion läuft perfekt. Unsere Gäste lieben die neue Website!</div>
         <div class="testimonial-author">
           <div class="testimonial-avatar">LW</div>
@@ -509,7 +565,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
       <h3>Eigener Website-Konfigurator</h3>
       <p>Ideal, wenn du noch nicht genau weißt, wie deine Website aussehen soll. Der Fragebogen hilft dir, Stil, Inhalte und Funktionen sauber zu strukturieren.</p>
       <div style="margin-top:2rem">
-        <a href="konfigurator/" class="btn-primary">Website konfigurieren</a>
+        <a href="konfigurator/" class="btn-primary btn-glow">Website konfigurieren</a>
       </div>
     </div>
   </div>
@@ -523,7 +579,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
       <h2>Transparente Preise. Keine versteckten Kosten.</h2>
     </div>
     <div class="pricing-grid">
-      <div class="price-card">
+      <div class="price-card card-glow">
         <h3>Starter</h3>
         <p class="price-desc">Für Einsteiger und Solo-Unternehmer</p>
         <div class="price-amount"><span class="currency">€</span>1.499</div>
@@ -537,7 +593,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
         </ul>
         <a href="#kontakt" class="price-btn secondary">Anfragen</a>
       </div>
-      <div class="price-card featured">
+      <div class="price-card featured card-glow">
         <h3>Business</h3>
         <p class="price-desc">Für wachsende Unternehmen</p>
         <div class="price-amount"><span class="currency">€</span>3.299</div>
@@ -553,7 +609,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
         </ul>
         <a href="#kontakt" class="price-btn primary">Jetzt starten</a>
       </div>
-      <div class="price-card">
+      <div class="price-card card-glow">
         <h3>Premium</h3>
         <p class="price-desc">Für anspruchsvolle Projekte</p>
         <div class="price-amount"><span class="currency">€</span>7.899</div>
@@ -604,7 +660,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
   <div class="container">
     <h2>Bereit für deine neue Website?</h2>
     <p>Lass uns in einem kostenlosen Gespräch deine Ziele besprechen. Keine Verpflichtung, nur ehrliche Beratung.</p>
-    <a href="mailto:hello@digitalservicehub.de" class="btn-primary animate-pulse">Jetzt kostenlos beraten lassen</a>
+    <a href="mailto:hello@digitalservicehub.de" class="btn-primary btn-glow">Jetzt kostenlos beraten lassen</a>
   </div>
 </section>
 
