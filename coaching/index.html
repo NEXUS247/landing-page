@@ -176,9 +176,48 @@ body::after {
   .contact-options{grid-template-columns:1fr}
   .nav{display:none}
 }
+
+/* DSH demo premium enhancements */
+.demo-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.demo-orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.22;animation:demoFloat 16s ease-in-out infinite}
+.demo-orb.one{width:420px;height:420px;background:radial-gradient(circle,rgba(135,168,120,.65),transparent 70%);top:8%;left:-8%}
+.demo-orb.two{width:360px;height:360px;background:radial-gradient(circle,rgba(201,169,110,.45),transparent 72%);top:45%;right:-8%;animation-delay:-6s}
+.demo-orb.three{width:300px;height:300px;background:radial-gradient(circle,rgba(135,168,120,.35),transparent 70%);bottom:8%;left:35%;animation-delay:-11s}
+@keyframes demoFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(24px,-28px,0) scale(1.06)}}
+.demo-light-strip{position:absolute;inset:auto 8% -35px;height:80px;background:linear-gradient(90deg,transparent,rgba(135,168,120,.18),transparent);filter:blur(28px);pointer-events:none}
+.hero,.gallery,.contact,section{isolation:isolate}
+.hero-inner,.gallery-inner,.contact-inner,.container,.section-inner{position:relative;z-index:1}
+.reveal-up{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+.reveal-up.is-visible{opacity:1;transform:translateY(0)}
+.premium-badge{position:fixed;left:24px;bottom:24px;z-index:40;background:rgba(255,255,255,.12);backdrop-filter:blur(18px);border:1px solid rgba(135,168,120,.3);box-shadow:0 18px 60px rgba(0,0,0,.18),0 0 35px rgba(135,168,120,.12);border-radius:999px;padding:.85rem 1.1rem;font-weight:700;font-size:.86rem;color:inherit}
+.smart-pop{position:fixed;right:24px;bottom:24px;z-index:50;max-width:330px;background:rgba(20,20,24,.9);color:#fff;border:1px solid rgba(135,168,120,.35);box-shadow:0 24px 80px rgba(0,0,0,.35),0 0 55px rgba(135,168,120,.16);backdrop-filter:blur(18px);border-radius:22px;padding:1.35rem;transform:translateY(145%);animation:smartPop .7s cubic-bezier(.22,1,.36,1) 4s forwards}
+@keyframes smartPop{to{transform:translateY(0)}}
+.smart-pop button{position:absolute;top:9px;right:12px;border:0;background:transparent;color:rgba(255,255,255,.65);font-size:1.35rem;cursor:pointer}
+.smart-pop h4{font-family:inherit;color:#fff;margin:0 1.2rem .45rem 0;font-size:1.05rem}
+.smart-pop p{color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.55;margin-bottom:1rem}
+.smart-pop a{display:inline-block;text-decoration:none;color:#111;background:linear-gradient(135deg,rgb(135,168,120),rgba(201,169,110,.95));padding:.75rem 1rem;border-radius:999px;font-weight:800;font-size:.85rem}
+.map-section{padding:5rem 0;position:relative;overflow:hidden}
+.map-card{max-width:1100px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1.25fr;gap:1.5rem;align-items:stretch}
+.map-info{border-radius:24px;padding:2rem;background:rgba(255,255,255,.09);backdrop-filter:blur(18px);border:1px solid rgba(135,168,120,.22);box-shadow:0 20px 70px rgba(0,0,0,.12)}
+.map-info h2{margin-bottom:.8rem}
+.map-info p{opacity:.78;margin-bottom:1.2rem}
+.map-frame{border:0;width:100%;min-height:320px;border-radius:24px;filter:saturate(1.05) contrast(1.02);box-shadow:0 20px 70px rgba(0,0,0,.18)}
+.gallery-item{box-shadow:0 16px 45px rgba(0,0,0,.12)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(135,168,120,.24),transparent 55%);opacity:0;transition:opacity .35s;pointer-events:none}
+.gallery-item:hover::after{opacity:1}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(10px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1100px,92vw);max-height:84vh;border-radius:20px;box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.lightbox span{position:absolute;top:22px;right:30px;color:white;font-size:2.2rem;cursor:pointer}
+@media(max-width:800px){.map-card{grid-template-columns:1fr}.premium-badge{display:none}.smart-pop{left:16px;right:16px;bottom:16px;max-width:none}}
+
 </style>
 </head>
 <body>
+<div class="demo-ambient"><div class="demo-orb one"></div><div class="demo-orb two"></div><div class="demo-orb three"></div></div>
+<div class="premium-badge">🌿 Ruhig. Klar. Persönlich.</div>
+<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Kostenloses Erstgespräch</h4><p>Klarheit in 20 Minuten: Buche ein unverbindliches Kennenlernen und finde heraus, ob Coaching gerade zu dir passt.</p><a href="#kontakt">Termin anfragen →</a></div>
+
 
 <!-- DSH Logo SVG Definition -->
 <svg style="display:none">
@@ -338,32 +377,32 @@ body::after {
       <p>Maßgeschneiderte Coaching-Programme für deine individuellen Bedürfnisse</p>
     </div>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🌱</div>
         <h3>Einzelcoaching</h3>
         <p>Intensive 1:1 Begleitung für gezielte Fortschritte. Wir arbeiten an deinen konkreten Zielen und entwickeln Lösungen die zu dir passen.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">👥</div>
         <h3>Gruppencoaching</div>
         <p>Gemeinsam wachsen im geschützten Rahmen. Tausche dich aus, lerne von anderen und finde neue Perspektiven.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">💼</div>
         <h3>Business Coaching</h3>
         <p>Führungskräfte und Unternehmer: Steigere deine Performance, entwickle deine Führungsstärke und meistere Herausforderungen.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">⚡</div>
         <h3>Intensiv-Workshops</h3>
         <p>Tiefe Transformation in kurzer Zeit. Ganztägige oder halbtägige Workshops für schnelle Durchbrüche.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🧘</div>
         <h3>Mindfulness Training</h3>
         <p>Stressabbau und innere Ruhe durch moderne Achtsamkeitsmethoden. Für mehr Klarheit und Gelassenheit im Alltag.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🎯</div>
         <h3>Zielsetzung & Fokus</h3>
         <p>Definiere klare Ziele und entwickle einen nachhaltigen Aktionsplan. Ich begleite dich bei der Umsetzung.</p>
@@ -400,19 +439,19 @@ body::after {
       <p>Einblicke in meine Coaching-Arbeit und den Raum den ich für dich schaffe</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/hero.jpg" alt="Ruhiger See Sonnenuntergang">
         <div class="gallery-overlay"><span>Dein Moment der Ruhe</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/detail.jpg" alt="Coaching Detail — Notebook und Stift">
         <div class="gallery-overlay"><span>Struktur für deine Ziele</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/nature.jpg" alt="Coaching im Freien">
         <div class="gallery-overlay"><span>Coaching in der Natur</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/session.jpg" alt="Coaching Session - Professionelle Begleitung">
         <div class="gallery-overlay"><span>Persönliche Begleitung</span></div>
       </div>
@@ -466,22 +505,36 @@ body::after {
 </section>
 
 <!-- Contact CTA -->
+
+<section class="map-section reveal-up" id="anfahrt">
+  <div class="demo-light-strip"></div>
+  <div class="map-card">
+    <div class="map-info">
+      <div class="section-label">Anfahrt</div>
+      <h2>Direkt vor Ort finden</h2>
+      <p>Eine integrierte Karte macht die Demo realistischer und hilft Besuchern sofort beim nächsten Schritt.</p>
+      <a href="https://www.google.com/maps/search/Berlin" target="_blank" rel="noopener" class="btn-primary">Route öffnen</a>
+    </div>
+    <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Berlin&output=embed"></iframe>
+  </div>
+</section>
+
 <section class="contact" id="kontakt">
   <div class="contact-inner">
     <h2>Bereit für deinen ersten Schritt?</h2>
     <p>Vereinbare ein kostenloses Erstgespräch. Wir besprechen deine Situation und ich zeige dir, wie ich dich unterstützen kann.</p>
     <div class="contact-options">
-      <div class="contact-card">
+      <div class="contact-card reveal-up">
         <div class="icon">📧</div>
         <h4>E-Mail</h4>
         <p>hello@clarity-coaching.de</p>
       </div>
-      <div class="contact-card">
+      <div class="contact-card reveal-up">
         <div class="icon">📱</div>
         <h4>Telefon</h4>
         <p>+49 152 123 45678</p>
       </div>
-      <div class="contact-card">
+      <div class="contact-card reveal-up">
         <div class="icon">📍</div>
         <h4>Standort</h4>
         <p>Hamburg & Online weltweit</p>
@@ -517,6 +570,15 @@ window.addEventListener('scroll', () => {
     header.classList.remove('scrolled');
   }
 });
+</script>
+
+
+<div class="lightbox" id="dshLightbox"><span>×</span><img alt="Galerie Vorschau"></div>
+<script>
+const revealDemo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-visible')})},{threshold:.12});
+document.querySelectorAll('.reveal-up').forEach(el=>revealDemo.observe(el));
+const lb=document.getElementById('dshLightbox');
+if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-item img').forEach(g=>g.addEventListener('click',(ev)=>{ev.preventDefault();img.src=g.src;img.alt=g.alt||'Galerie';lb.classList.add('open')}));lb.addEventListener('click',()=>lb.classList.remove('open'));}
 </script>
 
 </body>

@@ -168,9 +168,48 @@ body::after {
   .testi-grid{grid-template-columns:1fr}
   .trust-inner{gap:1.5rem}
 }
+
+/* DSH demo premium enhancements */
+.demo-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.demo-orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.22;animation:demoFloat 16s ease-in-out infinite}
+.demo-orb.one{width:420px;height:420px;background:radial-gradient(circle,rgba(212,175,55,.65),transparent 70%);top:8%;left:-8%}
+.demo-orb.two{width:360px;height:360px;background:radial-gradient(circle,rgba(180,92,55,.45),transparent 72%);top:45%;right:-8%;animation-delay:-6s}
+.demo-orb.three{width:300px;height:300px;background:radial-gradient(circle,rgba(212,175,55,.35),transparent 70%);bottom:8%;left:35%;animation-delay:-11s}
+@keyframes demoFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(24px,-28px,0) scale(1.06)}}
+.demo-light-strip{position:absolute;inset:auto 8% -35px;height:80px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.18),transparent);filter:blur(28px);pointer-events:none}
+.hero,.gallery,.contact,section{isolation:isolate}
+.hero-inner,.gallery-inner,.contact-inner,.container,.section-inner{position:relative;z-index:1}
+.reveal-up{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+.reveal-up.is-visible{opacity:1;transform:translateY(0)}
+.premium-badge{position:fixed;left:24px;bottom:24px;z-index:40;background:rgba(255,255,255,.12);backdrop-filter:blur(18px);border:1px solid rgba(212,175,55,.3);box-shadow:0 18px 60px rgba(0,0,0,.18),0 0 35px rgba(212,175,55,.12);border-radius:999px;padding:.85rem 1.1rem;font-weight:700;font-size:.86rem;color:inherit}
+.smart-pop{position:fixed;right:24px;bottom:24px;z-index:50;max-width:330px;background:rgba(20,20,24,.9);color:#fff;border:1px solid rgba(212,175,55,.35);box-shadow:0 24px 80px rgba(0,0,0,.35),0 0 55px rgba(212,175,55,.16);backdrop-filter:blur(18px);border-radius:22px;padding:1.35rem;transform:translateY(145%);animation:smartPop .7s cubic-bezier(.22,1,.36,1) 4s forwards}
+@keyframes smartPop{to{transform:translateY(0)}}
+.smart-pop button{position:absolute;top:9px;right:12px;border:0;background:transparent;color:rgba(255,255,255,.65);font-size:1.35rem;cursor:pointer}
+.smart-pop h4{font-family:inherit;color:#fff;margin:0 1.2rem .45rem 0;font-size:1.05rem}
+.smart-pop p{color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.55;margin-bottom:1rem}
+.smart-pop a{display:inline-block;text-decoration:none;color:#111;background:linear-gradient(135deg,rgb(212,175,55),rgba(180,92,55,.95));padding:.75rem 1rem;border-radius:999px;font-weight:800;font-size:.85rem}
+.map-section{padding:5rem 0;position:relative;overflow:hidden}
+.map-card{max-width:1100px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1.25fr;gap:1.5rem;align-items:stretch}
+.map-info{border-radius:24px;padding:2rem;background:rgba(255,255,255,.09);backdrop-filter:blur(18px);border:1px solid rgba(212,175,55,.22);box-shadow:0 20px 70px rgba(0,0,0,.12)}
+.map-info h2{margin-bottom:.8rem}
+.map-info p{opacity:.78;margin-bottom:1.2rem}
+.map-frame{border:0;width:100%;min-height:320px;border-radius:24px;filter:saturate(1.05) contrast(1.02);box-shadow:0 20px 70px rgba(0,0,0,.18)}
+.gallery-item{box-shadow:0 16px 45px rgba(0,0,0,.12)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(212,175,55,.24),transparent 55%);opacity:0;transition:opacity .35s;pointer-events:none}
+.gallery-item:hover::after{opacity:1}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(10px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1100px,92vw);max-height:84vh;border-radius:20px;box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.lightbox span{position:absolute;top:22px;right:30px;color:white;font-size:2.2rem;cursor:pointer}
+@media(max-width:800px){.map-card{grid-template-columns:1fr}.premium-badge{display:none}.smart-pop{left:16px;right:16px;bottom:16px;max-width:none}}
+
 </style>
 </head>
 <body>
+<div class="demo-ambient"><div class="demo-orb one"></div><div class="demo-orb two"></div><div class="demo-orb three"></div></div>
+<div class="premium-badge">✨ Fine Dining Atmosphäre</div>
+<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Tisch reservieren?</h4><p>Sichere dir deinen Platz für ein besonderes Dinner — schnell, elegant und direkt online.</p><a href="#kontakt">Reservieren →</a></div>
+
 
 <!-- DSH Logo SVG Definition -->
 <svg style="display:none">
@@ -351,27 +390,27 @@ body::after {
       <h2>Einblicke in die Aura</h2>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/hero.jpg" alt="Aura Restaurant">
         <div class="gallery-overlay"><div class="gallery-text">Das Restaurant<span>Hamburg</span></div></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/gallery1.jpg" alt="Signature Dish">
         <div class="gallery-overlay"><div class="gallery-text">Signature Dish<span>Kreation des Küchenchefs</span></div></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/ambiente.jpg" alt="Restaurant Ambiente">
         <div class="gallery-overlay"><div class="gallery-text">Ambiente<span>Elegantes Dining</span></div></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/dessert.jpg" alt="Dessert">
         <div class="gallery-overlay"><div class="gallery-text">Dessert<span>Süße Kunst</span></div></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Fine Dining">
         <div class="gallery-overlay"><div class="gallery-text">Service<span>Perfektion im Detail</span></div></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Cocktails">
         <div class="gallery-overlay"><div class="gallery-text">Cocktails<span>Kreative Mixologie</span></div></div>
       </div>
@@ -461,6 +500,20 @@ body::after {
 </section>
 
 <!-- Footer -->
+
+<section class="map-section reveal-up" id="anfahrt">
+  <div class="demo-light-strip"></div>
+  <div class="map-card">
+    <div class="map-info">
+      <div class="section-label">Anfahrt</div>
+      <h2>Direkt vor Ort finden</h2>
+      <p>Eine integrierte Karte macht die Demo realistischer und hilft Besuchern sofort beim nächsten Schritt.</p>
+      <a href="https://www.google.com/maps/search/Hamburg" target="_blank" rel="noopener" class="btn-primary">Route öffnen</a>
+    </div>
+    <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Hamburg&output=embed"></iframe>
+  </div>
+</section>
+
 <footer class="footer" id="kontakt">
   <div class="footer-inner">
     <div class="footer-logo">
@@ -483,6 +536,15 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 50) header.classList.add('scrolled');
   else header.classList.remove('scrolled');
 });
+</script>
+
+
+<div class="lightbox" id="dshLightbox"><span>×</span><img alt="Galerie Vorschau"></div>
+<script>
+const revealDemo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-visible')})},{threshold:.12});
+document.querySelectorAll('.reveal-up').forEach(el=>revealDemo.observe(el));
+const lb=document.getElementById('dshLightbox');
+if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-item img').forEach(g=>g.addEventListener('click',(ev)=>{ev.preventDefault();img.src=g.src;img.alt=g.alt||'Galerie';lb.classList.add('open')}));lb.addEventListener('click',()=>lb.classList.remove('open'));}
 </script>
 
 </body>

@@ -179,9 +179,48 @@ body::after {
   .contact-options{grid-template-columns:1fr}
   .nav{display:none}
 }
+
+/* DSH demo premium enhancements */
+.demo-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.demo-orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.22;animation:demoFloat 16s ease-in-out infinite}
+.demo-orb.one{width:420px;height:420px;background:radial-gradient(circle,rgba(212,165,116,.65),transparent 70%);top:8%;left:-8%}
+.demo-orb.two{width:360px;height:360px;background:radial-gradient(circle,rgba(101,67,33,.45),transparent 72%);top:45%;right:-8%;animation-delay:-6s}
+.demo-orb.three{width:300px;height:300px;background:radial-gradient(circle,rgba(212,165,116,.35),transparent 70%);bottom:8%;left:35%;animation-delay:-11s}
+@keyframes demoFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(24px,-28px,0) scale(1.06)}}
+.demo-light-strip{position:absolute;inset:auto 8% -35px;height:80px;background:linear-gradient(90deg,transparent,rgba(212,165,116,.18),transparent);filter:blur(28px);pointer-events:none}
+.hero,.gallery,.contact,section{isolation:isolate}
+.hero-inner,.gallery-inner,.contact-inner,.container,.section-inner{position:relative;z-index:1}
+.reveal-up{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+.reveal-up.is-visible{opacity:1;transform:translateY(0)}
+.premium-badge{position:fixed;left:24px;bottom:24px;z-index:40;background:rgba(255,255,255,.12);backdrop-filter:blur(18px);border:1px solid rgba(212,165,116,.3);box-shadow:0 18px 60px rgba(0,0,0,.18),0 0 35px rgba(212,165,116,.12);border-radius:999px;padding:.85rem 1.1rem;font-weight:700;font-size:.86rem;color:inherit}
+.smart-pop{position:fixed;right:24px;bottom:24px;z-index:50;max-width:330px;background:rgba(20,20,24,.9);color:#fff;border:1px solid rgba(212,165,116,.35);box-shadow:0 24px 80px rgba(0,0,0,.35),0 0 55px rgba(212,165,116,.16);backdrop-filter:blur(18px);border-radius:22px;padding:1.35rem;transform:translateY(145%);animation:smartPop .7s cubic-bezier(.22,1,.36,1) 4s forwards}
+@keyframes smartPop{to{transform:translateY(0)}}
+.smart-pop button{position:absolute;top:9px;right:12px;border:0;background:transparent;color:rgba(255,255,255,.65);font-size:1.35rem;cursor:pointer}
+.smart-pop h4{font-family:inherit;color:#fff;margin:0 1.2rem .45rem 0;font-size:1.05rem}
+.smart-pop p{color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.55;margin-bottom:1rem}
+.smart-pop a{display:inline-block;text-decoration:none;color:#111;background:linear-gradient(135deg,rgb(212,165,116),rgba(101,67,33,.95));padding:.75rem 1rem;border-radius:999px;font-weight:800;font-size:.85rem}
+.map-section{padding:5rem 0;position:relative;overflow:hidden}
+.map-card{max-width:1100px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1.25fr;gap:1.5rem;align-items:stretch}
+.map-info{border-radius:24px;padding:2rem;background:rgba(255,255,255,.09);backdrop-filter:blur(18px);border:1px solid rgba(212,165,116,.22);box-shadow:0 20px 70px rgba(0,0,0,.12)}
+.map-info h2{margin-bottom:.8rem}
+.map-info p{opacity:.78;margin-bottom:1.2rem}
+.map-frame{border:0;width:100%;min-height:320px;border-radius:24px;filter:saturate(1.05) contrast(1.02);box-shadow:0 20px 70px rgba(0,0,0,.18)}
+.gallery-item{box-shadow:0 16px 45px rgba(0,0,0,.12)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(212,165,116,.24),transparent 55%);opacity:0;transition:opacity .35s;pointer-events:none}
+.gallery-item:hover::after{opacity:1}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(10px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1100px,92vw);max-height:84vh;border-radius:20px;box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.lightbox span{position:absolute;top:22px;right:30px;color:white;font-size:2.2rem;cursor:pointer}
+@media(max-width:800px){.map-card{grid-template-columns:1fr}.premium-badge{display:none}.smart-pop{left:16px;right:16px;bottom:16px;max-width:none}}
+
 </style>
 </head>
 <body>
+<div class="demo-ambient"><div class="demo-orb one"></div><div class="demo-orb two"></div><div class="demo-orb three"></div></div>
+<div class="premium-badge">🪵 Maßarbeit mit Charakter</div>
+<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Projektidee im Kopf?</h4><p>Schick deine Maße, Fotos oder Wünsche — wir prüfen schnell, was machbar ist und melden uns mit einer Einschätzung.</p><a href="#kontakt">Projekt anfragen →</a></div>
+
 
 <!-- DSH Logo SVG Definition -->
 <svg style="display:none">
@@ -341,32 +380,32 @@ body::after {
       <p>Vom einzelnen Möbelstück bis zum kompletten Innenausbau — alles aus einer Hand</p>
     </div>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🪑</div>
         <h3>Maßmöbel</h3>
         <p>Individuell gefertigte Möbel nach deinen Vorstellungen. Von der Idee bis zur Fertigstellung — einzigartig und passgenau.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🏠</div>
         <h3>Innenausbau</h3>
         <p>Komplette Raumlösungen aus Holz. Einbauschränke, Regalsysteme, Wandverkleidungen — alles harmonisch aufeinander abgestimmt.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🍽️</div>
         <h3>Küchen & Küchenmöbel</h3>
         <p>Funktionale und ästhetische Küchenlösungen. Arbeitsplatten, Schränke, Inseln — maßgeschneidert für deinen Kochraum.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🚪</div>
         <h3>Türen & Fenster</h3>
         <p>Handgefertigte Holztüren und Fenster im traditionellen oder modernen Stil. Energieeffizient und langlebig.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">🎨</div>
         <h3>Restaurierung</h3>
         <p>Wir bringen alte Schätze wieder zum Leben. Professionelle Restaurierung von Antiquitäten und wertvollen Möbelstücken.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal-up">
         <div class="service-icon">📐</div>
         <h3>Planung & Beratung</h3>
         <p>Vor-Ort-Besichtigung, 3D-Visualisierung und detaillierte Planung. Wir begleiten dich von der ersten Idee bis zur Realisierung.</p>
@@ -384,23 +423,23 @@ body::after {
       <p>Jedes Stück erzählt eine Geschichte — entdecke unsere Handwerkskunst</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/hero.jpg" alt="Werkstatt Holzarbeit">
         <div class="gallery-overlay"><span>Unsere Werkstatt</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/detail.jpg" alt="Detail Holzarbeit">
         <div class="gallery-overlay"><span>Liebe zum Detail</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/table.jpg" alt="Maßgefertigter Tisch">
         <div class="gallery-overlay"><span>Eichen-Esstisch</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="images/finished.jpg" alt="Fertiges Walnuss Bücherregal">
         <div class="gallery-overlay"><span>Walnuss-Bücherregal im Einsatz</span></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item reveal-up">
         <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" alt="Holzmöbel">
         <div class="gallery-overlay"><span>Maßanfertigung</span></div>
       </div>
@@ -416,22 +455,22 @@ body::after {
       <h2>Von der Idee zum Unikat</h2>
     </div>
     <div class="process-grid">
-      <div class="process-step">
+      <div class="process-step reveal-up">
         <div class="step-number">1</div>
         <h3>Beratung</h3>
         <p>Wir besprechen deine Wünsche, nehmen Maß und zeigen dir Materialien und Optionen.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal-up">
         <div class="step-number">2</div>
         <h3>Entwurf</h3>
         <p>Detaillierte 3D-Visualisierung und Planung deines Projekts zur Freigabe.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal-up">
         <div class="step-number">3</div>
         <h3>Fertigung</h3>
         <p>Handwerkliche Fertigung in unserer Werkstatt mit besten Materialien.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal-up">
         <div class="step-number">4</div>
         <h3>Montage</h3>
         <p>Fachgerechte Montage vor Ort und finale Qualitätskontrolle.</p>
@@ -475,22 +514,36 @@ body::after {
 </section>
 
 <!-- Contact CTA -->
+
+<section class="map-section reveal-up" id="anfahrt">
+  <div class="demo-light-strip"></div>
+  <div class="map-card">
+    <div class="map-info">
+      <div class="section-label">Anfahrt</div>
+      <h2>Direkt vor Ort finden</h2>
+      <p>Eine integrierte Karte macht die Demo realistischer und hilft Besuchern sofort beim nächsten Schritt.</p>
+      <a href="https://www.google.com/maps/search/München" target="_blank" rel="noopener" class="btn-primary">Route öffnen</a>
+    </div>
+    <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=München&output=embed"></iframe>
+  </div>
+</section>
+
 <section class="contact" id="kontakt">
   <div class="contact-inner">
     <h2>Lass uns dein Projekt besprechen</h2>
     <p>Vereinbare einen kostenlosen Beratungstermin. Wir schauen uns deine Räumlichkeiten an und entwickeln ein Konzept das zu dir passt.</p>
     <div class="contact-options">
-      <div class="contact-card">
+      <div class="contact-card reveal-up">
         <div class="icon">📧</div>
         <h4>E-Mail</h4>
         <p>info@holzundform.de</p>
       </div>
-      <div class="contact-card">
+      <div class="contact-card reveal-up">
         <div class="icon">📱</div>
         <h4>Telefon</h4>
         <p>+49 40 123 45678</p>
       </div>
-      <div class="contact-card">
+      <div class="contact-card reveal-up">
         <div class="icon">📍</div>
         <h4>Standort</h4>
         <p>Hamburg & Umgebung</p>
@@ -522,6 +575,15 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 50) header.classList.add('scrolled');
   else header.classList.remove('scrolled');
 });
+</script>
+
+
+<div class="lightbox" id="dshLightbox"><span>×</span><img alt="Galerie Vorschau"></div>
+<script>
+const revealDemo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-visible')})},{threshold:.12});
+document.querySelectorAll('.reveal-up').forEach(el=>revealDemo.observe(el));
+const lb=document.getElementById('dshLightbox');
+if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-item img').forEach(g=>g.addEventListener('click',(ev)=>{ev.preventDefault();img.src=g.src;img.alt=g.alt||'Galerie';lb.classList.add('open')}));lb.addEventListener('click',()=>lb.classList.remove('open'));}
 </script>
 
 </body>
