@@ -298,6 +298,9 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 /* Website package finder */
 .finder-section{padding:6rem 0;position:relative;overflow:hidden;background:transparent}.finder-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(99,102,241,.12),transparent 34%),radial-gradient(circle at 80% 70%,rgba(6,182,212,.10),transparent 36%);pointer-events:none}.finder-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:2rem;align-items:stretch;position:relative;z-index:1}.finder-panel,.finder-result{background:rgba(10,10,20,.72);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(18px);border-radius:28px;padding:2rem;box-shadow:0 24px 80px rgba(0,0,0,.28),0 0 55px rgba(99,102,241,.08)}.finder-panel label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:800;margin:1rem 0 .45rem}.finder-panel select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;color:var(--text);padding:.95rem 1rem;font:inherit;outline:none}.finder-panel select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,102,241,.12)}.finder-result{display:flex;flex-direction:column;justify-content:center}.finder-kicker{color:var(--accent);font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;margin-bottom:.7rem}.finder-title{font-size:clamp(2rem,4vw,3.2rem);line-height:1;font-weight:900;margin-bottom:1rem;background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.finder-text{color:var(--text-dim);line-height:1.75;margin-bottom:1.3rem}.finder-list{display:grid;gap:.65rem;margin-bottom:1.5rem}.finder-list span{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:.75rem .9rem;color:var(--text-soft)}.finder-actions{display:flex;gap:.85rem;flex-wrap:wrap}.finder-actions a{border-radius:999px;text-decoration:none;padding:.95rem 1.15rem;font-weight:900}.finder-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}.finder-secondary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--text)}@media(max-width:850px){.finder-layout{grid-template-columns:1fr}}
 
+
+/* Conversion upgrades */
+.trust-strip{padding:1.6rem 2rem;background:rgba(10,20,35,.92);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}.trust-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.trust-item{color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;text-align:center}.trust-item strong{display:block;color:#f8c66b;margin-bottom:.25rem}.demo-value{padding:5rem 2rem;background:linear-gradient(180deg,#f8fafc,#eef4ff)}.demo-value-grid{max-width:1200px;margin:2rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}.demo-value-card{background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:24px;padding:1.6rem;box-shadow:0 18px 55px rgba(15,23,42,.08)}.demo-value-card h3{margin:.6rem 0;color:#0f172a}.demo-value-card p{color:#475569}.demo-value-card a{display:inline-block;margin-top:1rem;font-weight:800;color:#2563eb;text-decoration:none}@media(max-width:850px){.trust-grid,.demo-value-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.trust-grid,.demo-value-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -557,6 +560,24 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 
 
 <!-- Konfigurator -->
+
+<section class="trust-strip">
+  <div class="trust-grid">
+    <div class="trust-item"><strong>Festpreis</strong>Klare Pakete ohne Überraschungen</div>
+    <div class="trust-item"><strong>7 Tage Entwurf</strong>Schneller visueller erster Vorschlag</div>
+    <div class="trust-item"><strong>Mobile First</strong>Sauber auf Handy, Tablet und Desktop</div>
+    <div class="trust-item"><strong>Conversion Fokus</strong>Nicht nur schön — auf Anfragen gebaut</div>
+  </div>
+</section>
+<section class="demo-value" id="demo-nutzen">
+  <div class="section-header"><div class="section-label">Live-Demos mit Nutzen</div><h2>Jede Demo zeigt ein verkaufendes Feature</h2><p class="section-subtitle">Nicht drei austauschbare Designs, sondern branchenspezifische Funktionen, die echte Kundenanfragen auslösen.</p></div>
+  <div class="demo-value-grid">
+    <div class="demo-value-card"><div class="feature-icon">🧭</div><h3>Coaching-Kompass</h3><p>Ein kurzer Selbsttest als Lead-Magnet, der Besucher in ein Erstgespräch führt.</p><a href="coaching/#kompass">Coaching-Demo ansehen →</a></div>
+    <div class="demo-value-card"><div class="feature-icon">🪚</div><h3>Möbel-Konfigurator</h3><p>Maße, Material, Foto und Preisgefühl — ideal für qualifizierte Handwerksanfragen.</p><a href="handwerk/#moebelplaner">Handwerk-Demo ansehen →</a></div>
+    <div class="demo-value-card"><div class="feature-icon">🍷</div><h3>Reservierungs-Assistent</h3><p>Anlass, Verfügbarkeit, Wünsche und Warteliste — als modernes Gastro-Erlebnis.</p><a href="restaurant/#reservierung">Restaurant-Demo ansehen →</a></div>
+  </div>
+</section>
+
 <section class="section" id="konfigurator">
   <div class="section-inner">
     <div class="section-header">
