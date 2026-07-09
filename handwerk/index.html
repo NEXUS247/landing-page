@@ -214,6 +214,42 @@ body::after {
 .lightbox span{position:absolute;top:22px;right:30px;color:white;font-size:2.2rem;cursor:pointer}
 @media(max-width:800px){.map-card{grid-template-columns:1fr}.premium-badge{display:none}.smart-pop{left:16px;right:16px;bottom:16px;max-width:none}}
 
+/* Interactive 3D furniture planner */
+.planner-section{padding:6rem 0;background:linear-gradient(135deg,rgba(74,45,24,.96),rgba(42,26,14,.98));position:relative;overflow:hidden;color:#fff}
+.planner-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(212,165,116,.20),transparent 34%),radial-gradient(circle at 80% 70%,rgba(255,222,173,.10),transparent 36%);pointer-events:none}
+.planner-inner{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+.planner-layout{display:grid;grid-template-columns:.95fr 1.25fr;gap:2rem;align-items:stretch;margin-top:2.5rem}
+.planner-panel,.planner-preview{background:rgba(255,255,255,.07);border:1px solid rgba(212,165,116,.24);backdrop-filter:blur(18px);border-radius:28px;padding:2rem;box-shadow:0 24px 80px rgba(0,0,0,.26),0 0 60px rgba(212,165,116,.08)}
+.planner-panel label{display:block;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.72);font-weight:700;margin:.95rem 0 .4rem}
+.planner-panel input,.planner-panel select{width:100%;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.18);color:#fff;border-radius:14px;padding:.9rem 1rem;font:inherit;outline:none}
+.planner-panel input:focus,.planner-panel select:focus{border-color:rgba(212,165,116,.8);box-shadow:0 0 0 4px rgba(212,165,116,.12)}
+.planner-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.upload-box{margin-top:1rem;border:1px dashed rgba(212,165,116,.55);border-radius:18px;padding:1rem;background:rgba(0,0,0,.15)}
+.upload-box small{display:block;color:rgba(255,255,255,.65);line-height:1.5;margin-top:.45rem}
+.planner-price{margin-top:1.3rem;padding:1.2rem;border-radius:20px;background:linear-gradient(135deg,rgba(212,165,116,.22),rgba(255,255,255,.06));border:1px solid rgba(212,165,116,.28)}
+.planner-price strong{display:block;font-size:2rem;color:var(--amber);line-height:1.1;margin-top:.25rem}
+.planner-note{font-size:.83rem;color:rgba(255,255,255,.66);margin-top:.7rem;line-height:1.55}
+.planner-preview{display:grid;grid-template-rows:auto 1fr auto;min-height:520px;overflow:hidden}
+.preview-top{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem;color:rgba(255,255,255,.72);font-size:.9rem}
+.room-stage{position:relative;min-height:360px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.2));overflow:hidden;display:flex;align-items:center;justify-content:center;perspective:900px;border:1px solid rgba(255,255,255,.09)}
+.room-stage::before{content:'';position:absolute;inset:auto 0 0 0;height:42%;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.28));transform:skewY(-4deg);transform-origin:left bottom}
+.scan-preview{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.18;filter:saturate(.85) contrast(1.05);display:none}
+.scan-preview.active{display:block}
+.furniture-model{position:relative;width:230px;height:220px;transform-style:preserve-3d;transform:rotateX(-16deg) rotateY(28deg);transition:width .45s,height .45s,transform .45s;animation:modelFloat 5s ease-in-out infinite;z-index:2}
+@keyframes modelFloat{0%,100%{transform:rotateX(-16deg) rotateY(28deg) translateY(0)}50%{transform:rotateX(-14deg) rotateY(34deg) translateY(-8px)}}
+.furniture-face{position:absolute;border:1px solid rgba(255,255,255,.15);box-shadow:inset 0 0 35px rgba(255,255,255,.06),0 22px 55px rgba(0,0,0,.26)}
+.furniture-front{inset:0;background:linear-gradient(135deg,#8b5a2b,#c49157);transform:translateZ(48px);border-radius:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px}
+.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12)}
+.furniture-side{width:96px;height:100%;right:-48px;top:0;background:linear-gradient(135deg,#5f371b,#9d6938);transform:rotateY(90deg);border-radius:10px}
+.furniture-top{height:96px;width:100%;left:0;top:-48px;background:linear-gradient(135deg,#b47a3f,#e2b577);transform:rotateX(90deg);border-radius:10px}
+.planner-specs{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem}
+.planner-specs span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:.55rem .8rem;font-size:.84rem;color:rgba(255,255,255,.8)}
+.planner-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}
+.planner-actions a,.planner-actions button{border:0;text-decoration:none;border-radius:999px;padding:.9rem 1.15rem;font-weight:800;cursor:pointer}
+.planner-actions .primary{background:var(--amber);color:var(--walnut-dark)}
+.planner-actions .ghost{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)}
+@media(max-width:900px){.planner-layout{grid-template-columns:1fr}.planner-row{grid-template-columns:1fr}.planner-preview{min-height:auto}}
+
 </style>
 </head>
 <body>
@@ -414,6 +450,79 @@ body::after {
   </div>
 </section>
 
+<!-- 3D Möbelplaner -->
+<section class="planner-section" id="moebelplaner">
+  <div class="planner-inner">
+    <div class="section-header">
+      <div class="section-label">Interaktiver 3D-Planer</div>
+      <h2>Dein Maßmöbel live planen</h2>
+      <p>Maße eingeben, Material wählen, Referenzbild hochladen — und sofort eine erste 3D-Vorschau samt grober Preisschätzung erhalten.</p>
+    </div>
+    <div class="planner-layout">
+      <div class="planner-panel reveal-up">
+        <label for="plannerType">Möbeltyp</label>
+        <select id="plannerType">
+          <option value="regal">Einbauregal</option>
+          <option value="schrank">Kleiderschrank</option>
+          <option value="sideboard">Sideboard</option>
+          <option value="tisch">Esstisch</option>
+        </select>
+
+        <div class="planner-row">
+          <div><label for="plannerW">Breite cm</label><input id="plannerW" type="number" value="240" min="60" max="600"></div>
+          <div><label for="plannerH">Höhe cm</label><input id="plannerH" type="number" value="220" min="40" max="300"></div>
+          <div><label for="plannerD">Tiefe cm</label><input id="plannerD" type="number" value="45" min="20" max="120"></div>
+        </div>
+
+        <label for="plannerMaterial">Material</label>
+        <select id="plannerMaterial">
+          <option value="eiche" data-factor="1.00">Eiche massiv</option>
+          <option value="nussbaum" data-factor="1.35">Nussbaum Premium</option>
+          <option value="esche" data-factor="0.92">Esche hell</option>
+          <option value="multiplex" data-factor="0.72">Birke Multiplex</option>
+        </select>
+
+        <div class="upload-box">
+          <label for="plannerScan">Raumfoto / Scan hochladen</label>
+          <input id="plannerScan" type="file" accept="image/*">
+          <small>Demo-Funktion: Das Bild wird nur lokal als Hintergrund der Vorschau angezeigt — ideal für Wandnischen, Dachschrägen oder bestehende Räume.</small>
+        </div>
+
+        <div class="planner-price">
+          Grobe Projektspanne ab
+          <strong id="plannerPrice">2.890 €</strong>
+          <div class="planner-note">Unverbindliche Demo-Schätzung. Finale Preise hängen von Beschlägen, Oberfläche, Montage und Sondermaßen ab.</div>
+        </div>
+      </div>
+
+      <div class="planner-preview reveal-up">
+        <div class="preview-top">
+          <span>Live 3D-Vorschau</span>
+          <span id="plannerMaterialLabel">Eiche massiv</span>
+        </div>
+        <div class="room-stage">
+          <div class="scan-preview" id="scanPreview"></div>
+          <div class="furniture-model" id="furnitureModel">
+            <div class="furniture-face furniture-front"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="furniture-face furniture-side"></div>
+            <div class="furniture-face furniture-top"></div>
+          </div>
+        </div>
+        <div class="planner-specs">
+          <span id="specSize">240 × 220 × 45 cm</span>
+          <span id="specType">Einbauregal</span>
+          <span>3D-Entwurf inklusive</span>
+          <span>Montage optional</span>
+        </div>
+        <div class="planner-actions">
+          <a class="primary" href="#kontakt">Planung anfragen →</a>
+          <button class="ghost" type="button" id="plannerRotate">Ansicht drehen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Gallery -->
 <section class="gallery" id="galerie">
   <div class="gallery-inner">
@@ -584,6 +693,38 @@ const revealDemo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.i
 document.querySelectorAll('.reveal-up').forEach(el=>revealDemo.observe(el));
 const lb=document.getElementById('dshLightbox');
 if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-item img').forEach(g=>g.addEventListener('click',(ev)=>{ev.preventDefault();img.src=g.src;img.alt=g.alt||'Galerie';lb.classList.add('open')}));lb.addEventListener('click',()=>lb.classList.remove('open'));}
+
+// 3D furniture planner demo
+const plannerEls={
+  type:document.getElementById('plannerType'),w:document.getElementById('plannerW'),h:document.getElementById('plannerH'),d:document.getElementById('plannerD'),
+  material:document.getElementById('plannerMaterial'),price:document.getElementById('plannerPrice'),model:document.getElementById('furnitureModel'),
+  size:document.getElementById('specSize'),typeLabel:document.getElementById('specType'),matLabel:document.getElementById('plannerMaterialLabel'),scan:document.getElementById('plannerScan'),preview:document.getElementById('scanPreview'),rotate:document.getElementById('plannerRotate')
+};
+function updatePlanner(){
+  if(!plannerEls.model)return;
+  const w=Math.max(60,Math.min(600,+plannerEls.w.value||240));
+  const h=Math.max(40,Math.min(300,+plannerEls.h.value||220));
+  const d=Math.max(20,Math.min(120,+plannerEls.d.value||45));
+  const factor=+(plannerEls.material.selectedOptions[0]?.dataset.factor||1);
+  const area=(w*h*d)/100000;
+  const typeFactor={regal:1,schrank:1.22,sideboard:.82,tisch:.72}[plannerEls.type.value]||1;
+  const price=Math.round((1050+(area*760))*factor*typeFactor/10)*10;
+  plannerEls.price.textContent=price.toLocaleString('de-DE')+' €';
+  plannerEls.size.textContent=`${w} × ${h} × ${d} cm`;
+  plannerEls.typeLabel.textContent=plannerEls.type.selectedOptions[0].textContent;
+  plannerEls.matLabel.textContent=plannerEls.material.selectedOptions[0].textContent;
+  plannerEls.model.style.width=(150+(w/600)*210)+'px';
+  plannerEls.model.style.height=(120+(h/300)*230)+'px';
+  const palettes={eiche:['#8b5a2b','#c49157','#e2b577'],nussbaum:['#3b2115','#744222','#a66a3c'],esche:['#c8ad83','#ead8b8','#f2e7d3'],multiplex:['#b88449','#d6a66d','#edc690']};
+  const p=palettes[plannerEls.material.value]||palettes.eiche;
+  document.querySelector('.furniture-front').style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
+  document.querySelector('.furniture-side').style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
+  document.querySelector('.furniture-top').style.background=`linear-gradient(135deg,${p[1]},${p[2]})`;
+}
+['type','w','h','d','material'].forEach(k=>plannerEls[k]?.addEventListener('input',updatePlanner));
+plannerEls.scan?.addEventListener('change',()=>{const file=plannerEls.scan.files?.[0];if(!file)return;const url=URL.createObjectURL(file);plannerEls.preview.style.backgroundImage=`url(${url})`;plannerEls.preview.classList.add('active')});
+let rotated=false;plannerEls.rotate?.addEventListener('click',()=>{rotated=!rotated;plannerEls.model.style.animation='none';plannerEls.model.style.transform=rotated?'rotateX(-12deg) rotateY(-38deg) translateY(-4px)':'rotateX(-16deg) rotateY(28deg)';});
+updatePlanner();
 </script>
 
 </body>
