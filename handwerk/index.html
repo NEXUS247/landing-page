@@ -248,14 +248,21 @@ body::after {
 .planner-actions a,.planner-actions button{border:0;text-decoration:none;border-radius:999px;padding:.9rem 1.15rem;font-weight:800;cursor:pointer}
 .planner-actions .primary{background:var(--amber);color:var(--walnut-dark)}
 .planner-actions .ghost{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)}
+.planner-teaser{padding:2.6rem 0;background:linear-gradient(135deg,rgba(212,165,116,.18),rgba(74,45,24,.92));color:#fff;position:relative;overflow:hidden}
+.planner-teaser::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 50%,rgba(212,165,116,.22),transparent 36%);pointer-events:none}
+.planner-teaser-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;position:relative;z-index:1}
+.planner-teaser strong{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);line-height:1.05;margin-bottom:.4rem}
+.planner-teaser span{color:rgba(255,255,255,.75)}
+.planner-teaser a{white-space:nowrap;background:var(--amber);color:var(--walnut-dark);text-decoration:none;border-radius:999px;padding:1rem 1.35rem;font-weight:900;box-shadow:0 18px 45px rgba(0,0,0,.25)}
 @media(max-width:900px){.planner-layout{grid-template-columns:1fr}.planner-row{grid-template-columns:1fr}.planner-preview{min-height:auto}}
+@media(max-width:800px){.planner-teaser-inner{flex-direction:column;align-items:flex-start}.planner-teaser a{white-space:normal}}
 
 </style>
 </head>
 <body>
 <div class="demo-ambient"><div class="demo-orb one"></div><div class="demo-orb two"></div><div class="demo-orb three"></div></div>
 <div class="premium-badge">🪵 Maßarbeit mit Charakter</div>
-<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Projektidee im Kopf?</h4><p>Schick deine Maße, Fotos oder Wünsche — wir prüfen schnell, was machbar ist und melden uns mit einer Einschätzung.</p><a href="#kontakt">Projekt anfragen →</a></div>
+<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Neu: 3D-Möbelplaner</h4><p>Maße eingeben, Material wählen, Foto hochladen und dein Maßmöbel direkt als 3D-Vorschau ansehen.</p><a href="#moebelplaner">Planer testen →</a></div>
 
 
 <!-- DSH Logo SVG Definition -->
@@ -367,6 +374,7 @@ body::after {
     </a>
     <nav class="nav">
       <a href="#leistungen">Leistungen</a>
+      <a href="#moebelplaner">3D-Planer</a>
       <a href="#galerie">Galerie</a>
       <a href="#prozess">Prozess</a>
       <a href="#kontakt">Kontakt</a>
@@ -385,7 +393,7 @@ body::after {
       <h1>Holz &amp; Form</h1>
       <p class="hero-subtitle">Maßgeschneiderte Möbel und Innenausbau aus Holz. Jedes Stück ein Unikat, gefertigt mit jahrzehntelanger Erfahrung und Liebe zum Detail.</p>
       <div class="hero-ctas">
-        <a href="#kontakt" class="btn-primary">Beratungstermin vereinbaren</a>
+        <a href="#moebelplaner" class="btn-primary">3D-Möbelplaner testen</a>
         <a href="#galerie" class="btn-secondary">Werke ansehen</a>
       </div>
     </div>
@@ -406,6 +414,17 @@ body::after {
     <div class="trust-item"><span class="trust-icon">🛠️</span> 25 Jahre Erfahrung</div>
   </div>
 </div>
+
+<!-- 3D Planer Teaser -->
+<section class="planner-teaser">
+  <div class="planner-teaser-inner">
+    <div>
+      <strong>Plane dein Maßmöbel direkt online</strong>
+      <span>Interaktive 3D-Vorschau mit Maßen, Materialauswahl, Foto-Upload und grober Preisschätzung.</span>
+    </div>
+    <a href="#moebelplaner">3D-Konfigurator öffnen →</a>
+  </div>
+</section>
 
 <!-- Services -->
 <section class="services" id="leistungen">
@@ -454,8 +473,8 @@ body::after {
 <section class="planner-section" id="moebelplaner">
   <div class="planner-inner">
     <div class="section-header">
-      <div class="section-label">Interaktiver 3D-Planer</div>
-      <h2>Dein Maßmöbel live planen</h2>
+      <div class="section-label">Interaktiver 3D-Konfigurator</div>
+      <h2>Maße eingeben. Foto hochladen. 3D-Modell ansehen.</h2>
       <p>Maße eingeben, Material wählen, Referenzbild hochladen — und sofort eine erste 3D-Vorschau samt grober Preisschätzung erhalten.</p>
     </div>
     <div class="planner-layout">
