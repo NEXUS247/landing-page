@@ -270,6 +270,13 @@ body::after {
 .map-section{background:linear-gradient(180deg,#f5eee4,#efe4d5)}.map-card{box-shadow:0 24px 80px rgba(93,64,55,.14)}.map-info{background:rgba(255,252,247,.82);border-color:rgba(93,64,55,.12)}
 .contact{background:linear-gradient(135deg,rgba(38,22,12,.96),rgba(74,45,24,.94)),url('images/finished.jpg') center/cover}.contact::before{background:linear-gradient(135deg,rgba(0,0,0,.42),rgba(212,165,116,.12));pointer-events:none}.contact-card p{color:rgba(255,248,238,.76)}
 
+
+/* Stronger workshop atmosphere + conversion sections */
+body{background:linear-gradient(180deg,#f5eee4,#eadcca)}
+body::before{content:'';position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(245,238,228,.92),rgba(234,220,202,.94)),url('images/detail.jpg') center/cover;background-attachment:fixed}.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.22),transparent 55%),radial-gradient(circle at 68% 48%,rgba(212,165,116,.22),transparent 24%);pointer-events:none}.hero-image{border:1px solid rgba(232,201,168,.28);box-shadow:0 35px 95px rgba(0,0,0,.48),0 0 80px rgba(212,165,116,.16)}
+.material-section,.before-after{padding:6rem 0;position:relative;overflow:hidden}.material-section{background:linear-gradient(135deg,#25160e,#4a2d18);color:#fff}.material-section::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent),url('images/table.jpg') center/cover;opacity:.28}.material-inner,.ba-inner{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}.material-section .section-header p{color:rgba(255,248,238,.84)}.material-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}.material-card{min-height:230px;border-radius:26px;padding:1.4rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;border:1px solid rgba(255,248,238,.18);box-shadow:0 22px 70px rgba(0,0,0,.25);transition:.35s}.material-card:hover{transform:translateY(-6px);border-color:rgba(232,201,168,.55)}.material-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));z-index:0}.material-card>*{position:relative;z-index:1}.material-card h3{color:#fff;margin-bottom:.35rem}.material-card p{color:rgba(255,248,238,.78);font-size:.9rem}.mat-eiche{background:linear-gradient(135deg,#c79255,#7b4b2a)}.mat-nuss{background:linear-gradient(135deg,#6b3f2a,#1f120c)}.mat-esche{background:linear-gradient(135deg,#ead7b8,#9c7a4f)}.mat-schwarz{background:linear-gradient(135deg,#252525,#050505)}.material-grain{position:absolute;inset:0;opacity:.34;background:repeating-linear-gradient(105deg,transparent 0 12px,rgba(255,255,255,.08) 13px 15px,transparent 16px 34px);mix-blend-mode:soft-light}
+.before-after{background:linear-gradient(180deg,rgba(255,250,243,.96),rgba(239,228,213,.96))}.ba-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:30px;overflow:hidden;box-shadow:0 30px 90px rgba(93,64,55,.18);border:1px solid rgba(93,64,55,.12);margin-top:2.5rem;background:#fff}.ba-side{position:relative;min-height:420px;background-size:cover;background-position:center;display:flex;align-items:flex-end}.ba-before{background-image:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55)),url('images/cabinet.jpg')}.ba-after{background-image:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.50)),url('images/finished.jpg')}.ba-label{margin:1.2rem;padding:.85rem 1rem;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);font-weight:800}.ba-note{margin-top:1.2rem;text-align:center;color:#51433a}.ba-note strong{color:#3e2723}@media(max-width:900px){.material-grid{grid-template-columns:1fr 1fr}.ba-card{grid-template-columns:1fr}.ba-side{min-height:300px}}@media(max-width:560px){.material-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -387,6 +394,8 @@ body::after {
     </a>
     <nav class="nav">
       <a href="#leistungen">Leistungen</a>
+      <a href="#materialien">Materialien</a>
+      <a href="#vorher-nachher">Vorher/Nachher</a>
       <a href="#moebelplaner">3D-Planer</a>
       <a href="#galerie">Galerie</a>
       <a href="#prozess">Prozess</a>
@@ -479,6 +488,40 @@ body::after {
         <p>Vor-Ort-Besichtigung, 3D-Visualisierung und detaillierte Planung. Wir begleiten dich von der ersten Idee bis zur Realisierung.</p>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- Materialmuster -->
+<section class="material-section" id="materialien">
+  <div class="material-inner">
+    <div class="section-header">
+      <div class="section-label">Materialauswahl</div>
+      <h2>Holz, Oberfläche und Wirkung direkt erleben</h2>
+      <p>Eine starke Handwerker-Seite verkauft nicht nur Leistungen — sie zeigt fühlbar, wie unterschiedlich Materialien einen Raum verändern.</p>
+    </div>
+    <div class="material-grid">
+      <div class="material-card mat-eiche reveal-up"><div class="material-grain"></div><h3>Eiche Natur</h3><p>Warm, zeitlos und robust — ideal für Familienräume und Esstische.</p></div>
+      <div class="material-card mat-nuss reveal-up"><div class="material-grain"></div><h3>Nussbaum</h3><p>Dunkel, edel und ruhig — perfekt für Premium-Einbauten.</p></div>
+      <div class="material-card mat-esche reveal-up"><div class="material-grain"></div><h3>Esche Hell</h3><p>Leicht, freundlich und modern — für helle Räume und skandinavisches Design.</p></div>
+      <div class="material-card mat-schwarz reveal-up"><div class="material-grain"></div><h3>Schwarz-Matt</h3><p>Kontrastreich und architektonisch — stark für Küchen, Büros und Sideboards.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Vorher Nachher -->
+<section class="before-after" id="vorher-nachher">
+  <div class="ba-inner">
+    <div class="section-header">
+      <div class="section-label">Vorher / Nachher</div>
+      <h2>Aus einer leeren Ecke wird ein Maßstück</h2>
+      <p>Solche Transformationsbereiche machen sofort verständlich, welchen Wert individuelle Planung und saubere Fertigung liefern.</p>
+    </div>
+    <div class="ba-card reveal-up">
+      <div class="ba-side ba-before"><div class="ba-label">Vorher: ungenutzte Fläche</div></div>
+      <div class="ba-side ba-after"><div class="ba-label">Nachher: passgenaues Unikat</div></div>
+    </div>
+    <p class="ba-note"><strong>Demo-Idee:</strong> Für echte Kunden könnten hier reale Projektfotos, Raummaße und die entstandene Lösung gezeigt werden.</p>
   </div>
 </section>
 
