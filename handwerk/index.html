@@ -298,6 +298,10 @@ body::before{background:linear-gradient(180deg,#f6efe6,#eadcca)!important;backgr
 /* Fine tune ash and black material crop */
 .mat-esche .material-img{transform:translate(-5%,-53%) scale(1.12)!important}.mat-schwarz .material-img{transform:translate(-54%,-54%) scale(1.12)!important}
 
+
+/* Subtle dedicated hero background + logical empty before image */
+.hero-bg{background:linear-gradient(90deg,rgba(23,13,8,.88) 0%,rgba(41,24,14,.68) 42%,rgba(41,24,14,.28) 100%),url('images/generated/hero-subtle-workshop.png') center/cover!important}.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 72% 42%,rgba(212,165,116,.16),transparent 28%),linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.22));pointer-events:none}.hero::after{background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 62%)!important}.ba-before{background-image:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.48)),url('images/generated/before-empty-corner.png')!important;background-position:center!important}.ba-after{background-position:center!important}
+
 </style>
 </head>
 <body>
