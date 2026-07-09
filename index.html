@@ -294,6 +294,10 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 .nav{display:none}
 .stats-grid{gap:2rem}
 }
+
+/* Website package finder */
+.finder-section{padding:6rem 0;position:relative;overflow:hidden;background:transparent}.finder-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(99,102,241,.12),transparent 34%),radial-gradient(circle at 80% 70%,rgba(6,182,212,.10),transparent 36%);pointer-events:none}.finder-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:2rem;align-items:stretch;position:relative;z-index:1}.finder-panel,.finder-result{background:rgba(10,10,20,.72);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(18px);border-radius:28px;padding:2rem;box-shadow:0 24px 80px rgba(0,0,0,.28),0 0 55px rgba(99,102,241,.08)}.finder-panel label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:800;margin:1rem 0 .45rem}.finder-panel select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;color:var(--text);padding:.95rem 1rem;font:inherit;outline:none}.finder-panel select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,102,241,.12)}.finder-result{display:flex;flex-direction:column;justify-content:center}.finder-kicker{color:var(--accent);font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;margin-bottom:.7rem}.finder-title{font-size:clamp(2rem,4vw,3.2rem);line-height:1;font-weight:900;margin-bottom:1rem;background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.finder-text{color:var(--text-dim);line-height:1.75;margin-bottom:1.3rem}.finder-list{display:grid;gap:.65rem;margin-bottom:1.5rem}.finder-list span{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:.75rem .9rem;color:var(--text-soft)}.finder-actions{display:flex;gap:.85rem;flex-wrap:wrap}.finder-actions a{border-radius:999px;text-decoration:none;padding:.95rem 1.15rem;font-weight:900}.finder-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}.finder-secondary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--text)}@media(max-width:850px){.finder-layout{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -572,6 +576,33 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 </section>
 
 <!-- Pricing -->
+<section class="finder-section" id="paketfinder">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Paket-Finder</div>
+      <h2>Welches Website-Paket passt zu dir?</h2>
+      <p class="section-subtitle">Beantworte 3 Fragen und erhalte sofort eine Empfehlung — ideal für mehr Anfragen, Reservierungen oder Bewerbungen.</p>
+    </div>
+    <div class="finder-layout">
+      <div class="finder-panel card-glow">
+        <label for="finderIndustry">Branche</label>
+        <select id="finderIndustry"><option value="coach">Coach / Beratung</option><option value="handwerk">Handwerk / Dienstleistung</option><option value="restaurant">Restaurant / Gastronomie</option><option value="kmu">KMU / lokales Unternehmen</option></select>
+        <label for="finderGoal">Hauptziel</label>
+        <select id="finderGoal"><option value="leads">Mehr Anfragen gewinnen</option><option value="automation">Anfragen automatisieren</option><option value="premium">Premium-Auftritt & Vertrauen</option><option value="booking">Buchungen / Reservierungen</option></select>
+        <label for="finderBudget">Budgetrahmen</label>
+        <select id="finderBudget"><option value="starter">bis 1.500 €</option><option value="business" selected>bis 3.500 €</option><option value="premium">ab 5.000 €</option></select>
+      </div>
+      <div class="finder-result card-glow" id="finderResult">
+        <div class="finder-kicker">Empfehlung</div>
+        <div class="finder-title" id="finderTitle">Business Paket</div>
+        <p class="finder-text" id="finderText">Für dein Ziel eignet sich ein professioneller Auftritt mit klarer Conversion-Struktur und ersten Automationen.</p>
+        <div class="finder-list" id="finderList"><span>✓ Conversion Landing Page</span><span>✓ Kontakt- oder Buchungsflow</span><span>✓ Mobile optimiert</span></div>
+        <div class="finder-actions"><a class="finder-primary" href="#kontakt">Empfehlung besprechen</a><a class="finder-secondary" href="#preise">Preise ansehen</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section pricing" id="preise">
   <div class="container">
     <div class="section-header">
@@ -704,15 +735,15 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 
 <script>
 // Simple scroll animation
-const observer=new IntersectionObserver((entries)={
-  entries.forEach(entry={
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
     if(entry.isIntersecting){
       entry.target.style.opacity='1';
       entry.target.style.transform='translateY(0)';
     }
   });
 });
-document.querySelectorAll('.animate-fadeInUp,.animate-slideInLeft,.animate-slideInRight').forEach(el={
+document.querySelectorAll('.animate-fadeInUp,.animate-slideInLeft,.animate-slideInRight').forEach((el)=>{
   el.style.opacity='0';
   el.style.transform='translateY(40px)';
   el.style.transition='opacity 0.8s ease-out, transform 0.8s ease-out';
@@ -720,27 +751,22 @@ document.querySelectorAll('.animate-fadeInUp,.animate-slideInLeft,.animate-slide
 });
 
 // Scroll Reveal for all sections
-const revealObserver=new IntersectionObserver((entries)={
-  entries.forEach(entry={
-    if(entry.isIntersecting){
-      entry.target.classList.add('revealed');
-    }
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+    if(entry.isIntersecting){entry.target.classList.add('revealed');}
   });
 },{threshold:.1});
-
-document.querySelectorAll('.section,.demo-card,.feature-card,.testimonial-card,.price-card,.faq-item').forEach(el={
+document.querySelectorAll('.section,.finder-section,.demo-card,.feature-card,.testimonial-card,.price-card,.faq-item').forEach((el)=>{
   el.classList.add('reveal');
   revealObserver.observe(el);
 });
 
 // Mouse-follow glow effect for cards
-document.querySelectorAll('.demo-card,.feature-card,.price-card').forEach(card={
-  card.addEventListener('mousemove',(e)={
+document.querySelectorAll('.demo-card,.feature-card,.price-card,.finder-panel,.finder-result').forEach((card)=>{
+  card.addEventListener('mousemove',(e)=>{
     const rect=card.getBoundingClientRect();
-    const x=e.clientX-rect.left;
-    const y=e.clientY-rect.top;
-    card.style.setProperty('--mouse-x',`${x}px`);
-    card.style.setProperty('--mouse-y',`${y}px`);
+    card.style.setProperty('--mouse-x',`${e.clientX-rect.left}px`);
+    card.style.setProperty('--mouse-y',`${e.clientY-rect.top}px`);
   });
 });
 
@@ -751,59 +777,50 @@ function animateCounter(el){
   const duration=2000;
   const step=target/(duration/16);
   let current=0;
-  const timer=setInterval(()={
+  const timer=setInterval(()=>{
     current+=step;
-    if(current>=target){
-      current=target;
-      clearInterval(timer);
-    }
+    if(current>=target){current=target;clearInterval(timer);}
     el.textContent=Math.floor(current)+suffix;
   },16);
 }
-
-const counterObserver=new IntersectionObserver((entries)={
-  entries.forEach(entry={
-    if(entry.isIntersecting){
-      animateCounter(entry.target);
-      counterObserver.unobserve(entry.target);
-    }
+const counterObserver=new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+    if(entry.isIntersecting){animateCounter(entry.target);counterObserver.unobserve(entry.target);}
   });
 },{threshold:.5});
-
-document.querySelectorAll('.stat-number[data-count]').forEach(el={
-  counterObserver.observe(el);
-});
+document.querySelectorAll('.stat-number[data-count]').forEach((el)=>counterObserver.observe(el));
 
 // Typing Effect for Hero Title
-function typeWriter(element,text,speed=80){
-  let i=0;
-  element.textContent='';
-  function type(){
-    if(i<text.length){
-      element.textContent+=text.charAt(i);
-      i++;
-      setTimeout(type,speed);
-    }
-  }
-  type();
-}
-
+function typeWriter(element,text,speed=80){let i=0;element.textContent='';function type(){if(i<text.length){element.textContent+=text.charAt(i);i++;setTimeout(type,speed);}}type();}
 const heroTitle=document.getElementById('heroTitle');
-if(heroTitle){
-  const originalText=heroTitle.textContent;
-  heroTitle.textContent='';
-  setTimeout(()={
-    typeWriter(heroTitle,originalText,100);
-  },800);
-}
+if(heroTitle){const originalText=heroTitle.textContent;heroTitle.textContent='';setTimeout(()=>typeWriter(heroTitle,originalText,100),800);}
 
 // Popup Auto-Close after 15 seconds
 const popup=document.getElementById('configuratorPopup');
-if(popup){
-  setTimeout(()={
-    popup.style.transform='translateY(150%)';
-  },15000);
+if(popup){setTimeout(()=>{popup.style.transform='translateY(150%)';},15000);}
+
+// Website package finder
+const finderData={
+  starter:{title:'Starter Paket',text:'Ideal, wenn du schnell professionell online gehen und erste Anfragen gewinnen willst.',items:['✓ Premium Onepager','✓ Mobile optimiert','✓ Kontaktformular & Basis-SEO']},
+  business:{title:'Business Paket',text:'Die beste Wahl für ernsthafte Kundengewinnung: starke Website, klare Conversion-Struktur und sinnvolle Automationen.',items:['✓ Mehrseitige Website','✓ Branchen-Demo & Conversion-Flow','✓ Termin-/Anfrage-Automation']},
+  premium:{title:'Premium Paket',text:'Für Unternehmen, die einen starken Markenauftritt, besondere Interaktionen und maximalen Vertrauensaufbau wollen.',items:['✓ Individuelles Premium-Design','✓ Interaktiver Konfigurator / Assistent','✓ Automatisierung & Strategie-Setup']}
+};
+function updateFinder(){
+  const industry=document.getElementById('finderIndustry')?.value;
+  const goal=document.getElementById('finderGoal')?.value;
+  const budget=document.getElementById('finderBudget')?.value;
+  if(!industry)return;
+  let key=budget;
+  if(goal==='automation'||goal==='booking')key=budget==='starter'?'business':budget;
+  if(goal==='premium')key=budget==='starter'?'business':'premium';
+  const data=finderData[key];
+  const industryText={coach:'Für Coaches passt besonders ein Test/Kompass als Lead-Magnet.',handwerk:'Für Handwerk passt ein Konfigurator oder Anfrage-Assistent besonders gut.',restaurant:'Für Restaurants passt ein Reservierungs-Assistent mit Erinnerungen.',kmu:'Für KMU zählt vor allem Vertrauen, Klarheit und schnelle Kontaktaufnahme.'}[industry];
+  document.getElementById('finderTitle').textContent=data.title;
+  document.getElementById('finderText').textContent=data.text+' '+industryText;
+  document.getElementById('finderList').innerHTML=data.items.map(i=>`<span>${i}</span>`).join('');
 }
+['finderIndustry','finderGoal','finderBudget'].forEach(id=>document.getElementById(id)?.addEventListener('change',updateFinder));
+updateFinder();
 </script>
 </body>
 </html>

@@ -203,6 +203,15 @@ body::after {
 .lightbox span{position:absolute;top:22px;right:30px;color:white;font-size:2.2rem;cursor:pointer}
 @media(max-width:800px){.map-card{grid-template-columns:1fr}.premium-badge{display:none}.smart-pop{left:16px;right:16px;bottom:16px;max-width:none}}
 
+/* Smart reservation assistant */
+.reservation-assistant{padding:6rem 0;background:linear-gradient(135deg,#120c08,#2a1510);position:relative;overflow:hidden;color:#fff}
+.reservation-assistant::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(212,175,55,.22),transparent 34%),radial-gradient(circle at 80% 75%,rgba(180,92,55,.18),transparent 38%);pointer-events:none}
+.res-inner{max-width:1150px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}.res-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;margin-top:2.5rem}.res-panel,.res-preview{background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.24);backdrop-filter:blur(18px);border-radius:28px;padding:2rem;box-shadow:0 24px 80px rgba(0,0,0,.3),0 0 60px rgba(212,175,55,.08)}
+.res-panel label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.66);font-weight:800;margin:.95rem 0 .4rem}.res-panel input,.res-panel select,.res-panel textarea{width:100%;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.22);color:#fff;border-radius:14px;padding:.9rem 1rem;font:inherit;outline:none}.res-panel textarea{min-height:84px;resize:vertical}.res-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}.res-panel input:focus,.res-panel select:focus,.res-panel textarea:focus{border-color:rgba(212,175,55,.8);box-shadow:0 0 0 4px rgba(212,175,55,.12)}
+.availability{display:grid;gap:.7rem;margin-top:1.2rem}.slot{display:flex;justify-content:space-between;align-items:center;gap:1rem;border:1px solid rgba(212,175,55,.18);background:rgba(255,255,255,.055);border-radius:16px;padding:.9rem 1rem;cursor:pointer;transition:all .25s}.slot:hover,.slot.active{transform:translateY(-2px);border-color:rgba(212,175,55,.75);background:rgba(212,175,55,.12)}.slot small{color:rgba(255,255,255,.58)}
+.reservation-card{min-height:100%;display:flex;flex-direction:column;justify-content:center}.res-status{display:inline-flex;align-items:center;gap:.5rem;color:#120c08;background:linear-gradient(135deg,#d4af37,#f2d978);border-radius:999px;padding:.55rem .8rem;font-weight:900;font-size:.78rem;align-self:flex-start;margin-bottom:1.1rem}.res-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.4rem);line-height:1;margin-bottom:1rem}.res-text{color:rgba(255,255,255,.72);line-height:1.75}.res-summary{display:grid;gap:.7rem;margin:1.5rem 0}.res-summary span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:.75rem .9rem;color:rgba(255,255,255,.82)}.res-actions{display:flex;gap:.8rem;flex-wrap:wrap}.res-actions button,.res-actions a{border:0;text-decoration:none;border-radius:999px;padding:.95rem 1.2rem;font-weight:900;cursor:pointer}.res-confirm{background:#d4af37;color:#130d08}.res-ghost{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)!important}.waitlist-note{margin-top:1rem;color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.55}
+@media(max-width:850px){.res-layout{grid-template-columns:1fr}.res-row{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -491,11 +500,46 @@ body::after {
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="reservierung">
-  <div class="cta-inner">
-    <h2>Reserviere deinen Tisch</h2>
-    <p>Erlebe kulinarische Magie in Hamburg. Wir freuen uns darauf, dich in der Aura willkommen zu heißen.</p>
-    <a href="#" class="btn-gold">Jetzt reservieren</a>
+<section class="reservation-assistant" id="reservierung">
+  <div class="res-inner">
+    <div class="section-header">
+      <span class="section-label">Reservierungs-Assistent</span>
+      <h2>Dein Tisch, intelligent geplant</h2>
+      <p>Wähle Datum, Uhrzeit, Anlass und Wünsche — der Assistent simuliert Verfügbarkeit, Bestätigung und Warteliste wie ein moderner Restaurant-Chatbot.</p>
+    </div>
+    <div class="res-layout reveal-up">
+      <div class="res-panel">
+        <div class="res-row">
+          <div><label for="resDate">Datum</label><input id="resDate" type="date"></div>
+          <div><label for="resGuests">Personen</label><select id="resGuests"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>8</option></select></div>
+        </div>
+        <div class="res-row">
+          <div><label for="resTime">Wunschzeit</label><select id="resTime"><option>18:00</option><option>18:30</option><option selected>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option></select></div>
+          <div><label for="resOccasion">Anlass</label><select id="resOccasion"><option>Romantisches Dinner</option><option>Geburtstag</option><option>Business Dinner</option><option>Jahrestag</option><option>Freunde & Familie</option></select></div>
+        </div>
+        <label for="resNotes">Allergien oder Wünsche</label>
+        <textarea id="resNotes" placeholder="z.B. vegan, glutenfrei, ruhiger Tisch, Geburtstagsdessert ..."></textarea>
+        <div class="availability" id="resSlots"></div>
+      </div>
+      <div class="res-preview">
+        <div class="reservation-card">
+          <div class="res-status">● Live verfügbar</div>
+          <div class="res-title" id="resTitle">Tisch wird vorbereitet</div>
+          <p class="res-text" id="resText">Der Assistent prüft deine Auswahl und schlägt automatisch passende Zeiten vor.</p>
+          <div class="res-summary">
+            <span id="sumGuests">4 Personen</span>
+            <span id="sumTime">Heute · 19:00 Uhr</span>
+            <span id="sumOccasion">Romantisches Dinner</span>
+            <span id="sumNotes">Sonderwünsche: keine</span>
+          </div>
+          <div class="res-actions">
+            <button class="res-confirm" type="button" id="resConfirm">Reservierung vormerken</button>
+            <a class="res-ghost" href="#anfahrt">Anfahrt ansehen</a>
+          </div>
+          <p class="waitlist-note">Demo-Funktion: In einem echten System könnte dies mit OpenTable/Reservierungssoftware, WhatsApp-Erinnerung und Warteliste verbunden werden.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -545,6 +589,21 @@ const revealDemo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.i
 document.querySelectorAll('.reveal-up').forEach(el=>revealDemo.observe(el));
 const lb=document.getElementById('dshLightbox');
 if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-item img').forEach(g=>g.addEventListener('click',(ev)=>{ev.preventDefault();img.src=g.src;img.alt=g.alt||'Galerie';lb.classList.add('open')}));lb.addEventListener('click',()=>lb.classList.remove('open'));}
+
+// Restaurant reservation assistant demo
+const res={date:document.getElementById('resDate'),guests:document.getElementById('resGuests'),time:document.getElementById('resTime'),occasion:document.getElementById('resOccasion'),notes:document.getElementById('resNotes'),slots:document.getElementById('resSlots'),title:document.getElementById('resTitle'),text:document.getElementById('resText'),sumGuests:document.getElementById('sumGuests'),sumTime:document.getElementById('sumTime'),sumOccasion:document.getElementById('sumOccasion'),sumNotes:document.getElementById('sumNotes'),confirm:document.getElementById('resConfirm')};
+if(res.date){const today=new Date();res.date.valueAsDate=today;}
+function renderReservation(){
+  if(!res.slots)return;const base=res.time.value||'19:00';const [h,m]=base.split(':').map(Number);const times=[-30,0,30].map(delta=>{const d=new Date();d.setHours(h, m+delta,0,0);return d.toTimeString().slice(0,5)});
+  res.slots.innerHTML=times.map((t,i)=>`<div class="slot ${i===1?'active':''}" data-time="${t}"><strong>${t} Uhr</strong><small>${i===1?'Beste Wahl':i===0?'Noch 1 Tisch':'Warteliste möglich'}</small></div>`).join('');
+  res.slots.querySelectorAll('.slot').forEach(s=>s.onclick=()=>{res.time.value=s.dataset.time;renderReservation();});
+  const date=res.date.value?new Date(res.date.value+'T12:00:00').toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'}):'Heute';
+  res.sumGuests.textContent=`${res.guests.value} Personen`;res.sumTime.textContent=`${date} · ${res.time.value} Uhr`;res.sumOccasion.textContent=res.occasion.value;res.sumNotes.textContent='Sonderwünsche: '+(res.notes.value.trim()||'keine');
+  res.title.textContent=`Tisch für ${res.guests.value} um ${res.time.value}`;res.text.textContent=`Für ${res.occasion.value.toLowerCase()} schlagen wir einen passenden Tisch und automatische Erinnerung 24h vorher vor.`;
+}
+['date','guests','time','occasion','notes'].forEach(k=>res[k]?.addEventListener('input',renderReservation));
+res.confirm?.addEventListener('click',()=>{res.confirm.textContent='✓ Vorgemerkt — Bestätigung per WhatsApp';res.confirm.style.background='#7dd87d';});
+renderReservation();
 </script>
 
 </body>

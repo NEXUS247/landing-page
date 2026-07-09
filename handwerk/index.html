@@ -536,7 +536,9 @@ body::after {
         <div class="planner-actions">
           <a class="primary" href="#kontakt">Planung anfragen →</a>
           <button class="ghost" type="button" id="plannerRotate">Ansicht drehen</button>
+          <button class="ghost" type="button" id="plannerCopy">Maße kopieren</button>
         </div>
+        <p class="planner-note" id="plannerCopyNote"></p>
       </div>
     </div>
   </div>
@@ -717,7 +719,7 @@ if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-ite
 const plannerEls={
   type:document.getElementById('plannerType'),w:document.getElementById('plannerW'),h:document.getElementById('plannerH'),d:document.getElementById('plannerD'),
   material:document.getElementById('plannerMaterial'),price:document.getElementById('plannerPrice'),model:document.getElementById('furnitureModel'),
-  size:document.getElementById('specSize'),typeLabel:document.getElementById('specType'),matLabel:document.getElementById('plannerMaterialLabel'),scan:document.getElementById('plannerScan'),preview:document.getElementById('scanPreview'),rotate:document.getElementById('plannerRotate')
+  size:document.getElementById('specSize'),typeLabel:document.getElementById('specType'),matLabel:document.getElementById('plannerMaterialLabel'),scan:document.getElementById('plannerScan'),preview:document.getElementById('scanPreview'),rotate:document.getElementById('plannerRotate'),copy:document.getElementById('plannerCopy'),copyNote:document.getElementById('plannerCopyNote')
 };
 function updatePlanner(){
   if(!plannerEls.model)return;
@@ -743,6 +745,7 @@ function updatePlanner(){
 ['type','w','h','d','material'].forEach(k=>plannerEls[k]?.addEventListener('input',updatePlanner));
 plannerEls.scan?.addEventListener('change',()=>{const file=plannerEls.scan.files?.[0];if(!file)return;const url=URL.createObjectURL(file);plannerEls.preview.style.backgroundImage=`url(${url})`;plannerEls.preview.classList.add('active')});
 let rotated=false;plannerEls.rotate?.addEventListener('click',()=>{rotated=!rotated;plannerEls.model.style.animation='none';plannerEls.model.style.transform=rotated?'rotateX(-12deg) rotateY(-38deg) translateY(-4px)':'rotateX(-16deg) rotateY(28deg)';});
+plannerEls.copy?.addEventListener('click',async()=>{const text=`Maßmöbel-Anfrage: ${plannerEls.type.selectedOptions[0].textContent}, ${plannerEls.w.value} x ${plannerEls.h.value} x ${plannerEls.d.value} cm, Material: ${plannerEls.material.selectedOptions[0].textContent}, grobe Schätzung: ${plannerEls.price.textContent}`;try{await navigator.clipboard.writeText(text);plannerEls.copyNote.textContent='✓ Maße und Wunschkonfiguration wurden kopiert — bereit für die Anfrage.';}catch(e){plannerEls.copyNote.textContent=text;}});
 updatePlanner();
 </script>
 
