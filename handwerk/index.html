@@ -277,6 +277,10 @@ body::before{content:'';position:fixed;inset:0;z-index:-2;background:linear-grad
 .material-section,.before-after{padding:6rem 0;position:relative;overflow:hidden}.material-section{background:linear-gradient(135deg,#25160e,#4a2d18);color:#fff}.material-section::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent),url('images/table.jpg') center/cover;opacity:.28}.material-inner,.ba-inner{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}.material-section .section-header p{color:rgba(255,248,238,.84)}.material-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}.material-card{min-height:230px;border-radius:26px;padding:1.4rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;border:1px solid rgba(255,248,238,.18);box-shadow:0 22px 70px rgba(0,0,0,.25);transition:.35s}.material-card:hover{transform:translateY(-6px);border-color:rgba(232,201,168,.55)}.material-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));z-index:0}.material-card>*{position:relative;z-index:1}.material-card h3{color:#fff;margin-bottom:.35rem}.material-card p{color:rgba(255,248,238,.78);font-size:.9rem}.mat-eiche{background:linear-gradient(135deg,#c79255,#7b4b2a)}.mat-nuss{background:linear-gradient(135deg,#6b3f2a,#1f120c)}.mat-esche{background:linear-gradient(135deg,#ead7b8,#9c7a4f)}.mat-schwarz{background:linear-gradient(135deg,#252525,#050505)}.material-grain{position:absolute;inset:0;opacity:.34;background:repeating-linear-gradient(105deg,transparent 0 12px,rgba(255,255,255,.08) 13px 15px,transparent 16px 34px);mix-blend-mode:soft-light}
 .before-after{background:linear-gradient(180deg,rgba(255,250,243,.96),rgba(239,228,213,.96))}.ba-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:30px;overflow:hidden;box-shadow:0 30px 90px rgba(93,64,55,.18);border:1px solid rgba(93,64,55,.12);margin-top:2.5rem;background:#fff}.ba-side{position:relative;min-height:420px;background-size:cover;background-position:center;display:flex;align-items:flex-end}.ba-before{background-image:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55)),url('images/cabinet.jpg')}.ba-after{background-image:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.50)),url('images/finished.jpg')}.ba-label{margin:1.2rem;padding:.85rem 1rem;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);font-weight:800}.ba-note{margin-top:1.2rem;text-align:center;color:#51433a}.ba-note strong{color:#3e2723}@media(max-width:900px){.material-grid{grid-template-columns:1fr 1fr}.ba-card{grid-template-columns:1fr}.ba-side{min-height:300px}}@media(max-width:560px){.material-grid{grid-template-columns:1fr}}
 
+
+/* Handwerk cleanup: less repeated backgrounds, clearer configurator */
+body::before{background:linear-gradient(180deg,#f6efe6,#eadcca)!important;background-attachment:scroll!important}.hero-bg{background:linear-gradient(135deg,#4a2d18 0%,#25160e 100%)!important}.hero-image{transform:none!important;border-radius:28px!important;box-shadow:0 34px 100px rgba(0,0,0,.52),0 0 90px rgba(212,165,116,.20)!important}.hero-image img{height:560px!important;object-fit:cover!important}.hero-visual::before{content:'Werkstatt & Maßarbeit';position:absolute;top:-18px;right:22px;z-index:2;background:rgba(255,248,238,.92);color:#3e2723;border:1px solid rgba(212,165,116,.38);border-radius:999px;padding:.7rem 1rem;font-weight:900;font-size:.82rem;box-shadow:0 18px 45px rgba(0,0,0,.18)}.material-section::before{background:radial-gradient(circle at 15% 25%,rgba(212,165,116,.28),transparent 34%),linear-gradient(90deg,rgba(0,0,0,.18),transparent)!important;opacity:1!important}.planner-section{background:linear-gradient(135deg,#25160e,#4a2d18)!important}.planner-section::before{background:radial-gradient(circle at 20% 20%,rgba(212,165,116,.28),transparent 34%),radial-gradient(circle at 80% 70%,rgba(255,222,173,.16),transparent 36%)!important}.room-stage{background:linear-gradient(180deg,rgba(255,248,238,.12),rgba(0,0,0,.30))!important}.planner-panel,.planner-preview{background:rgba(18,11,7,.78)!important}.planner-panel label,.preview-top,.planner-specs span{color:rgba(255,248,238,.94)!important}.planner-note,.upload-box small,#plannerCopyNote{color:rgba(255,248,238,.86)!important}.planner-panel input,.planner-panel select{background:rgba(255,248,238,.14)!important;color:#fffaf3!important;border-color:rgba(255,248,238,.34)!important}.planner-panel select option{background:#25160e;color:#fffaf3}.planner-price{color:#fffaf3!important}.planner-price strong{color:#ffd7a8!important}.upload-box{background:rgba(255,248,238,.10)!important;border-color:rgba(232,201,168,.62)!important}.furniture-front span{border-color:rgba(255,248,238,.45)!important}
+
 </style>
 </head>
 <body>
@@ -610,8 +614,16 @@ body::before{content:'';position:fixed;inset:0;z-index:-2;background:linear-grad
     </div>
     <div class="gallery-grid">
       <div class="gallery-item reveal-up">
-        <img src="images/hero.jpg" alt="Werkstatt Holzarbeit">
-        <div class="gallery-overlay"><span>Unsere Werkstatt</span></div>
+        <img src="images/generated/workshop-premium-1.png" alt="Premium Werkstatt mit Möbelstück in Arbeit">
+        <div class="gallery-overlay"><span>Werkstatt & Fertigung</span></div>
+      </div>
+      <div class="gallery-item reveal-up">
+        <img src="images/generated/blueprint-planning.png" alt="Möbelplanung mit Skizzen und Holzmustern">
+        <div class="gallery-overlay"><span>Planung & Entwurf</span></div>
+      </div>
+      <div class="gallery-item reveal-up">
+        <img src="images/generated/workshop-premium-2.png" alt="Tischlerei mit Werkzeugen und Holzarbeiten">
+        <div class="gallery-overlay"><span>Handwerk im Detail</span></div>
       </div>
       <div class="gallery-item reveal-up">
         <img src="images/detail.jpg" alt="Detail Holzarbeit">
@@ -624,10 +636,6 @@ body::before{content:'';position:fixed;inset:0;z-index:-2;background:linear-grad
       <div class="gallery-item reveal-up">
         <img src="images/finished.jpg" alt="Fertiges Walnuss Bücherregal">
         <div class="gallery-overlay"><span>Walnuss-Bücherregal im Einsatz</span></div>
-      </div>
-      <div class="gallery-item reveal-up">
-        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" alt="Holzmöbel">
-        <div class="gallery-overlay"><span>Maßanfertigung</span></div>
       </div>
     </div>
   </div>
