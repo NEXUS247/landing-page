@@ -211,12 +211,38 @@ body::after {
 .lightbox span{position:absolute;top:22px;right:30px;color:white;font-size:2.2rem;cursor:pointer}
 @media(max-width:800px){.map-card{grid-template-columns:1fr}.premium-badge{display:none}.smart-pop{left:16px;right:16px;bottom:16px;max-width:none}}
 
+/* Coaching Compass Quiz */
+.compass-section{padding:6rem 0;background:linear-gradient(135deg,#f7f3eb,#eef4ea);position:relative;overflow:hidden}
+.compass-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 18% 25%,rgba(135,168,120,.22),transparent 34%),radial-gradient(circle at 82% 72%,rgba(201,169,110,.20),transparent 36%);pointer-events:none}
+.compass-inner{max-width:1100px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+.compass-card{margin-top:2.5rem;display:grid;grid-template-columns:.95fr 1.05fr;gap:2rem;align-items:stretch}
+.compass-panel,.compass-result{background:rgba(255,255,255,.78);backdrop-filter:blur(18px);border:1px solid rgba(135,168,120,.22);border-radius:28px;padding:2rem;box-shadow:0 22px 70px rgba(57,76,50,.12)}
+.quiz-progress{height:8px;background:rgba(135,168,120,.15);border-radius:99px;overflow:hidden;margin-bottom:1.4rem}
+.quiz-progress span{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--sage),var(--gold));border-radius:99px;transition:width .35s ease}
+.quiz-question{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.12;color:var(--dark);margin-bottom:1.25rem}
+.quiz-options{display:grid;gap:.8rem}
+.quiz-option{border:1px solid rgba(135,168,120,.20);background:#fff;border-radius:18px;padding:1rem 1.1rem;text-align:left;cursor:pointer;font:inherit;color:var(--text);transition:all .25s;box-shadow:0 10px 30px rgba(57,76,50,.06)}
+.quiz-option:hover,.quiz-option.active{transform:translateY(-2px);border-color:var(--sage);box-shadow:0 16px 40px rgba(135,168,120,.18)}
+.quiz-controls{display:flex;justify-content:space-between;gap:1rem;margin-top:1.4rem}
+.quiz-controls button{border:0;border-radius:999px;padding:.9rem 1.25rem;font-weight:800;cursor:pointer}
+.quiz-back{background:rgba(135,168,120,.12);color:var(--sage-dark)}
+.quiz-next{background:var(--sage);color:#fff;margin-left:auto}
+.compass-result{display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.compass-result::before{content:'';position:absolute;right:-70px;top:-70px;width:220px;height:220px;background:radial-gradient(circle,rgba(135,168,120,.18),transparent 70%);border-radius:50%}
+.result-kicker{color:var(--sage);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;margin-bottom:.6rem}
+.result-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);color:var(--dark);line-height:1;margin-bottom:1rem}
+.result-text{color:var(--text-light);line-height:1.75;margin-bottom:1.3rem}
+.result-list{display:grid;gap:.65rem;margin:1rem 0 1.5rem}.result-list span{background:rgba(135,168,120,.10);border:1px solid rgba(135,168,120,.14);border-radius:999px;padding:.7rem .9rem;color:var(--dark);font-weight:600;font-size:.9rem}
+.compass-cta{display:inline-block;text-decoration:none;background:var(--sage);color:#fff;border-radius:999px;padding:1rem 1.3rem;font-weight:900;align-self:flex-start}
+.compass-teaser{padding:2.4rem 0;background:linear-gradient(135deg,rgba(135,168,120,.15),rgba(247,243,235,.92))}.compass-teaser-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;gap:1.4rem;align-items:center}.compass-teaser strong{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3vw,2.6rem);color:var(--dark);line-height:1.05}.compass-teaser span{color:var(--text-light)}.compass-teaser a{text-decoration:none;background:var(--sage);color:#fff;border-radius:999px;padding:1rem 1.2rem;font-weight:900;white-space:nowrap}
+@media(max-width:850px){.compass-card{grid-template-columns:1fr}.compass-teaser-inner{flex-direction:column;align-items:flex-start}.compass-teaser a{white-space:normal}}
+
 </style>
 </head>
 <body>
 <div class="demo-ambient"><div class="demo-orb one"></div><div class="demo-orb two"></div><div class="demo-orb three"></div></div>
 <div class="premium-badge">🌿 Ruhig. Klar. Persönlich.</div>
-<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Kostenloses Erstgespräch</h4><p>Klarheit in 20 Minuten: Buche ein unverbindliches Kennenlernen und finde heraus, ob Coaching gerade zu dir passt.</p><a href="#kontakt">Termin anfragen →</a></div>
+<div class="smart-pop"><button onclick="this.parentElement.style.display='none'">×</button><h4>Kostenloser Coaching-Kompass</h4><p>Finde in 2 Minuten heraus, welcher Arbeitstyp du bist und welcher nächste Schritt wirklich passt.</p><a href="#kompass">Test starten →</a></div>
 
 
 <!-- DSH Logo SVG Definition -->
@@ -328,6 +354,7 @@ body::after {
     </a>
     <nav class="nav">
       <a href="#leistungen">Leistungen</a>
+      <a href="#kompass">Test</a>
       <a href="#ueber-mich">Über mich</a>
       <a href="#galerie">Galerie</a>
       <a href="#kontakt">Kontakt</a>
@@ -346,7 +373,7 @@ body::after {
       <h1>Deine <em>Transformation</em> beginnt hier</h1>
       <p class="hero-subtitle">Individuelle Begleitung für deine persönliche und berufliche Entwicklung. Finde Klarheit, überwinde Blockaden, lebe dein volles Potenzial.</p>
       <div class="hero-ctas">
-        <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch</a>
+        <a href="#kompass" class="btn-primary">Kostenlosen Test starten</a>
         <a href="#leistungen" class="btn-secondary">Mehr erfahren</a>
       </div>
     </div>
@@ -368,6 +395,17 @@ body::after {
   </div>
 </div>
 
+<!-- Compass Teaser -->
+<section class="compass-teaser">
+  <div class="compass-teaser-inner">
+    <div>
+      <strong>Welcher Arbeitstyp bist du?</strong>
+      <span>Der kostenlose Coaching-Kompass zeigt dir, ob du gerade mehr Fokus, Energie, Struktur oder Mut brauchst.</span>
+    </div>
+    <a href="#kompass">Jetzt testen →</a>
+  </div>
+</section>
+
 <!-- Services -->
 <section class="services" id="leistungen">
   <div class="services-inner">
@@ -384,7 +422,7 @@ body::after {
       </div>
       <div class="service-card reveal-up">
         <div class="service-icon">👥</div>
-        <h3>Gruppencoaching</div>
+        <h3>Gruppencoaching</h3>
         <p>Gemeinsam wachsen im geschützten Rahmen. Tausche dich aus, lerne von anderen und finde neue Perspektiven.</p>
       </div>
       <div class="service-card reveal-up">
@@ -406,6 +444,39 @@ body::after {
         <div class="service-icon">🎯</div>
         <h3>Zielsetzung & Fokus</h3>
         <p>Definiere klare Ziele und entwickle einen nachhaltigen Aktionsplan. Ich begleite dich bei der Umsetzung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Coaching Compass Quiz -->
+<section class="compass-section" id="kompass">
+  <div class="compass-inner">
+    <div class="section-header">
+      <div class="section-label">Kostenloser Selbsttest</div>
+      <h2>Dein persönlicher Coaching-Kompass</h2>
+      <p>Beantworte 5 kurze Fragen und erhalte eine erste Einschätzung zu deinem aktuellen Arbeitstyp — inklusive passender Coaching-Empfehlung.</p>
+    </div>
+    <div class="compass-card reveal-up">
+      <div class="compass-panel">
+        <div class="quiz-progress"><span id="quizProgress"></span></div>
+        <div class="quiz-question" id="quizQuestion">Wobei fühlst du dich aktuell am meisten blockiert?</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-controls">
+          <button class="quiz-back" id="quizBack" type="button">Zurück</button>
+          <button class="quiz-next" id="quizNext" type="button">Weiter</button>
+        </div>
+      </div>
+      <div class="compass-result" id="quizResult">
+        <div class="result-kicker">Dein Ergebnis erscheint hier</div>
+        <div class="result-title">Starte den Test</div>
+        <p class="result-text">Der Kompass ist bewusst kurz gehalten: Er fühlt sich leicht an, liefert aber sofort einen konkreten nächsten Schritt.</p>
+        <div class="result-list">
+          <span>✓ Kostenlos</span>
+          <span>✓ Ohne Anmeldung</span>
+          <span>✓ Sofortige Empfehlung</span>
+        </div>
+        <a class="compass-cta" href="#kontakt">Erstgespräch sichern</a>
       </div>
     </div>
   </div>
@@ -579,6 +650,32 @@ const revealDemo=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.i
 document.querySelectorAll('.reveal-up').forEach(el=>revealDemo.observe(el));
 const lb=document.getElementById('dshLightbox');
 if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-item img').forEach(g=>g.addEventListener('click',(ev)=>{ev.preventDefault();img.src=g.src;img.alt=g.alt||'Galerie';lb.classList.add('open')}));lb.addEventListener('click',()=>lb.classList.remove('open'));}
+
+// Coaching Compass Quiz
+const quizQuestions=[
+  {q:'Wobei fühlst du dich aktuell am meisten blockiert?',a:[['Ich habe zu viele Ideen, aber keinen Fokus','fokus'],['Ich funktioniere nur noch und bin erschöpft','energie'],['Ich weiß, was ich will, aber traue mich nicht','mut'],['Ich brauche mehr Struktur und Verbindlichkeit','struktur']]},
+  {q:'Wie triffst du wichtige Entscheidungen meistens?',a:[['Ich analysiere lange und schiebe es auf','struktur'],['Ich entscheide aus dem Bauch, zweifle danach aber','mut'],['Ich lasse mich von äußeren Erwartungen beeinflussen','fokus'],['Ich bin oft zu müde, um klar zu denken','energie']]},
+  {q:'Was würde dir in den nächsten 30 Tagen am meisten helfen?',a:[['Ein klarer Plan mit Prioritäten','struktur'],['Mehr innere Ruhe und Energie','energie'],['Mut für ein wichtiges Gespräch oder einen Schritt','mut'],['Klarheit, was wirklich zu mir passt','fokus']]},
+  {q:'Welcher Satz klingt am ehesten nach dir?',a:[['Ich verliere mich schnell in Optionen','fokus'],['Ich brauche Routinen, die mich stabilisieren','struktur'],['Ich will sichtbarer werden, halte mich aber zurück','mut'],['Ich gebe viel, aber lade wenig auf','energie']]},
+  {q:'Was soll Coaching für dich zuerst verändern?',a:[['Klarheit schaffen','fokus'],['Energie zurückholen','energie'],['Umsetzung sichern','struktur'],['Selbstvertrauen stärken','mut']]}
+];
+const quizResults={
+  fokus:{title:'Der Klarheits-Sucher',text:'Du brauchst gerade weniger Optionen und mehr Richtung. Dein nächster Schritt ist nicht mehr Input, sondern Fokus: Was ist wirklich wichtig — und was darf weg?',tips:['Prioritäten-Session','Werte & Ziele sortieren','Entscheidungs-Kompass erstellen']},
+  energie:{title:'Der Energie-Regulierer',text:'Du hast wahrscheinlich lange funktioniert. Der sinnvollste erste Schritt ist Stabilität: Grenzen, Erholung und ein Alltag, der dich wieder trägt.',tips:['Stressmuster erkennen','Energie-Routinen aufbauen','Grenzen klarer setzen']},
+  struktur:{title:'Der Umsetzungs-Stratege',text:'Du weißt schon mehr, als du denkst — jetzt braucht es Struktur, Verbindlichkeit und einen Plan, der realistisch bleibt.',tips:['30-Tage-Plan','Accountability-System','Blockaden in Umsetzung lösen']},
+  mut:{title:'Der Mut-Entwickler',text:'Du stehst vor einem Schritt, der dir wichtig ist. Coaching hilft dir, Selbstvertrauen aufzubauen und nicht länger gegen dich selbst zu argumentieren.',tips:['Selbstbild stärken','Mutige Gespräche vorbereiten','Sichtbarkeit & Entscheidung trainieren']}
+};
+let quizIndex=0;const quizAnswers=[];
+const qEl=document.getElementById('quizQuestion'),oEl=document.getElementById('quizOptions'),pEl=document.getElementById('quizProgress'),backEl=document.getElementById('quizBack'),nextEl=document.getElementById('quizNext'),rEl=document.getElementById('quizResult');
+function renderQuiz(){
+  if(!qEl)return;const item=quizQuestions[quizIndex];qEl.textContent=item.q;pEl.style.width=((quizIndex+1)/quizQuestions.length*100)+'%';oEl.innerHTML='';
+  item.a.forEach(([text,val])=>{const b=document.createElement('button');b.type='button';b.className='quiz-option'+(quizAnswers[quizIndex]===val?' active':'');b.textContent=text;b.onclick=()=>{quizAnswers[quizIndex]=val;renderQuiz();};oEl.appendChild(b);});
+  backEl.style.visibility=quizIndex===0?'hidden':'visible';nextEl.textContent=quizIndex===quizQuestions.length-1?'Ergebnis anzeigen':'Weiter';
+}
+function showResult(){const counts={fokus:0,energie:0,struktur:0,mut:0};quizAnswers.forEach(v=>counts[v]++);const key=Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];const res=quizResults[key];rEl.innerHTML=`<div class="result-kicker">Dein Arbeitstyp</div><div class="result-title">${res.title}</div><p class="result-text">${res.text}</p><div class="result-list">${res.tips.map(t=>`<span>✓ ${t}</span>`).join('')}</div><a class="compass-cta" href="#kontakt">Passendes Erstgespräch sichern</a>`;}
+backEl?.addEventListener('click',()=>{if(quizIndex>0){quizIndex--;renderQuiz();}});
+nextEl?.addEventListener('click',()=>{if(!quizAnswers[quizIndex])return;if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz();}else showResult();});
+renderQuiz();
 </script>
 
 </body>
