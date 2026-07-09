@@ -12,8 +12,42 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,102,241,.05) 0%,rgba(6,182,212,.08) 30%,rgba(34,197,94,.03) 70%,rgba(99,102,241,.05) 100%),var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;min-height:100vh}
 
-/* Animations */
-@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+/* Global Background Orbs */
+.global-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.global-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4}
+.global-orb-1{width:700px;height:700px;background:radial-gradient(circle,rgba(99,102,241,.25) 0%,transparent 70%);top:5%;left:-5%;animation:float-slow 12s ease-in-out infinite}
+.global-orb-2{width:600px;height:600px;background:radial-gradient(circle,rgba(6,182,212,.2) 0%,transparent 70%);top:40%;right:-10%;animation:float-slow 15s ease-in-out infinite;animation-delay:-5s}
+.global-orb-3{width:500px;height:500px;background:radial-gradient(circle,rgba(34,197,94,.12) 0%,transparent 70%);bottom:10%;left:30%;animation:float-slow 18s ease-in-out infinite;animation-delay:-10s}
+.global-orb-4{width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,.15) 0%,transparent 70%);top:70%;right:20%;animation:float-slow 10s ease-in-out infinite;animation-delay:-3s}
+
+@keyframes float-slow{0%,100%{transform:translateY(0) translateX(0)}25%{transform:translateY(-30px) translateX(20px)}50%{transform:translateY(-15px) translateX(-10px)}75%{transform:translateY(-40px) translateX(15px)}}
+
+/* Sections transparent */
+.section{background:transparent!important;position:relative;z-index:1}
+.stats{background:transparent!important;position:relative;z-index:1}
+.testimonials{background:transparent!important;position:relative;z-index:1}
+.pricing{background:transparent!important;position:relative;z-index:1}
+.faq{background:transparent!important;position:relative;z-index:1}
+.cta-section{background:transparent!important;position:relative;z-index:1}
+
+/* Popup Modal */
+.popup-modal{position:fixed;bottom:30px;right:30px;background:rgba(19,19,31,.95);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,.3);border-radius:24px;padding:1.5rem 2rem;max-width:320px;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(99,102,241,.1);transform:translateY(150%);transition:transform .6s cubic-bezier(.34,1.56,.64,1);animation:popup-slide-in .8s ease-out 3s forwards}
+.popup-modal:hover{transform:translateY(-5px)!important;box-shadow:0 25px 70px rgba(0,0,0,.6),0 0 50px rgba(99,102,241,.15)}
+@keyframes popup-slide-in{to{transform:translateY(0)}}
+.popup-close{position:absolute;top:10px;right:15px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;transition:color .3s}
+.popup-close:hover{color:var(--text)}
+.popup-icon{font-size:2rem;margin-bottom:.5rem}
+.popup-title{font-weight:700;font-size:1.1rem;margin-bottom:.5rem;color:var(--text)}
+.popup-text{color:var(--text-dim);font-size:.9rem;line-height:1.6;margin-bottom:1rem}
+.popup-btn{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;padding:.8rem 1.5rem;border-radius:50px;font-weight:600;text-decoration:none;display:inline-block;font-size:.85rem;transition:all .3s}
+.popup-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(99,102,241,.3)}
+
+/* Counter Animation */
+.counter-value{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Typing Effect */
+.typing-text{border-right:3px solid var(--primary);animation:typing-cursor .8s step-end infinite}
+@keyframes typing-cursor{0%,100%{border-color:transparent}50%{border-color:var(--primary)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
 @keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
@@ -216,6 +250,23 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 </style>
 </head>
 <body>
+<!-- Global Background Orbs -->
+<div class="global-bg">
+  <div class="global-orb global-orb-1"></div>
+  <div class="global-orb global-orb-2"></div>
+  <div class="global-orb global-orb-3"></div>
+  <div class="global-orb global-orb-4"></div>
+</div>
+
+<!-- Popup Modal -->
+<div class="popup-modal" id="configuratorPopup">
+  <button class="popup-close" onclick="this.parentElement.style.display='none'">×</button>
+  <div class="popup-icon">🚀</div>
+  <div class="popup-title">Website-Konfigurator</div>
+  <div class="popup-text">Entdecke sofort, welche Website perfekt zu deinem Business passt. In nur 2 Minuten!</div>
+  <a href="konfigurator/" class="popup-btn">Jetzt konfigurieren →</a>
+</div>
+
 <!-- Header -->
 <header class="header">
   <div class="header-inner">
@@ -254,7 +305,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-label animate-fadeInUp">🚀 Websites die verkaufen</div>
-      <h1 class="animate-fadeInUp delay-1">Websites die verkaufen. Automatisiert.</h1>
+      <h1 class="animate-fadeInUp delay-1 typing-text" id="heroTitle">Websites die verkaufen. Automatisiert.</h1>
       <p class="hero-subtitle animate-fadeInUp delay-2">Wir erstellen hochkonvertierende Websites für Coaches, Handwerker und KMU. Kein Stress, keine versteckten Kosten — nur Ergebnisse.</p>
       <div class="hero-badges animate-fadeInUp delay-2">
         <span class="hero-badge">✅ In 7-10 Tagen online</span>
@@ -283,19 +334,19 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,rgba(99,10
 <section class="stats">
   <div class="stats-grid">
     <div class="stat animate-fadeInUp">
-      <div class="stat-number">50+</div>
+      <div class="stat-number" data-count="50" data-suffix="+">0</div>
       <div class="stat-label">Websites erstellt</div>
     </div>
     <div class="stat animate-fadeInUp delay-1">
-      <div class="stat-number">100%</div>
+      <div class="stat-number" data-count="100" data-suffix="%">0</div>
       <div class="stat-label">Kundenzufriedenheit</div>
     </div>
     <div class="stat animate-fadeInUp delay-2">
-      <div class="stat-number">7 Tage</div>
+      <div class="stat-number" data-count="7" data-suffix=" Tage">0</div>
       <div class="stat-label">Durchschnittliche Lieferzeit</div>
     </div>
     <div class="stat animate-fadeInUp delay-3">
-      <div class="stat-number">24/7</div>
+      <div class="stat-number" data-count="24" data-suffix="/7">0</div>
       <div class="stat-label">Support verfügbar</div>
     </div>
   </div>
@@ -636,6 +687,67 @@ document.querySelectorAll('.demo-card,.feature-card,.price-card').forEach(card={
     card.style.setProperty('--mouse-y',`${y}px`);
   });
 });
+
+// Counter Animation
+function animateCounter(el){
+  const target=parseInt(el.dataset.count);
+  const suffix=el.dataset.suffix||'';
+  const duration=2000;
+  const step=target/(duration/16);
+  let current=0;
+  const timer=setInterval(()={
+    current+=step;
+    if(current>=target){
+      current=target;
+      clearInterval(timer);
+    }
+    el.textContent=Math.floor(current)+suffix;
+  },16);
+}
+
+const counterObserver=new IntersectionObserver((entries)={
+  entries.forEach(entry={
+    if(entry.isIntersecting){
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:.5});
+
+document.querySelectorAll('.stat-number[data-count]').forEach(el={
+  counterObserver.observe(el);
+});
+
+// Typing Effect for Hero Title
+function typeWriter(element,text,speed=80){
+  let i=0;
+  element.textContent='';
+  function type(){
+    if(i<text.length){
+      element.textContent+=text.charAt(i);
+      i++;
+      setTimeout(type,speed);
+    }
+  }
+  type();
+}
+
+const heroTitle=document.getElementById('heroTitle');
+if(heroTitle){
+  const originalText=heroTitle.textContent;
+  heroTitle.textContent='';
+  setTimeout(()={
+    typeWriter(heroTitle,originalText,100);
+  },800);
+}
+
+// Popup Auto-Close after 15 seconds
+const popup=document.getElementById('configuratorPopup');
+if(popup){
+  setTimeout(()={
+    popup.style.transform='translateY(150%)';
+  },15000);
+}
 </script>
 </body>
 </html>
