@@ -50,7 +50,25 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 
 /* Hero */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:100px}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(99,102,241,.15) 0%,transparent 70%),radial-gradient(ellipse at 80% 20%,rgba(6,182,212,.1) 0%,transparent 50%)}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,.08) 0%,rgba(6,182,212,.12) 30%,rgba(34,197,94,.05) 70%,rgba(99,102,241,.08) 100%);filter:blur(80px);transform:scale(1.2)}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.6;animation:float 8s ease-in-out infinite}
+.hero-orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(99,102,241,.3) 0%,transparent 70%);top:-10%;left:-10%;animation-delay:0s}
+.hero-orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(6,182,212,.25) 0%,transparent 70%);bottom:10%;right:-5%;animation-delay:-3s;animation-duration:10s}
+.hero-orb-3{width:400px;height:400px;background:radial-gradient(circle,rgba(34,197,94,.15) 0%,transparent 70%);top:40%;left:30%;animation-delay:-6s;animation-duration:12s}
+
+/* Floating Particles */
+.particles{position:absolute;inset:0;overflow:hidden;z-index:1;pointer-events:none}
+.particle{position:absolute;width:4px;height:4px;background:rgba(99,102,241,.4);border-radius:50%;animation:particle-float 15s infinite}
+.particle:nth-child(1){left:10%;top:100%;animation-delay:0s;animation-duration:12s;background:rgba(99,102,241,.5)}
+.particle:nth-child(2){left:20%;top:100%;animation-delay:1s;animation-duration:15s;background:rgba(6,182,212,.5);width:6px;height:6px}
+.particle:nth-child(3){left:35%;top:100%;animation-delay:2s;animation-duration:18s;background:rgba(34,197,94,.3)}
+.particle:nth-child(4){left:50%;top:100%;animation-delay:3s;animation-duration:14s;background:rgba(99,102,241,.4);width:3px;height:3px}
+.particle:nth-child(5){left:65%;top:100%;animation-delay:4s;animation-duration:16s;background:rgba(6,182,212,.4)}
+.particle:nth-child(6){left:80%;top:100%;animation-delay:5s;animation-duration:13s;background:rgba(34,197,94,.4);width:5px;height:5px}
+.particle:nth-child(7){left:90%;top:100%;animation-delay:6s;animation-duration:17s;background:rgba(99,102,241,.3)}
+.particle:nth-child(8){left:5%;top:100%;animation-delay:7s;animation-duration:19s;background:rgba(6,182,212,.3);width:7px;height:7px}
+
+@keyframes particle-float{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) translateX(30px);opacity:0}}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:100px 100px;mask-image:radial-gradient(ellipse at center,black 40%,transparent 80%)}
 .hero-inner{max-width:1400px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
 .hero-content{text-align:left}
@@ -200,7 +218,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 <!-- Hero -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
   <div class="hero-grid"></div>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-label animate-fadeInUp">🚀 Websites die verkaufen</div>
