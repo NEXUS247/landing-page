@@ -212,6 +212,10 @@ body::after {
 .reservation-card{min-height:100%;display:flex;flex-direction:column;justify-content:center}.res-status{display:inline-flex;align-items:center;gap:.5rem;color:#120c08;background:linear-gradient(135deg,#d4af37,#f2d978);border-radius:999px;padding:.55rem .8rem;font-weight:900;font-size:.78rem;align-self:flex-start;margin-bottom:1.1rem}.res-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.4rem);line-height:1;margin-bottom:1rem}.res-text{color:rgba(255,255,255,.72);line-height:1.75}.res-summary{display:grid;gap:.7rem;margin:1.5rem 0}.res-summary span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:.75rem .9rem;color:rgba(255,255,255,.82)}.res-actions{display:flex;gap:.8rem;flex-wrap:wrap}.res-actions button,.res-actions a{border:0;text-decoration:none;border-radius:999px;padding:.95rem 1.2rem;font-weight:900;cursor:pointer}.res-confirm{background:#d4af37;color:#130d08}.res-ghost{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)!important}.waitlist-note{margin-top:1rem;color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.55}
 @media(max-width:850px){.res-layout{grid-template-columns:1fr}.res-row{grid-template-columns:1fr}}
 
+
+/* Wine cellar and live inventory */
+.wine-section{padding:6rem 0;background:linear-gradient(135deg,#0e0907,#24110d);color:#fff;position:relative;overflow:hidden}.wine-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 22% 30%,rgba(120,25,35,.34),transparent 34%),radial-gradient(circle at 78% 70%,rgba(212,175,55,.18),transparent 38%);pointer-events:none}.wine-inner{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}.wine-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:stretch;margin-top:2.5rem}.wine-card,.cellar-card{background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.22);border-radius:28px;padding:2rem;backdrop-filter:blur(18px);box-shadow:0 24px 80px rgba(0,0,0,.32),0 0 55px rgba(120,25,35,.12)}.cellar-card{min-height:420px;background:linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.30)),url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200') center/cover;border:1px solid rgba(212,175,55,.28);display:flex;align-items:flex-end;overflow:hidden}.cellar-caption{background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:1.4rem;backdrop-filter:blur(14px)}.cellar-caption strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;line-height:1.1;margin-bottom:.5rem;color:#f2d978}.cellar-caption span{color:rgba(255,255,255,.72);line-height:1.6}.wine-list{display:grid;gap:.85rem;margin-top:1.3rem}.wine-row{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;padding:1rem;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);transition:all .25s}.wine-row:hover{transform:translateY(-2px);border-color:rgba(212,175,55,.5)}.wine-row h3{font-family:'Playfair Display',serif;margin:0 0 .25rem;color:#fff}.wine-row p{margin:0;color:rgba(255,255,255,.62);font-size:.9rem}.stock-pill{white-space:nowrap;border-radius:999px;padding:.55rem .75rem;font-weight:900;font-size:.78rem}.stock-high{background:rgba(125,216,125,.16);color:#9cf09c;border:1px solid rgba(125,216,125,.25)}.stock-low{background:rgba(212,175,55,.16);color:#f2d978;border:1px solid rgba(212,175,55,.28)}.stock-rare{background:rgba(255,112,112,.14);color:#ffb0b0;border:1px solid rgba(255,112,112,.22)}.inventory-box{margin-top:1.5rem;padding:1.35rem;border-radius:22px;background:linear-gradient(135deg,rgba(212,175,55,.13),rgba(255,255,255,.055));border:1px solid rgba(212,175,55,.22)}.inventory-box h3{margin-bottom:.55rem}.inventory-box p{color:rgba(255,255,255,.7);line-height:1.65}.inventory-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1rem}.inventory-tags span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:.55rem .75rem;color:rgba(255,255,255,.78);font-size:.86rem}@media(max-width:900px){.wine-layout{grid-template-columns:1fr}.cellar-card{min-height:340px}.wine-row{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -331,6 +335,7 @@ body::after {
       <a href="#about">Über uns</a>
       <a href="#galerie">Galerie</a>
       <a href="#menu">Menü</a>
+      <a href="#weinkeller">Weinkeller</a>
       <a href="#reservierung">Reservierung</a>
       <a href="#kontakt" class="cta-btn">Tisch reservieren</a>
     </nav>
@@ -467,6 +472,39 @@ body::after {
           <span class="price">€ 22</span>
         </div>
         <p>Schokolade & Gold — Valrhona-Ganache, karamellisierte Macadamia, essbares Goldblatt</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wine Cellar / Live Inventory -->
+<section class="wine-section" id="weinkeller">
+  <div class="wine-inner">
+    <div class="section-header">
+      <span class="section-label">Eigener Weinkeller</span>
+      <h2>Weinkarte mit Live-Bestand</h2>
+      <p>Besondere Flaschen, Jahrgänge und Raritäten werden nicht nur präsentiert — der Bestand kann live angezeigt und automatisch aktualisiert werden.</p>
+    </div>
+    <div class="wine-layout reveal-up">
+      <div class="cellar-card">
+        <div class="cellar-caption">
+          <strong>Kuratiert im eigenen Weinkeller</strong>
+          <span>Perfekte Pairings zum Menü, seltene Jahrgänge und Empfehlungen des Sommeliers — sichtbar, hochwertig und verkaufsstark.</span>
+        </div>
+      </div>
+      <div class="wine-card">
+        <span class="section-label">Auszug aus der Weinkarte</span>
+        <div class="wine-list">
+          <div class="wine-row"><div><h3>Riesling GG 2021</h3><p>Rheingau · mineralisch · Menübegleitung Fisch</p></div><span class="stock-pill stock-high">12 Flaschen</span></div>
+          <div class="wine-row"><div><h3>Pinot Noir Reserve 2018</h3><p>Baden · elegant · Empfehlung zu Wild & Trüffel</p></div><span class="stock-pill stock-low">3 Flaschen</span></div>
+          <div class="wine-row"><div><h3>Champagne Brut Millésimé</h3><p>Reims · feinperlig · Aperitif & Dessert</p></div><span class="stock-pill stock-high">8 Flaschen</span></div>
+          <div class="wine-row"><div><h3>Barolo Riserva 2015</h3><p>Piemont · Rarität · nur auf Anfrage</p></div><span class="stock-pill stock-rare">1 Flasche</span></div>
+        </div>
+        <div class="inventory-box">
+          <h3>Live-Bestand als Premium-Funktion</h3>
+          <p>Diese Funktion kann nicht nur für Wein genutzt werden. Restaurants könnten damit auch limitierte Produkte sichtbar machen — z.B. Dry-Aged Steaks, Wagyu, Austern, Trüffel, Kaviar oder Tagesgerichte.</p>
+          <div class="inventory-tags"><span>Weinbestand</span><span>Dry-Aged Fleisch</span><span>Wagyu Cuts</span><span>Trüffel</span><span>Tages-Specials</span></div>
+        </div>
       </div>
     </div>
   </div>
