@@ -247,11 +247,11 @@ body::after {
 .furniture-model{position:relative;width:230px;height:220px;transform-style:preserve-3d;transform:rotateX(-16deg) rotateY(28deg);transition:width .45s,height .45s,transform .45s;animation:modelFloat 5s ease-in-out infinite;z-index:2}
 @keyframes modelFloat{0%,100%{transform:rotateX(-16deg) rotateY(28deg) translateY(0)}50%{transform:rotateX(-14deg) rotateY(34deg) translateY(-8px)}}
 .furniture-face{position:absolute;border:1px solid rgba(255,255,255,.15);box-shadow:inset 0 0 35px rgba(255,255,255,.06),0 22px 55px rgba(0,0,0,.26)}
-.furniture-front{inset:0;background:linear-gradient(135deg,#8b5a2b,#c49157);transform:translateZ(48px);border-radius:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px}
-.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden}
+.furniture-front{inset:0;background:linear-gradient(135deg,#8b5a2b,#c49157);transform:translateZ(48px);border-radius:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px;background-size:cover}
+.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden;background-size:cover}
 .furniture-front span::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 28%,rgba(255,255,255,.16) 32%,transparent 36% 100%);opacity:.55}
-.furniture-side{width:96px;height:100%;right:-48px;top:0;background:linear-gradient(135deg,#5f371b,#9d6938);transform:rotateY(90deg);border-radius:10px}
-.furniture-top{height:96px;width:100%;left:0;top:-48px;background:linear-gradient(135deg,#b47a3f,#e2b577);transform:rotateX(90deg);border-radius:10px}
+.furniture-side{width:96px;height:100%;right:-48px;top:0;background:linear-gradient(135deg,#5f371b,#9d6938);transform:rotateY(90deg);border-radius:10px;background-size:cover}
+.furniture-top{height:96px;width:100%;left:0;top:-48px;background:linear-gradient(135deg,#b47a3f,#e2b577);transform:rotateX(90deg);border-radius:10px;background-size:cover}
 .planner-specs{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem}
 .planner-specs span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:.55rem .8rem;font-size:.84rem;color:rgba(255,255,255,.8)}
 .planner-scene-note{margin-top:.85rem;color:rgba(255,248,238,.76);font-size:.84rem;line-height:1.55}
@@ -873,21 +873,25 @@ const plannerEls={
 const plannerTemplates={
   wohnzimmer:{
     name:'Wohnzimmer-Nische',
+    image:"images/generated/after-custom-cabinet-niche.png",
     background:"linear-gradient(180deg,rgba(255,248,238,.12),rgba(0,0,0,.24)),linear-gradient(180deg,#d8cab9 0 58%,#9f8266 58% 100%)",
     overlay:"radial-gradient(circle at 24% 24%,rgba(255,240,214,.22),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.24))"
   },
   schlafzimmer:{
     name:'Schlafzimmer',
+    image:"images/finished.jpg",
     background:"linear-gradient(180deg,rgba(255,248,238,.10),rgba(0,0,0,.2)),linear-gradient(180deg,#e4ddd4 0 60%,#8b7767 60% 100%)",
     overlay:"radial-gradient(circle at 70% 28%,rgba(255,255,255,.18),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.22))"
   },
   flur:{
     name:'Flur / Eingangsbereich',
+    image:"images/cabinet.jpg",
     background:"linear-gradient(180deg,rgba(255,248,238,.08),rgba(0,0,0,.22)),linear-gradient(180deg,#cfc7bc 0 54%,#6f6156 54% 100%)",
     overlay:"linear-gradient(90deg,rgba(0,0,0,.18),transparent 45%),radial-gradient(circle at 82% 16%,rgba(255,233,193,.14),transparent 22%)"
   },
   atelier:{
     name:'Home Office / Atelier',
+    image:"images/detail.jpg",
     background:"linear-gradient(180deg,rgba(255,248,238,.08),rgba(0,0,0,.20)),linear-gradient(180deg,#d7d9dd 0 56%,#7e858d 56% 100%)",
     overlay:"radial-gradient(circle at 18% 20%,rgba(201,169,110,.16),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.22))"
   }
@@ -898,17 +902,21 @@ function setPlannerScene(key, customLabel){
   const tpl=plannerTemplates[key]||plannerTemplates.wohnzimmer;
   plannerEls.roomStage.style.background=tpl.background;
   plannerEls.sceneOverlay.style.background=tpl.overlay;
+  plannerEls.preview.style.backgroundImage=`url('${tpl.image}')`;
+  plannerEls.preview.classList.add('active');
   plannerEls.sceneNote.textContent=customLabel?`Aktive Testszene: ${customLabel}. Diese Demo interpretiert deine Beschreibung visuell als schnelle Raumstimmung.`:`Aktive Testszene: ${tpl.name}. Für echte Projekte kann hier später eine KI-Raumszene oder ein echtes Kundenfoto verwendet werden.`;
 }
 function applyPromptScene(){
   const text=(plannerEls.prompt.value||'').trim().toLowerCase();
   if(!text){customSceneActive=false;setPlannerScene(activeTemplate);return;}
   let key='atelier';
-  if(text.includes('altbau')||text.includes('wohn')||text.includes('fischgrät')) key='wohnzimmer';
+  if(text.includes('altbau')||text.includes('wohn')||text.includes('fischgrät')||text.includes('sofa')) key='wohnzimmer';
   if(text.includes('schlaf')||text.includes('textil')||text.includes('bett')) key='schlafzimmer';
   if(text.includes('flur')||text.includes('eingang')||text.includes('garderobe')) key='flur';
   customSceneActive=true;
   setPlannerScene(key,plannerEls.prompt.value.trim());
+  if(text.includes('abend')||text.includes('warm')) plannerEls.sceneOverlay.style.background=`radial-gradient(circle at 70% 22%,rgba(255,208,145,.26),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.28))`;
+  if(text.includes('hell')||text.includes('skandi')||text.includes('minimal')) plannerEls.sceneOverlay.style.background=`radial-gradient(circle at 24% 20%,rgba(255,255,255,.22),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.18))`;
 }
 function updateFurnitureLayout(){
   const layout={
@@ -943,9 +951,21 @@ function updatePlanner(){
   plannerEls.model.style.height=(120+(h/300)*230)+'px';
   const palettes={eiche:['#8b5a2b','#c49157','#e2b577'],nussbaum:['#3b2115','#744222','#a66a3c'],esche:['#c8ad83','#ead8b8','#f2e7d3'],multiplex:['#b88449','#d6a66d','#edc690']};
   const p=palettes[plannerEls.material.value]||palettes.eiche;
-  plannerEls.front.style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
-  plannerEls.side.style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
-  plannerEls.top.style.background=`linear-gradient(135deg,${p[1]},${p[2]})`;
+  const materialPos={eiche:'0% 0%',nussbaum:'33% 0%',esche:'66% 0%',multiplex:'100% 0%'}[plannerEls.material.value]||'0% 0%';
+  plannerEls.front.style.backgroundImage=`linear-gradient(135deg,${p[0]}d9,${p[1]}cc),url('images/generated/wood-material-samples.png')`;
+  plannerEls.side.style.backgroundImage=`linear-gradient(135deg,${p[0]}e6,${p[1]}cc),url('images/generated/wood-material-samples.png')`;
+  plannerEls.top.style.backgroundImage=`linear-gradient(135deg,${p[1]}d9,${p[2]}bf),url('images/generated/wood-material-samples.png')`;
+  plannerEls.front.style.backgroundPosition=`center, ${materialPos}`;
+  plannerEls.side.style.backgroundPosition=`center, ${materialPos}`;
+  plannerEls.top.style.backgroundPosition=`center, ${materialPos}`;
+  plannerEls.front.style.backgroundSize='cover, cover';
+  plannerEls.side.style.backgroundSize='cover, cover';
+  plannerEls.top.style.backgroundSize='cover, cover';
+  [...plannerEls.front.querySelectorAll('span')].forEach((cell,idx)=>{
+    cell.style.backgroundImage=`linear-gradient(135deg,rgba(255,255,255,.05),rgba(0,0,0,.10)),url('images/generated/wood-material-samples.png')`;
+    cell.style.backgroundPosition=`center, ${idx*18}% ${idx*6}%`;
+    cell.style.backgroundSize='cover, cover';
+  });
   plannerEls.front.style.boxShadow=`inset 0 0 30px rgba(255,255,255,.06), inset -18px -18px 40px rgba(0,0,0,.16)`;
   plannerEls.side.style.opacity=plannerEls.type.value==='tisch'?.72:.96;
   plannerEls.top.style.height=plannerEls.type.value==='tisch'?'42px':'96px';
