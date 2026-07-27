@@ -247,8 +247,8 @@ body::after {
 .furniture-model{position:relative;width:230px;height:220px;transform-style:preserve-3d;transform:rotateX(-16deg) rotateY(28deg);transition:width .45s,height .45s,transform .45s;animation:modelFloat 5s ease-in-out infinite;z-index:2}
 @keyframes modelFloat{0%,100%{transform:rotateX(-16deg) rotateY(28deg) translateY(0)}50%{transform:rotateX(-14deg) rotateY(34deg) translateY(-8px)}}
 .furniture-face{position:absolute;border:1px solid rgba(255,255,255,.15);box-shadow:inset 0 0 35px rgba(255,255,255,.06),0 22px 55px rgba(0,0,0,.26)}
-.furniture-front{inset:0;background:linear-gradient(135deg,#8b5a2b,#c49157);transform:translateZ(48px);border-radius:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px;background-size:cover}
-.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden;background-size:cover}
+.furniture-front{inset:0;background:linear-gradient(135deg,#8b5a2b,#c49157);transform:translateZ(48px);border-radius:10px;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:14px;background-repeat:no-repeat}
+.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden;background-repeat:no-repeat}
 .furniture-front span::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 28%,rgba(255,255,255,.16) 32%,transparent 36% 100%);opacity:.55}
 .furniture-side{width:96px;height:100%;right:-48px;top:0;background:linear-gradient(135deg,#5f371b,#9d6938);transform:rotateY(90deg);border-radius:10px;background-size:cover}
 .furniture-top{height:96px;width:100%;left:0;top:-48px;background:linear-gradient(135deg,#b47a3f,#e2b577);transform:rotateX(90deg);border-radius:10px;background-size:cover}
@@ -921,18 +921,19 @@ function applyPromptScene(){
 }
 function updateFurnitureLayout(){
   const layout={
-    regal:[1,1,1,1,1,1],
-    schrank:[2,0,2,0,1,1],
-    sideboard:[2,2,1,1,1,1],
-    tisch:[3,0,0,1,0,1]
-  }[plannerEls.type.value]||[1,1,1,1,1,1];
+    regal:[2,2,2,2,2,2],
+    schrank:[3,0,3,3,0,3],
+    sideboard:[2,2,2,2,2,2],
+    tisch:[6,0,0,1,0,1]
+  }[plannerEls.type.value]||[2,2,2,2,2,2];
   const cells=[...plannerEls.front.querySelectorAll('span')];
   cells.forEach((cell,idx)=>{
     const val=layout[idx]||0;
     cell.style.display=val===0?'none':'block';
     cell.style.gridColumn=val>1?`span ${val}`:'span 1';
     cell.style.borderRadius=plannerEls.type.value==='tisch'?'999px':'7px';
-    cell.style.opacity=plannerEls.type.value==='tisch'&&idx>0?.22:.95;
+    cell.style.opacity=plannerEls.type.value==='tisch'&&idx>0?.18:.95;
+    cell.style.minHeight=plannerEls.type.value==='tisch'&&idx===0?'32px':'auto';
   });
 }
 function updatePlanner(){
@@ -952,25 +953,34 @@ function updatePlanner(){
   plannerEls.model.style.height=(120+(h/300)*230)+'px';
   const palettes={eiche:['#8b5a2b','#c49157','#e2b577'],nussbaum:['#3b2115','#744222','#a66a3c'],esche:['#c8ad83','#ead8b8','#f2e7d3'],multiplex:['#b88449','#d6a66d','#edc690']};
   const p=palettes[plannerEls.material.value]||palettes.eiche;
-  const materialPos={eiche:'0% 0%',nussbaum:'33% 0%',esche:'66% 0%',multiplex:'100% 0%'}[plannerEls.material.value]||'0% 0%';
+  const materialMap={
+    eiche:{base:'0% 0%',cells:['4% 6%','9% 8%','14% 10%','7% 58%','12% 60%','17% 62%']},
+    nussbaum:{base:'100% 0%',cells:['84% 6%','89% 8%','94% 10%','87% 58%','92% 60%','97% 62%']},
+    esche:{base:'0% 100%',cells:['4% 88%','9% 90%','14% 92%','7% 96%','12% 98%','17% 99%']},
+    multiplex:{base:'100% 100%',cells:['84% 88%','89% 90%','94% 92%','87% 96%','92% 98%','97% 99%']}
+  }[plannerEls.material.value]||{base:'0% 0%',cells:['4% 6%','9% 8%','14% 10%','7% 58%','12% 60%','17% 62%']};
   plannerEls.front.style.backgroundImage=`linear-gradient(135deg,${p[0]}d9,${p[1]}cc),url('images/generated/wood-material-samples.png')`;
   plannerEls.side.style.backgroundImage=`linear-gradient(135deg,${p[0]}e6,${p[1]}cc),url('images/generated/wood-material-samples.png')`;
   plannerEls.top.style.backgroundImage=`linear-gradient(135deg,${p[1]}d9,${p[2]}bf),url('images/generated/wood-material-samples.png')`;
-  plannerEls.front.style.backgroundPosition=`center, ${materialPos}`;
-  plannerEls.side.style.backgroundPosition=`center, ${materialPos}`;
-  plannerEls.top.style.backgroundPosition=`center, ${materialPos}`;
-  plannerEls.front.style.backgroundSize='cover, cover';
-  plannerEls.side.style.backgroundSize='cover, cover';
-  plannerEls.top.style.backgroundSize='cover, cover';
+  plannerEls.front.style.backgroundPosition=`center, ${materialMap.base}`;
+  plannerEls.side.style.backgroundPosition=`center, ${materialMap.base}`;
+  plannerEls.top.style.backgroundPosition=`center, ${materialMap.base}`;
+  plannerEls.front.style.backgroundSize='cover, 200% 200%';
+  plannerEls.side.style.backgroundSize='cover, 200% 200%';
+  plannerEls.top.style.backgroundSize='cover, 200% 200%';
   [...plannerEls.front.querySelectorAll('span')].forEach((cell,idx)=>{
     cell.style.backgroundImage=`linear-gradient(135deg,rgba(255,255,255,.05),rgba(0,0,0,.10)),url('images/generated/wood-material-samples.png')`;
-    cell.style.backgroundPosition=`center, ${idx*18}% ${idx*6}%`;
-    cell.style.backgroundSize='cover, cover';
+    cell.style.backgroundPosition=`center, ${materialMap.cells[idx]||materialMap.base}`;
+    cell.style.backgroundSize='cover, 200% 200%';
   });
   plannerEls.front.style.boxShadow=`inset 0 0 30px rgba(255,255,255,.06), inset -18px -18px 40px rgba(0,0,0,.16)`;
   plannerEls.side.style.opacity=plannerEls.type.value==='tisch'?.72:.96;
   plannerEls.top.style.height=plannerEls.type.value==='tisch'?'42px':'96px';
   plannerEls.top.style.top=plannerEls.type.value==='tisch'?'-21px':'-48px';
+  plannerEls.front.style.gridTemplateColumns=plannerEls.type.value==='tisch'?'repeat(6,1fr)':plannerEls.type.value==='schrank'?'repeat(6,1fr)':'repeat(6,1fr)';
+  plannerEls.front.style.padding=plannerEls.type.value==='tisch'?'10px 12px':'14px';
+  plannerEls.front.style.gap=plannerEls.type.value==='schrank'?'10px':plannerEls.type.value==='tisch'?'6px':'8px';
+  plannerEls.model.style.borderRadius=plannerEls.type.value==='tisch'?'20px':'10px';
   updateFurnitureLayout();
 }
 ['type','w','h','d','material'].forEach(k=>plannerEls[k]?.addEventListener('input',updatePlanner));
