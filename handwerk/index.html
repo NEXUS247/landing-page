@@ -873,25 +873,25 @@ const plannerEls={
 const plannerTemplates={
   wohnzimmer:{
     name:'Wohnzimmer-Nische',
-    image:"images/generated/after-custom-cabinet-niche.png",
+    image:"images/generated/template-wohnzimmer-nische.png",
     background:"linear-gradient(180deg,rgba(255,248,238,.12),rgba(0,0,0,.24)),linear-gradient(180deg,#d8cab9 0 58%,#9f8266 58% 100%)",
     overlay:"radial-gradient(circle at 24% 24%,rgba(255,240,214,.22),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.24))"
   },
   schlafzimmer:{
     name:'Schlafzimmer',
-    image:"images/finished.jpg",
+    image:"images/generated/template-schlafzimmer.png",
     background:"linear-gradient(180deg,rgba(255,248,238,.10),rgba(0,0,0,.2)),linear-gradient(180deg,#e4ddd4 0 60%,#8b7767 60% 100%)",
     overlay:"radial-gradient(circle at 70% 28%,rgba(255,255,255,.18),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.22))"
   },
   flur:{
     name:'Flur / Eingangsbereich',
-    image:"images/cabinet.jpg",
+    image:"images/generated/template-flur.png",
     background:"linear-gradient(180deg,rgba(255,248,238,.08),rgba(0,0,0,.22)),linear-gradient(180deg,#cfc7bc 0 54%,#6f6156 54% 100%)",
     overlay:"linear-gradient(90deg,rgba(0,0,0,.18),transparent 45%),radial-gradient(circle at 82% 16%,rgba(255,233,193,.14),transparent 22%)"
   },
   atelier:{
     name:'Home Office / Atelier',
-    image:"images/detail.jpg",
+    image:"images/generated/template-atelier.png",
     background:"linear-gradient(180deg,rgba(255,248,238,.08),rgba(0,0,0,.20)),linear-gradient(180deg,#d7d9dd 0 56%,#7e858d 56% 100%)",
     overlay:"radial-gradient(circle at 18% 20%,rgba(201,169,110,.16),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.22))"
   }
@@ -913,6 +913,7 @@ function applyPromptScene(){
   if(text.includes('altbau')||text.includes('wohn')||text.includes('fischgrät')||text.includes('sofa')) key='wohnzimmer';
   if(text.includes('schlaf')||text.includes('textil')||text.includes('bett')) key='schlafzimmer';
   if(text.includes('flur')||text.includes('eingang')||text.includes('garderobe')) key='flur';
+  if(text.includes('office')||text.includes('atelier')||text.includes('büro')||text.includes('arbeitszimmer')) key='atelier';
   customSceneActive=true;
   setPlannerScene(key,plannerEls.prompt.value.trim());
   if(text.includes('abend')||text.includes('warm')) plannerEls.sceneOverlay.style.background=`radial-gradient(circle at 70% 22%,rgba(255,208,145,.26),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.28))`;
