@@ -224,8 +224,16 @@ body::after {
 .planner-panel input,.planner-panel select{width:100%;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.18);color:#fff;border-radius:14px;padding:.9rem 1rem;font:inherit;outline:none}
 .planner-panel input:focus,.planner-panel select:focus{border-color:rgba(212,165,116,.8);box-shadow:0 0 0 4px rgba(212,165,116,.12)}
 .planner-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.planner-textarea{min-height:92px;resize:vertical}
 .upload-box{margin-top:1rem;border:1px dashed rgba(212,165,116,.55);border-radius:18px;padding:1rem;background:rgba(0,0,0,.15)}
 .upload-box small{display:block;color:rgba(255,255,255,.65);line-height:1.5;margin-top:.45rem}
+.template-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:1rem}
+.template-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:#fff;border-radius:16px;padding:.85rem;text-align:left;cursor:pointer;transition:all .3s}
+.template-btn strong{display:block;font-size:.9rem;margin-bottom:.2rem}
+.template-btn span{display:block;color:rgba(255,248,238,.68);font-size:.78rem;line-height:1.45}
+.template-btn:hover,.template-btn.active{border-color:rgba(232,201,168,.72);background:rgba(212,165,116,.14);transform:translateY(-2px)}
+.planner-tools{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+.planner-tools button{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:.75rem 1rem;font-weight:700;cursor:pointer}
 .planner-price{margin-top:1.3rem;padding:1.2rem;border-radius:20px;background:linear-gradient(135deg,rgba(212,165,116,.22),rgba(255,255,255,.06));border:1px solid rgba(212,165,116,.28)}
 .planner-price strong{display:block;font-size:2rem;color:var(--amber);line-height:1.1;margin-top:.25rem}
 .planner-note{font-size:.83rem;color:rgba(255,255,255,.66);margin-top:.7rem;line-height:1.55}
@@ -235,15 +243,18 @@ body::after {
 .room-stage::before{content:'';position:absolute;inset:auto 0 0 0;height:42%;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.28));transform:skewY(-4deg);transform-origin:left bottom}
 .scan-preview{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.18;filter:saturate(.85) contrast(1.05);display:none}
 .scan-preview.active{display:block}
+.scene-overlay{position:absolute;inset:0;background:radial-gradient(circle at 22% 24%,rgba(255,240,214,.18),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.24));pointer-events:none;transition:background .35s}
 .furniture-model{position:relative;width:230px;height:220px;transform-style:preserve-3d;transform:rotateX(-16deg) rotateY(28deg);transition:width .45s,height .45s,transform .45s;animation:modelFloat 5s ease-in-out infinite;z-index:2}
 @keyframes modelFloat{0%,100%{transform:rotateX(-16deg) rotateY(28deg) translateY(0)}50%{transform:rotateX(-14deg) rotateY(34deg) translateY(-8px)}}
 .furniture-face{position:absolute;border:1px solid rgba(255,255,255,.15);box-shadow:inset 0 0 35px rgba(255,255,255,.06),0 22px 55px rgba(0,0,0,.26)}
 .furniture-front{inset:0;background:linear-gradient(135deg,#8b5a2b,#c49157);transform:translateZ(48px);border-radius:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px}
-.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12)}
+.furniture-front span{background:rgba(255,255,255,.10);border-radius:7px;border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden}
+.furniture-front span::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 28%,rgba(255,255,255,.16) 32%,transparent 36% 100%);opacity:.55}
 .furniture-side{width:96px;height:100%;right:-48px;top:0;background:linear-gradient(135deg,#5f371b,#9d6938);transform:rotateY(90deg);border-radius:10px}
 .furniture-top{height:96px;width:100%;left:0;top:-48px;background:linear-gradient(135deg,#b47a3f,#e2b577);transform:rotateX(90deg);border-radius:10px}
 .planner-specs{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem}
 .planner-specs span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:.55rem .8rem;font-size:.84rem;color:rgba(255,255,255,.8)}
+.planner-scene-note{margin-top:.85rem;color:rgba(255,248,238,.76);font-size:.84rem;line-height:1.55}
 .planner-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}
 .planner-actions a,.planner-actions button{border:0;text-decoration:none;border-radius:999px;padding:.9rem 1.15rem;font-weight:800;cursor:pointer}
 .planner-actions .primary{background:var(--amber);color:var(--walnut-dark)}
@@ -589,10 +600,37 @@ body::before{background:linear-gradient(180deg,#f6efe6,#eadcca)!important;backgr
           <option value="multiplex" data-factor="0.72">Birke Multiplex</option>
         </select>
 
+        <label>Test-Raumvorlagen</label>
+        <div class="template-grid" id="plannerTemplates">
+          <button class="template-btn active" type="button" data-template="wohnzimmer">
+            <strong>Wohnzimmer-Nische</strong>
+            <span>Warme Wand, ruhiger Boden, ideal für Sideboards und Regale.</span>
+          </button>
+          <button class="template-btn" type="button" data-template="schlafzimmer">
+            <strong>Schlafzimmer</strong>
+            <span>Helle Wand, textile Stimmung, gut für Kleiderschränke.</span>
+          </button>
+          <button class="template-btn" type="button" data-template="flur">
+            <strong>Flur / Eingangsbereich</strong>
+            <span>Schmaler Raum, mehr Kontrast, stark für Einbauten.</span>
+          </button>
+          <button class="template-btn" type="button" data-template="atelier">
+            <strong>Home Office / Atelier</strong>
+            <span>Modern, neutral, gut um Materialwirkung zu testen.</span>
+          </button>
+        </div>
+
+        <label for="plannerPrompt">Raum per KI-Idee beschreiben</label>
+        <textarea id="plannerPrompt" class="planner-textarea" placeholder="z.B. Helle Altbauwand, Fischgrätboden, links Fenster, eher warmes Abendlicht"></textarea>
+        <div class="planner-tools">
+          <button type="button" id="plannerPromptApply">Szene anwenden</button>
+          <button type="button" id="plannerPromptReset">Auf Vorlage zurücksetzen</button>
+        </div>
+
         <div class="upload-box">
           <label for="plannerScan">Raumfoto / Scan hochladen</label>
           <input id="plannerScan" type="file" accept="image/*">
-          <small>Demo-Funktion: Das Bild wird nur lokal als Hintergrund der Vorschau angezeigt — ideal für Wandnischen, Dachschrägen oder bestehende Räume.</small>
+          <small>Du kannst entweder ein eigenes Foto hochladen, eine Vorlage auswählen oder eine Szene beschreiben. So kann jeder sofort testen, wie das Möbel davor wirken würde.</small>
         </div>
 
         <div class="planner-price">
@@ -609,6 +647,7 @@ body::before{background:linear-gradient(180deg,#f6efe6,#eadcca)!important;backgr
         </div>
         <div class="room-stage">
           <div class="scan-preview" id="scanPreview"></div>
+          <div class="scene-overlay" id="sceneOverlay"></div>
           <div class="furniture-model" id="furnitureModel">
             <div class="furniture-face furniture-front"><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="furniture-face furniture-side"></div>
@@ -621,6 +660,7 @@ body::before{background:linear-gradient(180deg,#f6efe6,#eadcca)!important;backgr
           <span>3D-Entwurf inklusive</span>
           <span>Montage optional</span>
         </div>
+        <p class="planner-scene-note" id="plannerSceneNote">Aktive Testszene: Wohnzimmer-Nische. Für echte Projekte kann hier später eine KI-Raumszene oder ein echtes Kundenfoto verwendet werden.</p>
         <div class="planner-actions">
           <a class="primary" href="#kontakt">Planung anfragen →</a>
           <button class="ghost" type="button" id="plannerRotate">Ansicht drehen</button>
@@ -826,8 +866,66 @@ if(lb){const img=lb.querySelector('img');document.querySelectorAll('.gallery-ite
 const plannerEls={
   type:document.getElementById('plannerType'),w:document.getElementById('plannerW'),h:document.getElementById('plannerH'),d:document.getElementById('plannerD'),
   material:document.getElementById('plannerMaterial'),price:document.getElementById('plannerPrice'),model:document.getElementById('furnitureModel'),
-  size:document.getElementById('specSize'),typeLabel:document.getElementById('specType'),matLabel:document.getElementById('plannerMaterialLabel'),scan:document.getElementById('plannerScan'),preview:document.getElementById('scanPreview'),rotate:document.getElementById('plannerRotate'),copy:document.getElementById('plannerCopy'),copyNote:document.getElementById('plannerCopyNote')
+  size:document.getElementById('specSize'),typeLabel:document.getElementById('specType'),matLabel:document.getElementById('plannerMaterialLabel'),scan:document.getElementById('plannerScan'),preview:document.getElementById('scanPreview'),rotate:document.getElementById('plannerRotate'),copy:document.getElementById('plannerCopy'),copyNote:document.getElementById('plannerCopyNote'),
+  templates:[...document.querySelectorAll('#plannerTemplates .template-btn')],prompt:document.getElementById('plannerPrompt'),promptApply:document.getElementById('plannerPromptApply'),promptReset:document.getElementById('plannerPromptReset'),
+  sceneOverlay:document.getElementById('sceneOverlay'),sceneNote:document.getElementById('plannerSceneNote'),roomStage:document.querySelector('.room-stage'),front:document.querySelector('.furniture-front'),side:document.querySelector('.furniture-side'),top:document.querySelector('.furniture-top')
 };
+const plannerTemplates={
+  wohnzimmer:{
+    name:'Wohnzimmer-Nische',
+    background:"linear-gradient(180deg,rgba(255,248,238,.12),rgba(0,0,0,.24)),linear-gradient(180deg,#d8cab9 0 58%,#9f8266 58% 100%)",
+    overlay:"radial-gradient(circle at 24% 24%,rgba(255,240,214,.22),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.24))"
+  },
+  schlafzimmer:{
+    name:'Schlafzimmer',
+    background:"linear-gradient(180deg,rgba(255,248,238,.10),rgba(0,0,0,.2)),linear-gradient(180deg,#e4ddd4 0 60%,#8b7767 60% 100%)",
+    overlay:"radial-gradient(circle at 70% 28%,rgba(255,255,255,.18),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.22))"
+  },
+  flur:{
+    name:'Flur / Eingangsbereich',
+    background:"linear-gradient(180deg,rgba(255,248,238,.08),rgba(0,0,0,.22)),linear-gradient(180deg,#cfc7bc 0 54%,#6f6156 54% 100%)",
+    overlay:"linear-gradient(90deg,rgba(0,0,0,.18),transparent 45%),radial-gradient(circle at 82% 16%,rgba(255,233,193,.14),transparent 22%)"
+  },
+  atelier:{
+    name:'Home Office / Atelier',
+    background:"linear-gradient(180deg,rgba(255,248,238,.08),rgba(0,0,0,.20)),linear-gradient(180deg,#d7d9dd 0 56%,#7e858d 56% 100%)",
+    overlay:"radial-gradient(circle at 18% 20%,rgba(201,169,110,.16),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.22))"
+  }
+};
+let activeTemplate='wohnzimmer';
+let customSceneActive=false;
+function setPlannerScene(key, customLabel){
+  const tpl=plannerTemplates[key]||plannerTemplates.wohnzimmer;
+  plannerEls.roomStage.style.background=tpl.background;
+  plannerEls.sceneOverlay.style.background=tpl.overlay;
+  plannerEls.sceneNote.textContent=customLabel?`Aktive Testszene: ${customLabel}. Diese Demo interpretiert deine Beschreibung visuell als schnelle Raumstimmung.`:`Aktive Testszene: ${tpl.name}. Für echte Projekte kann hier später eine KI-Raumszene oder ein echtes Kundenfoto verwendet werden.`;
+}
+function applyPromptScene(){
+  const text=(plannerEls.prompt.value||'').trim().toLowerCase();
+  if(!text){customSceneActive=false;setPlannerScene(activeTemplate);return;}
+  let key='atelier';
+  if(text.includes('altbau')||text.includes('wohn')||text.includes('fischgrät')) key='wohnzimmer';
+  if(text.includes('schlaf')||text.includes('textil')||text.includes('bett')) key='schlafzimmer';
+  if(text.includes('flur')||text.includes('eingang')||text.includes('garderobe')) key='flur';
+  customSceneActive=true;
+  setPlannerScene(key,plannerEls.prompt.value.trim());
+}
+function updateFurnitureLayout(){
+  const layout={
+    regal:[1,1,1,1,1,1],
+    schrank:[2,0,2,0,1,1],
+    sideboard:[2,2,1,1,1,1],
+    tisch:[3,0,0,1,0,1]
+  }[plannerEls.type.value]||[1,1,1,1,1,1];
+  const cells=[...plannerEls.front.querySelectorAll('span')];
+  cells.forEach((cell,idx)=>{
+    const val=layout[idx]||0;
+    cell.style.display=val===0?'none':'block';
+    cell.style.gridColumn=val>1?`span ${val}`:'span 1';
+    cell.style.borderRadius=plannerEls.type.value==='tisch'?'999px':'7px';
+    cell.style.opacity=plannerEls.type.value==='tisch'&&idx>0?.22:.95;
+  });
+}
 function updatePlanner(){
   if(!plannerEls.model)return;
   const w=Math.max(60,Math.min(600,+plannerEls.w.value||240));
@@ -845,14 +943,28 @@ function updatePlanner(){
   plannerEls.model.style.height=(120+(h/300)*230)+'px';
   const palettes={eiche:['#8b5a2b','#c49157','#e2b577'],nussbaum:['#3b2115','#744222','#a66a3c'],esche:['#c8ad83','#ead8b8','#f2e7d3'],multiplex:['#b88449','#d6a66d','#edc690']};
   const p=palettes[plannerEls.material.value]||palettes.eiche;
-  document.querySelector('.furniture-front').style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
-  document.querySelector('.furniture-side').style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
-  document.querySelector('.furniture-top').style.background=`linear-gradient(135deg,${p[1]},${p[2]})`;
+  plannerEls.front.style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
+  plannerEls.side.style.background=`linear-gradient(135deg,${p[0]},${p[1]})`;
+  plannerEls.top.style.background=`linear-gradient(135deg,${p[1]},${p[2]})`;
+  plannerEls.front.style.boxShadow=`inset 0 0 30px rgba(255,255,255,.06), inset -18px -18px 40px rgba(0,0,0,.16)`;
+  plannerEls.side.style.opacity=plannerEls.type.value==='tisch'?.72:.96;
+  plannerEls.top.style.height=plannerEls.type.value==='tisch'?'42px':'96px';
+  plannerEls.top.style.top=plannerEls.type.value==='tisch'?'-21px':'-48px';
+  updateFurnitureLayout();
 }
 ['type','w','h','d','material'].forEach(k=>plannerEls[k]?.addEventListener('input',updatePlanner));
 plannerEls.scan?.addEventListener('change',()=>{const file=plannerEls.scan.files?.[0];if(!file)return;const url=URL.createObjectURL(file);plannerEls.preview.style.backgroundImage=`url(${url})`;plannerEls.preview.classList.add('active')});
+plannerEls.templates.forEach(btn=>btn.addEventListener('click',()=>{
+  plannerEls.templates.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activeTemplate=btn.dataset.template;
+  if(!customSceneActive) setPlannerScene(activeTemplate);
+}));
+plannerEls.promptApply?.addEventListener('click',applyPromptScene);
+plannerEls.promptReset?.addEventListener('click',()=>{plannerEls.prompt.value='';customSceneActive=false;setPlannerScene(activeTemplate);});
 let rotated=false;plannerEls.rotate?.addEventListener('click',()=>{rotated=!rotated;plannerEls.model.style.animation='none';plannerEls.model.style.transform=rotated?'rotateX(-12deg) rotateY(-38deg) translateY(-4px)':'rotateX(-16deg) rotateY(28deg)';});
 plannerEls.copy?.addEventListener('click',async()=>{const text=`Maßmöbel-Anfrage: ${plannerEls.type.selectedOptions[0].textContent}, ${plannerEls.w.value} x ${plannerEls.h.value} x ${plannerEls.d.value} cm, Material: ${plannerEls.material.selectedOptions[0].textContent}, grobe Schätzung: ${plannerEls.price.textContent}`;try{await navigator.clipboard.writeText(text);plannerEls.copyNote.textContent='✓ Maße und Wunschkonfiguration wurden kopiert — bereit für die Anfrage.';}catch(e){plannerEls.copyNote.textContent=text;}});
+setPlannerScene(activeTemplate);
 updatePlanner();
 </script>
 
